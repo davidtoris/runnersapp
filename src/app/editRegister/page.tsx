@@ -19,15 +19,15 @@ const Login = () => {
   });
 
   const [files, setFiles] = useState<FileList | null >(null)
-  const handleFiles = ({target}: ChangeEvent<HTMLInputElement>) => {
-    setFiles(target.files[0])
-  }
+  // const handleFiles = ({target}: ChangeEvent<HTMLInputElement>) => {
+  //   setFiles(target.files[0])
+  // }
 
-  const algo = () => {
-    const formData = new FormData();
-    formData.append('image', files)
-    dispatch(uploadImage(formData))
-  }
+  // const algo = () => {
+  //   const formData = new FormData();
+  //   formData.append('image', files)
+  //   dispatch(uploadImage(formData))
+  // }
 
   return (
     <div className='flex justify-center items-center h-screen w-full'>
@@ -43,13 +43,13 @@ const Login = () => {
           <div className='text-5xl font-bold text-gray-600 mt-10'>Bienvenido David</div>
         </div>
 
-        <input 
+        {/* <input 
           type='file' 
           multiple
           accept='images/*'
           onChange={handleFiles} 
           name="image"/>
-        <button onClick={algo}>enviar</button>
+        <button onClick={algo}>enviar</button> */}
 
 
         <Formik
