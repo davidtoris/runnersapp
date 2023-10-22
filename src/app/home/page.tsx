@@ -14,7 +14,7 @@ import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkSt
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState<User>(null)
+  const [user, setUser] = useState<User | null>(null)
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData !== null) {
