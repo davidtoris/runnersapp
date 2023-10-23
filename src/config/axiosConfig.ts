@@ -8,15 +8,16 @@ export const instancePublicAPI = axios.create({
 
 export const instanceAPI = axios.create({
   baseURL: API_BASE_URL,
-  headers: {'x-tokens': localStorage.getItem('tokenUser')}
+  headers: { 'Content-type': 'application/json' },
   
 });
 
+
 // instanceAPI.interceptors.request.use(
 //   (config) => {
-//     const token = 
-//     const auth = token ? `x-tokens ${token}` : '';
-//     config.headers.common['Authorization'] = auth;
+//     const token = localStorage.getItem('tokenUser')
+//     // const auth = token ? `x-tokens ${token}` : '';
+//     config.headers.common['x-tokens'] = token;
 //     return config;
 //   },
 //   (error) => Promise.reject(error),

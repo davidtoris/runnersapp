@@ -26,9 +26,9 @@ const Home = () => {
     dispatch(getDate())
   }, [])
 
-  useEffect(() => {
-    dispatch(validateToken())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(validateToken())
+  // }, [])
   
   const { date } = useSelector((state : RootState) => state.dateData)
 
@@ -115,7 +115,7 @@ const Home = () => {
           />
         </div>
 
-        <Link href="/editRegister">
+        {/* <Link href="/editRegister">
           <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer'>
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
@@ -125,7 +125,7 @@ const Home = () => {
         <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
           <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>
           <div className='bg-gray-500 text-white rounded-full p-2 px-5 ml-5 cursor-pointer shadow-xl hover:bg-blueCustom'>Ver todos los reultados</div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
