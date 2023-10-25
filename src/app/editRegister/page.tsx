@@ -30,7 +30,10 @@ const RegisterComp = ({}) => {
   }, [])
 
   useEffect(() => {
-    dispatch(validateToken(token))
+    const token = localStorage.getItem('tokenUser');
+    if (token !== null) {
+      dispatch(validateToken(token))
+    }
   }, [])
   
 
