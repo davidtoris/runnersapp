@@ -1,26 +1,28 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosConfig"
-import { userAll, userItem, userLoading, userRespStatusAct, userUpdateAct } from "./userSlice"
+import { userAll, userItem, userLoading, userStatusFunc } from "./userSlice"
 import { User, UserPayload } from "./userInterface"
 
 
 export const registerUser = ( user : UserPayload) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(userLoading())
+    dispatch(userLoading(true))
     try {
       const resp = await instancePublicAPI.post<User>('/users', user)
       dispatch(userAll(resp.data));
-      dispatch(userRespStatusAct(resp.status))
+      dispatch(userStatusFunc(resp.status))
+      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
-      dispatch(userRespStatusAct(error?.response?.status));
+      dispatch(userStatusFunc(error?.response?.status));
+      dispatch(userLoading(false))
     }
   }
 }
 
 export const showOneUser = ( id : string, token : string | null ) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(userLoading())
+    dispatch(userLoading(true))
     try {
       const resp = await instanceAPI.get(`/users/${id}`, {
         headers: {
@@ -29,18 +31,19 @@ export const showOneUser = ( id : string, token : string | null ) => {
       })
       console.log(resp);
       dispatch(userItem(resp.data[0]));
+      dispatch(userLoading(false))
       // dispatch(userUpdateAct(true));
-      // userRespStatusAct(resp.status)
     } catch (error: any) {
       console.log(error)
-      dispatch(userRespStatusAct(error?.response?.status));
+      dispatch(userStatusFunc(error?.response?.status));
+      dispatch(userLoading(false))
     }
   }
 }
 
 export const updatedUser = ( id : string, token : string | null, user : UserPayload ) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(userLoading())
+    dispatch(userLoading(true))
     try {
       const resp = await instanceAPI.put(`/users/${id}`, user, {
         headers: {
@@ -50,11 +53,12 @@ export const updatedUser = ( id : string, token : string | null, user : UserPayl
       console.log(resp?.data);
       localStorage.setItem('user', JSON.stringify(resp.data))
       // dispatch(userItem(resp.data[0]));
-      // dispatch(userUpdateAct(true));
-      dispatch(userRespStatusAct(resp.status))
+      dispatch(userLoading(false))
+      dispatch(userStatusFunc(resp.status))
     } catch (error: any) {
       console.log(error)
-      dispatch(userRespStatusAct(error?.response?.status));
+      dispatch(userStatusFunc(error?.response?.status));
+      dispatch(userLoading(false))
     }
   }
 }

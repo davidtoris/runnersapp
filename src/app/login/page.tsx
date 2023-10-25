@@ -10,7 +10,7 @@ import { RootState, useAppDispatch } from '@/store';
 import { login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import Loader from "../../components/Loader";
-import { userRespStatusAct } from '@/store/slices/user/userSlice';
+import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 const Login = () => {
 
@@ -22,16 +22,15 @@ const Login = () => {
     password: Yup.string().required('* Contraseña requerida')
   });
 
-  const { userRespStatus, userStatus } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userLoading } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userRespStatus === 200) {
-      router.push("/home");
-    }
-    return () => {
-      dispatch(userRespStatusAct(null))
-    }
-  }, [userRespStatus])
+    userStatus === 200 && router.push("/home")
+  }, [userStatus])
+
+  useEffect(() => {
+    dispatch(userStatusFunc(null))
+  }, [])
 
   return (
     <div className='flex justify-center items-center  h-screen'>
@@ -97,8 +96,8 @@ const Login = () => {
                           </div>
                         </div>
 
-                        {userRespStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El usuario y/o contraseña son incorrectos</div>)}
-                        {userRespStatus === 500 || userRespStatus === 504 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo salió mal, vuelve a intentarlo</div>)}
+                        {userStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El usuario y/o contraseña son incorrectos</div>)}
+                        {userStatus === 500 || userStatus === 504 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo salió mal, vuelve a intentarlo</div>)}
 
                         <Link href="/forgot">
                           <div className='text-greenCustom underline text-center mt-2'>
@@ -110,7 +109,7 @@ const Login = () => {
                         <div className='flex justify-center mt-10'>
                           <button type="submit">
                             <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                              {userStatus === 'loading' ? ( <Loader />) : 'Iniciar Sesión'}
+                              {userLoading ? ( <Loader />) : 'Iniciar Sesión'}
                             </div>
                           </button>
                         </div>

@@ -5,10 +5,10 @@ import { UserInterface } from './userInterface';
 const initialState : UserInterface = {
   users: null,
   userItem: null,
-  userStatus: '',
-  userUpdate: false,
   userFounded: null,
-  userRespStatus: null,
+
+  userLoading: false,
+  userStatus: null,
 }
 const userSlice = createSlice({
 
@@ -16,32 +16,27 @@ const userSlice = createSlice({
   initialState,
   reducers: {
 
-    userLoading(state) {
-      state.userStatus = 'loading';
-    },
     userAll( state, action) {
       state.users = action.payload;
-      state.userStatus = 'full';
+      state.userLoading = false;
     },
     userItem( state, action) {
       state.userItem = action.payload;
-      state.userStatus = 'full';
-    },
-    userUpdateAct( state, action ) {
-      state.userUpdate = action.payload;
-    },
-    userRespStatusAct( state, action ) {
-      state.userRespStatus = action.payload;
+      state.userLoading = false;
     },
     userFounded( state, action ) {
       state.userFounded = action.payload;
     },
-    userError(state) {
-      state.userStatus = 'error'; 
-    }
+
+    userLoading(state, action) {
+      state.userLoading = action.payload;
+    },
+    userStatusFunc( state, action ) {
+      state.userStatus = action.payload;
+    },
   }
 });
 
-export const { userAll, userItem, userUpdateAct, userRespStatusAct, userFounded, userLoading, userError } = userSlice.actions;
+export const { userAll, userItem, userFounded, userStatusFunc, userLoading } = userSlice.actions;
 
 export default userSlice.reducer;

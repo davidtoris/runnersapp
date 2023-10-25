@@ -8,7 +8,7 @@ import { registerUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import Loader from '@/components/Loader';
-import { userRespStatusAct } from '@/store/slices/user/userSlice';
+import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 
 const RegisterComp = ({}) => {
@@ -16,7 +16,7 @@ const RegisterComp = ({}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { userRespStatus, userStatus } = useSelector((state : RootState) => state.userData);
+  const { userLoading, userStatus } = useSelector((state : RootState) => state.userData);
 
   const UserSchema = Yup.object().shape({
     nombre: Yup.string().required('* Nombre requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios').max(10, 'El nombre debe ser máximo de 10 caractéres'),
@@ -72,11 +72,14 @@ const RegisterComp = ({}) => {
     
   });
 
+
   useEffect(() => {
-    if (userRespStatus === 200) {
-      router.push("/login");
-    }
-  }, [userRespStatus])
+    userStatus === 200 && router.push("/login")
+  }, [userStatus])
+
+  useEffect(() => {
+    dispatch(userStatusFunc(null))
+  }, [])
   
 
   return (
@@ -387,17 +390,17 @@ const RegisterComp = ({}) => {
                     {errors.agree &&<div className='error ml-10'>{errors.agree}</div>}
                   </div>
 
-                  {userRespStatus === 504 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>Algo ocurrió, intentalo de nuevo</div>)}
-                  {userRespStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
-                  {userRespStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
-                  {userRespStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro con éxito</div>)}
+                  {userStatus === 504 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>Algo ocurrió, intentalo de nuevo</div>)}
+                  {userStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
+                  {userStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
+                  {userStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro con éxito</div>)}
 
                   <div className='flex justify-center mt-5'>
                     <button type="submit" 
                       className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-slate-200 disabled:cursor-not-allowed'
                       disabled={!dirty || !isValid}
                       >
-                        {userStatus === 'loading' ? ( <Loader />) : 'Registrarme'}
+                        {userLoading ? ( <Loader />) : 'Registrarme'}
                     </button>
                   </div>  
                 </div>
