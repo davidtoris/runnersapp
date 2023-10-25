@@ -11,7 +11,7 @@ import { newPass } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import { userStatusFunc } from '@/store/slices/user/userSlice';
 
-const Login = () => {
+const NewPass = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -126,4 +126,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default NewPass;

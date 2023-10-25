@@ -10,16 +10,15 @@ import { RootState, useAppDispatch } from '@/store';
 import { forgot, login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 
-const Login = () => {
+const Forgot = () => {
 
-  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const UserSchema = Yup.object().shape({
     correo: Yup.string().email('* Debe ser un email válido').required('* Email requerido'),
   });
 
-  const { userRespStatus } = useSelector((state : RootState) => state.userData)
+  const { userStatus } = useSelector((state : RootState) => state.userData)
 
   return (
     <div className='flex justify-center items-center  h-screen'>
@@ -72,9 +71,9 @@ const Login = () => {
                           </div>
                         </div>
 
-                        {userRespStatus === 200 &&  (<div className='text-2xl text-greenCustom font-bold my-4 text-center w-8/12 m-auto'>Te hemos enviado un correo para crear una nueva contraseña</div>)}
-                        {userRespStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El correo no se encuentra registrado</div>)}
-                        {userRespStatus === 401 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El token ha expirado, envía de nuevo el correo</div>)}
+                        {userStatus === 200 &&  (<div className='text-2xl text-greenCustom font-bold my-4 text-center w-8/12 m-auto'>Te hemos enviado un correo para crear una nueva contraseña</div>)}
+                        {userStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El correo no se encuentra registrado</div>)}
+                        {userStatus === 401 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El token ha expirado, envía de nuevo el correo</div>)}
 
                       
                         <div className='flex justify-center mt-10'>
@@ -104,4 +103,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Forgot;

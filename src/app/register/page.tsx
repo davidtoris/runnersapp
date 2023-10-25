@@ -11,7 +11,7 @@ import Loader from '@/components/Loader';
 import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 
-const RegisterComp = ({}) => {
+const Register = ({}) => {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -418,4 +418,4 @@ const RegisterComp = ({}) => {
   );
 };
 
-export default RegisterComp;
+export default Register;

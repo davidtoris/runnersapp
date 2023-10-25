@@ -11,7 +11,7 @@ import { validateToken } from '@/store/slices/auth/authService';
 import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 
-const RegisterComp = ({}) => {
+const EditRegister = ({}) => {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -423,4 +423,4 @@ const RegisterComp = ({}) => {
   );
 };
 
-export default RegisterComp;
+export default EditRegister;
