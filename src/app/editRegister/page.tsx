@@ -15,8 +15,6 @@ const RegisterComp = ({}) => {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
-
-  const token = localStorage.getItem('tokenUser')
   const [idUser, setIdUser] = useState('')
   
   useEffect(() => {
@@ -143,7 +141,10 @@ const RegisterComp = ({}) => {
                 genero: values.genero === '' ? null : values.genero,
               };
               console.log(user);
-              dispatch(updatedUser(idUser, token, user))
+              const token = localStorage.getItem('tokenUser');
+              if (token !== null) {
+                dispatch(updatedUser(idUser, token, user))
+              }
             }}>
 
             {
