@@ -10,6 +10,7 @@ import { RootState, useAppDispatch } from '@/store';
 import { login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import { userRespStatusAct } from '@/store/slices/user/userSlice';
+import Loader from "../../components/Loader";
 
 const Login = () => {
 
@@ -21,7 +22,7 @@ const Login = () => {
     password: Yup.string().required('* Contraseña requerida')
   });
 
-  const { userUpdate, userRespStatus } = useSelector((state : RootState) => state.userData)
+  const { userUpdate, userRespStatus, userStatus } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
     if (userUpdate) {
@@ -111,7 +112,7 @@ const Login = () => {
                         <div className='flex justify-center mt-10'>
                           <button type="submit">
                             <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                              <div className=""> Iniciar Sesión</div>
+                              {userStatus === 'loading' ? ( <Loader />) : 'Iniciar Sesión'}
                             </div>
                           </button>
                         </div>

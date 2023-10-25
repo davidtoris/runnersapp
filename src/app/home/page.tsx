@@ -22,24 +22,30 @@ const Home = () => {
     }
   }, [])
 
+  const token = localStorage.getItem('tokenUser');
+
   useEffect(() => {
-    dispatch(getDate())
+    dispatch(getDate(token))
   }, [])
 
-  // useEffect(() => {
-  //   dispatch(validateToken())
-  // }, [])
+  useEffect(() => {
+    dispatch(validateToken(token))
+  }, [])
   
   const { date } = useSelector((state : RootState) => state.dateData)
 
   const number = () => {
     let numRunner;
     const num = user?.numRunner;
+    console.log(num?.length)
     if (num?.length === 1) {
       numRunner = '00' + num;
     }
     if (num?.length === 2) {
       numRunner = '0' + num;
+    } 
+    if (num !== undefined && num.length >= 3) {
+      numRunner = num;
     }
     return numRunner;
   };
@@ -98,8 +104,8 @@ const Home = () => {
               Categoría
             </div>
             <div className='left'>
-              { user?.sexo === "H" && 'Varonil'}
-              { user?.sexo === "F" && 'Femenil'}
+              { user?.genero === "H" && 'Varonil'}
+              { user?.genero === "F" && 'Femenil'}
             </div>
           </div>
         </div>
@@ -115,13 +121,13 @@ const Home = () => {
           />
         </div>
 
-        {/* <Link href="/editRegister">
+        <Link href="/editRegister">
           <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer'>
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
           </div>
         </Link>
-
+{/* 
         <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
           <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>
           <div className='bg-gray-500 text-white rounded-full p-2 px-5 ml-5 cursor-pointer shadow-xl hover:bg-blueCustom'>Ver todos los reultados</div>

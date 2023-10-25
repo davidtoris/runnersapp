@@ -1,6 +1,6 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosConfig"
-import { userAll, userLoading, userRespStatusAct, userUpdate } from "./userSlice"
+import { userAll, userItem, userLoading, userRespStatusAct, userUpdate } from "./userSlice"
 import { User, UserPayload } from "./userInterface"
 
 
@@ -19,6 +19,47 @@ export const registerUser = ( user : UserPayload) => {
   }
 }
 
+export const showOneUser = ( id : string, token : string | null ) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(userLoading())
+    try {
+      const resp = await instanceAPI.get(`/users/${id}`, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      console.log(resp);
+      dispatch(userItem(resp.data[0]));
+      // dispatch(userUpdate(true));
+      // userRespStatusAct(resp.status)
+    } catch (error: any) {
+      console.log(error)
+      dispatch(userRespStatusAct(error?.response?.status));
+    }
+  }
+}
+
+export const updatedUser = ( id : string, token : string | null, user : UserPayload ) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(userLoading())
+    try {
+      const resp = await instanceAPI.put(`/users/${id}`, user, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      console.log(resp?.data);
+      localStorage.setItem('user', JSON.stringify(resp.data))
+      // dispatch(userItem(resp.data[0]));
+      // dispatch(userUpdate(true));
+      dispatch(userRespStatusAct(resp.status))
+    } catch (error: any) {
+      console.log(error)
+      dispatch(userRespStatusAct(error?.response?.status));
+    }
+  }
+}
+
 export const uploadImage = ( image : any) => {
   return async (dispatch: AppDispatch) => {
     try {
@@ -30,25 +71,3 @@ export const uploadImage = ( image : any) => {
     }
   }
 }
-
-// export const changePassword = ( token : changePasswordPayload) => {
-//   return async (dispatch: AppDispatch) => {
-//     try {
-//       await instanceAPI.post<UserResponse>('/user/changePassword', token )
-//       dispatch(changePasswordTrue('true'));
-//     } catch (error) {
-//       dispatch(changePasswordTrue('false'));
-//     }
-//   }
-// }
-
-// export const savePassword = ( newPassword : savePasswordPayload) => {
-//   return async (dispatch: AppDispatch) => {
-//     try {
-//       await instanceAPI.post<UserResponse>('/user/savePassword', newPassword )
-//       dispatch(savePasswordTrue('true'));
-//     } catch (error) {
-//       dispatch(savePasswordTrue('false'));
-//     }
-//   }
-// }

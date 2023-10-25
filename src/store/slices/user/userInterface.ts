@@ -5,17 +5,25 @@ export interface UserResponse {
 
 export interface User {
   _id: string,
-  nombre: string,
   apellido: string,
   correo: string,
-  password: string,
-  numColaborador: string,
+  correoFamiliar: string,
+  depto: string,
+  direccion: string,
   edad: string,
-  kms: string,
-  sexo: string,
-  role: string,
   estado: string,
+  genero: string,
+  images: string,
+  kms: string,
+  nombre: string,
+  numColaborador: string,
   numRunner: string,
+  otroDepto: string,
+  password: string,
+  playera: string,
+  role: string,
+  tipo: string,
+  ubicacion: string,
 }
 
 export interface UserPayload {

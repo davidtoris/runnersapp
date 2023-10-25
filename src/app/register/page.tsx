@@ -2,14 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
-
-// import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { registerUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
-// import Loader from '../src/components/Loader';
 
 
 const RegisterComp = ({}) => {
@@ -53,6 +50,16 @@ const RegisterComp = ({}) => {
         is: (ubicacion:any) => ubicacion === "otraUbicacion",
         then: (direccion) => direccion.required('Campo requerido'),
       }),
+    ciudad: Yup.string()
+      .when(["ubicacion"], {
+        is: (ubicacion:any) => ubicacion === "otraUbicacion",
+        then: (ciudad) => ciudad.required('Campo requerido'),
+      }),
+    estado: Yup.string()
+      .when(["ubicacion"], {
+        is: (ubicacion:any) => ubicacion === "otraUbicacion",
+        then: (estado) => estado.required('Campo requerido'),
+      }),
     edad: Yup.string().required('* Edad requerida'),
     playera: Yup.string().required('* Elige una opción'),
     kms: Yup.string().required('* Elige una opción'),
@@ -61,8 +68,6 @@ const RegisterComp = ({}) => {
     
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const { userUpdate, userRespStatus } = useSelector((state : RootState) => state.userData)
 
@@ -93,6 +98,8 @@ const RegisterComp = ({}) => {
               correoFamiliar: '',
               ubicacion: '',
               direccion: '',
+              ciudad: '',
+              estado: '',
               edad: '' ,
               playera: '',
               kms: '',
@@ -113,6 +120,8 @@ const RegisterComp = ({}) => {
                 correoFamiliar: values.correoFamiliar === '' ? null : values.correoFamiliar,
                 ubicacion: values.ubicacion === '' ? null : values.ubicacion,
                 direccion: values.direccion === '' ? null : values.direccion,
+                ciudad: values.ciudad === '' ? null : values.ciudad,
+                estado: values.estado === '' ? null : values.estado,
                 edad: values.edad === '' ? null : values.edad,
                 playera: values.playera === '' ? null : values.playera,
                 kms: values.kms === '' ? null : values.kms,
@@ -288,14 +297,32 @@ const RegisterComp = ({}) => {
                     </div>
 
                     {ubicacionIsOtro && (
-                      <div className='my-5'>
-                        <div className='label'>Dirección de la Oficina para entrega de playera</div>
-                        <Field
-                          name="direccion"
-                          placeholder="Escribe tu ubicación"
-                          type="text" />
-                        {errors.direccion && <div className='error'>{errors.direccion}</div>}
-                      </div>
+                      <>
+                        <div className='my-5'>
+                          <div className='label'>Dirección de la Oficina para entrega de playera</div>
+                          <Field
+                            name="direccion"
+                            placeholder="Escribe tu ubicación"
+                            type="text" />
+                          {errors.direccion && <div className='error'>{errors.direccion}</div>}
+                        </div>
+                        <div className='my-5'>
+                          <div className='label'>Estado</div>
+                          <Field
+                            name="estado"
+                            placeholder="Escribe el estado de tu ubicación"
+                            type="text" />
+                          {errors.estado && <div className='error'>{errors.estado}</div>}
+                        </div>
+                        <div className='my-5'>
+                          <div className='label'>Ciudad</div>
+                          <Field
+                            name="ciudad"
+                            placeholder="Escribe la ciudad de tu ubicación"
+                            type="text" />
+                          {errors.ciudad && <div className='error'>{errors.ciudad}</div>}
+                        </div>
+                      </>
                     )}
 
 

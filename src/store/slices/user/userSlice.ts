@@ -36,9 +36,12 @@ const userSlice = createSlice({
     userFounded( state, action ) {
       state.userFounded = action.payload;
     },
+    userError(state) {
+      state.userStatus = 'error'; 
+    }
   }
 });
 
-export const { userAll, userItem, userUpdate, userRespStatusAct, userFounded, userLoading } = userSlice.actions;
+export const { userAll, userItem, userUpdate, userRespStatusAct, userFounded, userLoading, userError } = userSlice.actions;
 
 export default userSlice.reducer;
