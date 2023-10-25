@@ -100,7 +100,7 @@ const Login = () => {
                         </div>
 
                         {userRespStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El usuario y/o contraseña son incorrectos</div>)}
-                        {userRespStatus === 500 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo salió mal, vuelve a intentarlo</div>)}
+                        {userRespStatus === 500 || userRespStatus === 504 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo salió mal, vuelve a intentarlo</div>)}
 
                         <Link href="/forgot">
                           <div className='text-greenCustom underline text-center mt-2'>
