@@ -11,11 +11,9 @@ export const registerUser = ( user : UserPayload) => {
       const resp = await instancePublicAPI.post<User>('/users', user)
       dispatch(userAll(resp.data));
       dispatch(userStatusFunc(resp.status))
-      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }
@@ -31,12 +29,10 @@ export const showOneUser = ( id : string, token : string | null ) => {
       })
       console.log(resp);
       dispatch(userItem(resp.data[0]));
-      dispatch(userLoading(false))
-      // dispatch(userUpdateAct(true));
+      dispatch(userStatusFunc(resp.status))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }
@@ -53,12 +49,10 @@ export const updatedUser = ( id : string, token : string | null, user : UserPayl
       console.log(resp?.data);
       localStorage.setItem('user', JSON.stringify(resp.data))
       // dispatch(userItem(resp.data[0]));
-      dispatch(userLoading(false))
       dispatch(userStatusFunc(resp.status))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }

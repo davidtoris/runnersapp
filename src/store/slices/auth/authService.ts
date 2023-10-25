@@ -15,11 +15,9 @@ export const login = ( user : AuthPayload) => {
       Cookies.set('user', JSON.stringify(resp.data.usuario))
       dispatch(userItem(resp.data));
       dispatch(userStatusFunc(resp.status));
-      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }
@@ -30,11 +28,9 @@ export const forgot = ( email : ForgotPayload) => {
     try {
       const resp = await instancePublicAPI.post('/auth/forgot', email)
       dispatch(userStatusFunc(resp.status));
-      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }
@@ -45,11 +41,9 @@ export const newPass = ( pass : NewPassPayload) => {
     try {
       const resp = await instanceAPI.post('/auth/newPass', pass)
       dispatch(userStatusFunc(resp.status));
-      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
-      dispatch(userLoading(false))
     }
   }
 }
@@ -57,14 +51,13 @@ export const newPass = ( pass : NewPassPayload) => {
 export const validateToken = ( token : string | '' ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
-    console.log(token);
     try {
-      const {data} = await instanceAPI.get('/auth/validate', {
+      const resp = await instanceAPI.get('/auth/validate', {
         headers: {
           'x-tokens': token,
         },
       })
-      console.log(data);
+      dispatch(userStatusFunc(resp.status));
     } catch (error : any) {
       console.log(error);
       Cookies.remove('tokenUser')

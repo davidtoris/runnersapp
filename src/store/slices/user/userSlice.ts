@@ -27,12 +27,12 @@ const userSlice = createSlice({
     userFounded( state, action ) {
       state.userFounded = action.payload;
     },
-
     userLoading(state, action) {
       state.userLoading = action.payload;
     },
     userStatusFunc( state, action ) {
       state.userStatus = action.payload;
+      state.userLoading = false;
     },
   }
 });
