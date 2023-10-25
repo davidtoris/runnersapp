@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { RootState, useAppDispatch } from '@/store';
 import { newPass } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
-import { userRespStatusAct } from '@/store/slices/user/userSlice';
+import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 const Login = () => {
 
@@ -28,13 +28,18 @@ const Login = () => {
   });
 
 
-  const handleLogin = () => {
-    dispatch(userRespStatusAct(null));
-    router.push("/login")
-  }
+  const { userStatus } = useSelector((state : RootState) => state.userData)
+
+  useEffect(() => {
+    userStatus === 200 && router.push("/login")
+  }, [userStatus])
+
+  useEffect(() => {
+    dispatch(userStatusFunc(null))
+  }, [])
   
 
-  const { userRespStatus } = useSelector((state : RootState) => state.userData)
+  
 
   return (
     <div className='flex justify-center items-center  h-screen'>
@@ -89,14 +94,14 @@ const Login = () => {
                           </div>
                         </div>
 
-                        {userRespStatus === 200 &&  (<div className='text-2xl text-greenCustom font-bold my-4 text-center w-8/12 m-auto'>Se ha actualizado tu contraseña correctamente, regresa al login he inicia sesión</div>)}
-                        {userRespStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo falló, inténtalo de nuevo</div>)}
-                        {userRespStatus === 401 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El token ha expirado</div>)}
+                        {userStatus === 200 &&  (<div className='text-2xl text-greenCustom font-bold my-4 text-center w-8/12 m-auto'>Se ha actualizado tu contraseña correctamente, regresa al login he inicia sesión</div>)}
+                        {userStatus === 400 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo falló, inténtalo de nuevo</div>)}
+                        {userStatus === 401 &&  (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El token ha expirado</div>)}
 
                         
-                        <div className='text-greenCustom underline text-center mt-2 font-bold cursor-pointer' onClick={handleLogin}>
+                        {/* <div className='text-greenCustom underline text-center mt-2 font-bold cursor-pointer' onClick={handleLogin}>
                           Regresar al Login
-                        </div>
+                        </div> */}
                         
 
                         <div className='flex justify-center mt-10'>

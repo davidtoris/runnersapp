@@ -8,7 +8,7 @@ import { showOneUser, updatedUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
-import { userRespStatusAct } from '@/store/slices/user/userSlice';
+import { userStatusFunc } from '@/store/slices/user/userSlice';
 
 
 const RegisterComp = ({}) => {
@@ -80,16 +80,15 @@ const RegisterComp = ({}) => {
     
   });
 
-  const { userRespStatus, userItem } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userItem } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userRespStatus === 200) {
-      router.push("/home");
-    }
-    return () => {
-      dispatch(userRespStatusAct(null));
-    }
-  }, [userRespStatus])
+    userStatus === 200 && router.push("/home")
+  }, [userStatus])
+
+  useEffect(() => {
+    dispatch(userStatusFunc(null))
+  }, [])
   
   // console.log(userItem)
   // console.log(userRespStatus)
@@ -397,9 +396,9 @@ const RegisterComp = ({}) => {
                     
                   </div>
 
-                  {userRespStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
-                  {userRespStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
-                  {userRespStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro actualizado con éxito</div>)}
+                  {userStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
+                  {userStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
+                  {userStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro actualizado con éxito</div>)}
 
                   <div className='flex justify-center mt-5'>
                     <button type="submit" 
