@@ -15,21 +15,27 @@ import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkSt
 const Home = () => {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<User | null>(null)
+  
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData !== null) {
       setUser( JSON.parse(userData) );
     }
   }, [])
-
-  const token = localStorage.getItem('tokenUser');
-
+  
+  
   useEffect(() => {
-    dispatch(getDate(token))
+    const token = localStorage.getItem('tokenUser');
+    if (token !== null) {
+      dispatch(getDate(token))
+    }
   }, [])
 
   useEffect(() => {
-    dispatch(validateToken(token))
+    const token = localStorage.getItem('tokenUser');
+    if (token !== null) {
+      dispatch(validateToken(token))
+    }
   }, [])
   
   const { date } = useSelector((state : RootState) => state.dateData)
@@ -37,7 +43,6 @@ const Home = () => {
   const number = () => {
     let numRunner;
     const num = user?.numRunner;
-    console.log(num?.length)
     if (num?.length === 1) {
       numRunner = '00' + num;
     }
