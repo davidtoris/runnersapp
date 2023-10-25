@@ -15,13 +15,15 @@ const RegisterComp = ({}) => {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const token = localStorage.getItem('tokenUser')
 
+  const token = localStorage.getItem('tokenUser')
   const [idUser, setIdUser] = useState('')
   
   useEffect(() => {
     const userLocStor = localStorage.getItem('user')
-    if (userLocStor !== null) {
+    const token = localStorage.getItem('tokenUser');
+    
+    if (userLocStor !== null && token !== null) {
       const user = JSON.parse(userLocStor);
       const idUser = user._id;
       setIdUser(user._id);
