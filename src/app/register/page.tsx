@@ -8,6 +8,7 @@ import { registerUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import Loader from '@/components/Loader';
+import { userRespStatusAct } from '@/store/slices/user/userSlice';
 
 
 const RegisterComp = ({}) => {
@@ -74,6 +75,9 @@ const RegisterComp = ({}) => {
   useEffect(() => {
     if (userRespStatus === 200) {
       router.push("/login");
+    }
+    return () => {
+      dispatch(userRespStatusAct(null))
     }
   }, [userRespStatus])
   

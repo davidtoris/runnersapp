@@ -10,6 +10,7 @@ import { RootState, useAppDispatch } from '@/store';
 import { login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import Loader from "../../components/Loader";
+import { userRespStatusAct } from '@/store/slices/user/userSlice';
 
 const Login = () => {
 
@@ -26,6 +27,9 @@ const Login = () => {
   useEffect(() => {
     if (userRespStatus === 200) {
       router.push("/home");
+    }
+    return () => {
+      dispatch(userRespStatusAct(null))
     }
   }, [userRespStatus])
 
