@@ -11,7 +11,7 @@ export const registerUser = ( user : UserPayload) => {
       const resp = await instancePublicAPI.post<User>('/users', user)
       dispatch(userAll(resp.data));
       dispatch(userUpdateAct(true));
-      userRespStatusAct(resp.status)
+      dispatch(userRespStatusAct(resp.status))
     } catch (error: any) {
       console.log(error)
       dispatch(userRespStatusAct(error?.response?.status));
