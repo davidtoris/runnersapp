@@ -390,9 +390,9 @@ const Register = ({}) => {
                     {errors.agree &&<div className='error ml-10'>{errors.agree}</div>}
                   </div>
 
-                  {userStatus === 504 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>Algo ocurrió, intentalo de nuevo</div>)}
-                  {userStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
-                  {userStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
+                  {userStatus === 504 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo ocurrió, intentalo de nuevo</div>)}
+                  {userStatus === 400 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El correo ya existe</div>)}
+                  {userStatus === 401 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El Colaborador ha registrado más de 4 familiares</div>)}
                   {userStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro con éxito</div>)}
 
                   <div className='flex justify-center mt-5'>
