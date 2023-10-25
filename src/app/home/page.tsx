@@ -9,31 +9,25 @@ import { getDate } from '@/store/slices/date/dateService';
 import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
 import Link from 'next/link';
+import Cookies from "js-cookie"
 
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<User | null>(null)
+  const token = Cookies.get('tokenUser')
+  const userData = Cookies.get('user')
   
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData !== null) {
+    if (userData) {
       setUser( JSON.parse(userData) );
     }
   }, [])
   
-  
   useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    if (token !== null) {
+    if (token) {
       dispatch(getDate(token))
-    }
-  }, [])
-
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    if (token !== null) {
       dispatch(validateToken(token))
     }
   }, [])
@@ -68,8 +62,7 @@ const Home = () => {
 
         <div className='flex flex-col justify-center mt-20'>
           <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
-          <div className='text-4xl font-bold text-gray-600 mt-3'>{`${user?.nombre} ${user?.apellido}`}</div>
-
+          <div className='text-4xl font-bold text-gray-600 mt-3'>{user && `${user?.nombre} ${user?.apellido}`}</div>
         </div>
 
         <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>

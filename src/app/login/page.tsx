@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 import { RootState, useAppDispatch } from '@/store';
 import { login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
-import { userRespStatusAct } from '@/store/slices/user/userSlice';
 import Loader from "../../components/Loader";
 
 const Login = () => {
@@ -22,17 +21,13 @@ const Login = () => {
     password: Yup.string().required('* Contraseña requerida')
   });
 
-  const { userUpdate, userRespStatus, userStatus } = useSelector((state : RootState) => state.userData)
+  const { userRespStatus, userStatus } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userUpdate) {
+    if (userRespStatus === 200) {
       router.push("/home");
     }
-  }, [userUpdate])
-
-  useEffect(() => {
-    dispatch(userRespStatusAct(null));
-  }, []);
+  }, [userRespStatus])
 
   return (
     <div className='flex justify-center items-center  h-screen'>
@@ -54,7 +49,6 @@ const Login = () => {
             }}
 
             onSubmit={ async (values) => {
-              console.log(values);
               dispatch(login(values))
             }}>
 

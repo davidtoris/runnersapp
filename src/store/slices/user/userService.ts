@@ -1,6 +1,6 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosConfig"
-import { userAll, userItem, userLoading, userRespStatusAct, userUpdate } from "./userSlice"
+import { userAll, userItem, userLoading, userRespStatusAct, userUpdateAct } from "./userSlice"
 import { User, UserPayload } from "./userInterface"
 
 
@@ -10,7 +10,7 @@ export const registerUser = ( user : UserPayload) => {
     try {
       const resp = await instancePublicAPI.post<User>('/users', user)
       dispatch(userAll(resp.data));
-      dispatch(userUpdate(true));
+      dispatch(userUpdateAct(true));
       userRespStatusAct(resp.status)
     } catch (error: any) {
       console.log(error)
@@ -30,7 +30,7 @@ export const showOneUser = ( id : string, token : string | null ) => {
       })
       console.log(resp);
       dispatch(userItem(resp.data[0]));
-      // dispatch(userUpdate(true));
+      // dispatch(userUpdateAct(true));
       // userRespStatusAct(resp.status)
     } catch (error: any) {
       console.log(error)
@@ -51,7 +51,7 @@ export const updatedUser = ( id : string, token : string | null, user : UserPayl
       console.log(resp?.data);
       localStorage.setItem('user', JSON.stringify(resp.data))
       // dispatch(userItem(resp.data[0]));
-      // dispatch(userUpdate(true));
+      // dispatch(userUpdateAct(true));
       dispatch(userRespStatusAct(resp.status))
     } catch (error: any) {
       console.log(error)

@@ -27,7 +27,7 @@ const userSlice = createSlice({
       state.userItem = action.payload;
       state.userStatus = 'full';
     },
-    userUpdate( state, action ) {
+    userUpdateAct( state, action ) {
       state.userUpdate = action.payload;
     },
     userRespStatusAct( state, action ) {
@@ -42,6 +42,6 @@ const userSlice = createSlice({
   }
 });
 
-export const { userAll, userItem, userUpdate, userRespStatusAct, userFounded, userLoading, userError } = userSlice.actions;
+export const { userAll, userItem, userUpdateAct, userRespStatusAct, userFounded, userLoading, userError } = userSlice.actions;
 
 export default userSlice.reducer;

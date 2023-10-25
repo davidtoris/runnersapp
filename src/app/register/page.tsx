@@ -15,7 +15,7 @@ const RegisterComp = ({}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { userUpdate, userRespStatus, userStatus } = useSelector((state : RootState) => state.userData);
+  const { userRespStatus, userStatus } = useSelector((state : RootState) => state.userData);
 
   const UserSchema = Yup.object().shape({
     nombre: Yup.string().required('* Nombre requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios').max(10, 'El nombre debe ser máximo de 10 caractéres'),
@@ -72,10 +72,11 @@ const RegisterComp = ({}) => {
   });
 
   useEffect(() => {
-    if (userUpdate) {
+    if (userRespStatus === 200) {
       router.push("/login");
     }
-  }, [userUpdate])
+  }, [userRespStatus])
+  
 
   return (
     <div className='flex m-auto justify-center container w-12/12'>
