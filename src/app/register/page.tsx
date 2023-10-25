@@ -76,9 +76,6 @@ const RegisterComp = ({}) => {
     if (userRespStatus === 200) {
       router.push("/login");
     }
-    return () => {
-      dispatch(userRespStatusAct(null))
-    }
   }, [userRespStatus])
   
 
