@@ -47,6 +47,7 @@ export const newPass = ( pass : NewPassPayload, token : string) => {
         },
       })
       dispatch(userRespFunc('newPass'))
+      dispatch(userLoading(false))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
