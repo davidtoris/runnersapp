@@ -29,7 +29,7 @@ const Home = () => {
         
 
           {/* Presencial */}
-          <div className='bg-blueCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md w-12/12 md:w-4/12'>
+          <div className='bg-blueCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md w-12/12 md:w-6/12'>
             {/* <h3 className='uppercase font-bold text-2xl mb-3 text-center'>presencial</h3> */}
             <p className='mb-3 flex items-center justify-center'>
               <FaCalendarAlt className='mr-3'/>Sábado 25 de noviembre 2023</p>
@@ -86,14 +86,14 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='bg-yellowCustom text-white text-left md:text-center p-7 mt-10'>
+      <div className='bg-blueCustom text-white text-left md:text-center p-7 mt-10'>
         <h3 className=' font-extrabold text-3xl mb-3 text-center'>CONVOCATORIA</h3>
-        <ul className='list-disc md:list-none text-xl'>
-        <li>La <span className='font-bold'>edad</span> mínima para correr: 18 años cumplidos al 30 de noviembre del 2023</li>
-        <li>Cada participante correrá con: la <span className='font-bold'>app</span> de su preferencia</li>
-        <li>Al terminar la carrera: cada participante sube sus <span className='font-bold'>resultados y adjunta</span> una captura de pantalla de la app como <span className='font-bold'>evidencia,</span> en este sitio  </li>
-        <li>La <span className='font-bold'>categoría:</span> será determinada por el género y la edad que tendrá el competidor al 30 de noviembre del 2023</li>
-        <li>Participan: colaboradores <span className='font-bold'>inscritos</span> y pueden inscribir a la carrera a dos de sus familiares</li>
+        <ul className='list-disc md:list-none text-2xl'>
+        <li>La <span className='font-bold text-gray-800'>edad</span> mínima para correr: 18 años cumplidos al 30 de noviembre del 2023</li>
+        <li>Cada participante correrá con: la <span className='font-bold text-gray-800'>app</span> de su preferencia</li>
+        <li>Al terminar la carrera: cada participante sube sus <span className='font-bold text-gray-800'>resultados y adjunta</span> una captura de pantalla de la app como <span className='font-bold text-gray-800'>evidencia,</span> en este sitio  </li>
+        <li>La <span className='font-bold text-gray-800'>categoría:</span> será determinada por el género y la edad que tendrá el competidor al 30 de noviembre del 2023</li>
+        <li>Participan: colaboradores <span className='font-bold text-gray-800'>inscritos</span> y pueden inscribir a la carrera a dos de sus familiares</li>
 
         </ul>
 

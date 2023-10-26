@@ -385,7 +385,7 @@ const EditRegister = ({}) => {
                       {errors.edad &&<div className='error'>{errors.edad}</div>}
                     </div>
 
-                    <div className='my-5'>
+                    {/* <div className='my-5'>
                       <div className='label'>Talla de Playera</div>
                       <Field 
                         as="select"
@@ -397,7 +397,7 @@ const EditRegister = ({}) => {
                           <option value="xg">XG</option>
                       </Field>
                       {errors.playera &&<div className='error'>{errors.playera}</div>}
-                    </div>
+                    </div> */}
                     
                     <div className='my-5'>
                       <div className='label'>Kilómetros a correr</div>
