@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { RootState, useAppDispatch } from '@/store';
 import { forgot, login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
+import Loader from '@/components/Loader';
 
 const Forgot = () => {
 
@@ -18,7 +19,7 @@ const Forgot = () => {
     correo: Yup.string().email('* Debe ser un email válido').required('* Email requerido'),
   });
 
-  const { userStatus } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userLoading } = useSelector((state : RootState) => state.userData)
 
   return (
     <div className='flex justify-center items-center  h-screen'>
@@ -79,11 +80,17 @@ const Forgot = () => {
                         <div className='flex justify-center mt-10'>
                           <button type="submit">
                             <div className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                              <div className=""> Recuperar Contraseña </div>
+                            {userLoading ? ( 
+                            <>
+                              <Loader />
+                              <div className='text-lg'>Este proceso puede tardar un momento, <span className='font-extrabold'>no recargues la página</span></div>
+                            </>
+                          ) : 'Recuperar Contraseña'}
+
+                              <div className="">  </div>
                             </div>
                           </button>
                         </div>
-
                         <Link href="/login">
                           <div className='text-greenCustom underline text-center mt-2'>
                             Regresar al Login
