@@ -32,14 +32,10 @@ const NewPass = () => {
 
   useEffect(() => {
     userStatus === 200 && router.push("/login")
+    return () => {
+      dispatch(userStatusFunc(null))
+    }
   }, [userStatus])
-
-  useEffect(() => {
-    dispatch(userStatusFunc(null))
-  }, [])
-  
-
-  
 
   return (
     <div className='flex justify-center items-center  h-screen'>

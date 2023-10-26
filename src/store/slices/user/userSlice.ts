@@ -6,9 +6,9 @@ const initialState : UserInterface = {
   users: null,
   userItem: null,
   userFounded: null,
-
   userLoading: false,
   userStatus: null,
+  userResp: '',
 }
 const userSlice = createSlice({
 
@@ -34,9 +34,12 @@ const userSlice = createSlice({
       state.userStatus = action.payload;
       state.userLoading = false;
     },
+    userRespFunc(state, action) {
+      state.userResp = action.payload;
+    }
   }
 });
 
-export const { userAll, userItem, userFounded, userStatusFunc, userLoading } = userSlice.actions;
+export const { userAll, userItem, userFounded, userStatusFunc, userLoading, userRespFunc } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -8,21 +8,21 @@ import { showOneUser, updatedUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
-import { userStatusFunc } from '@/store/slices/user/userSlice';
-
+import { userRespFunc, userStatusFunc } from '@/store/slices/user/userSlice';
+import Cookies from "js-cookie";
+import Link from 'next/link';
 
 const EditRegister = ({}) => {
   
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [idUser, setIdUser] = useState('')
+  const token = Cookies.get('tokenUser')
+  const userData = Cookies.get('user')
   
   useEffect(() => {
-    const userLocStor = localStorage.getItem('user')
-    const token = localStorage.getItem('tokenUser');
-    
-    if (userLocStor !== null && token !== null) {
-      const user = JSON.parse(userLocStor);
+    if (userData && token) {
+      const user = JSON.parse(userData);
       const idUser = user._id;
       setIdUser(user._id);
       dispatch(showOneUser(idUser, token))
@@ -73,6 +73,16 @@ const EditRegister = ({}) => {
         is: (ubicacion:any) => ubicacion === "otraUbicacion",
         then: (direccion) => direccion.required('Campo requerido'),
       }),
+    ciudad: Yup.string()
+      .when(["ubicacion"], {
+        is: (ubicacion:any) => ubicacion === "otraUbicacion",
+        then: (ciudad) => ciudad.required('Campo requerido'),
+      }),
+    estado: Yup.string()
+      .when(["ubicacion"], {
+        is: (ubicacion:any) => ubicacion === "otraUbicacion",
+        then: (estado) => estado.required('Campo requerido'),
+        }),
     edad: Yup.string().required('* Edad requerida'),
     playera: Yup.string().required('* Elige una opción'),
     kms: Yup.string().required('* Elige una opción'),
@@ -80,15 +90,12 @@ const EditRegister = ({}) => {
     
   });
 
-  const { userStatus, userItem } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    userStatus === 200 && router.push("/home")
-  }, [userStatus])
-
-  useEffect(() => {
-    dispatch(userStatusFunc(null))
-  }, [])
+    userResp === 'editRegister' && router.push("/home")
+    dispatch(userRespFunc(''))
+  }, [userResp])
   
   // console.log(userItem)
   // console.log(userRespStatus)
@@ -115,6 +122,8 @@ const EditRegister = ({}) => {
               correoFamiliar: '',
               ubicacion: '',
               direccion: '',
+              ciudad: '',
+              estado: '',
               edad: '' ,
               playera: '',
               kms: '',
@@ -134,14 +143,15 @@ const EditRegister = ({}) => {
                 correoFamiliar: values.correoFamiliar === '' ? null : values.correoFamiliar,
                 ubicacion: values.ubicacion === '' ? null : values.ubicacion,
                 direccion: values.direccion === '' ? null : values.direccion,
+                ciudad: values.ciudad === '' ? null : values.ciudad,
+                estado: values.estado === '' ? null : values.estado,
                 edad: values.edad === '' ? null : values.edad,
                 playera: values.playera === '' ? null : values.playera,
                 kms: values.kms === '' ? null : values.kms,
                 genero: values.genero === '' ? null : values.genero,
               };
               console.log(user);
-              const token = localStorage.getItem('tokenUser');
-              if (token !== null) {
+              if (token) {
                 dispatch(updatedUser(idUser, token, user))
               }
             }}>
@@ -306,7 +316,7 @@ const EditRegister = ({}) => {
 
                     {typeState === 'familiar' && (
                       <div className='my-5'>
-                        <div className='label'>Correo del Colabordador<div className='font-light'>El correo debe ser el mismo con el que el Colaborador se registró</div></div>
+                        <div className='label'>Correo institucional del Colabordador<div className='font-light'>El correo debe ser el mismo con el que el Colaborador se registró</div></div>
                         <Field
                           name="correoFamiliar"
                           placeholder="Escribe el correo"
@@ -331,14 +341,32 @@ const EditRegister = ({}) => {
                     </div>
 
                     {ubicacionIsOtro && (
-                      <div className='my-5'>
-                        <div className='label'>Dirección de la Oficina para entrega de playera</div>
-                        <Field
-                          name="direccion"
-                          placeholder="Escribe tu ubicación"
-                          type="text" />
-                        {errors.direccion && <div className='error'>{errors.direccion}</div>}
-                      </div>
+                      <>
+                        <div className='my-5'>
+                          <div className='label'>Dirección de la Oficina para entrega de playera</div>
+                          <Field
+                            name="direccion"
+                            placeholder="Escribe tu ubicación"
+                            type="text" />
+                          {errors.direccion && <div className='error'>{errors.direccion}</div>}
+                        </div>
+                        <div className='my-5'>
+                          <div className='label'>Estado</div>
+                          <Field
+                            name="estado"
+                            placeholder="Escribe el estado de tu ubicación"
+                            type="text" />
+                          {errors.estado && <div className='error'>{errors.estado}</div>}
+                        </div>
+                        <div className='my-5'>
+                          <div className='label'>Ciudad</div>
+                          <Field
+                            name="ciudad"
+                            placeholder="Escribe la ciudad de tu ubicación"
+                            type="text" />
+                          {errors.ciudad && <div className='error'>{errors.ciudad}</div>}
+                        </div>
+                      </>
                     )}
 
 
@@ -398,16 +426,21 @@ const EditRegister = ({}) => {
 
                   {userStatus === 400 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El correo ya existe</div>)}
                   {userStatus === 401 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-blueCustom text-white rounded-md p-2'>El Colaborador ha registrado más de 4 familiares</div>)}
-                  {userStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro actualizado con éxito</div>)}
 
                   <div className='flex justify-center mt-5'>
+                    <Link href="/home">
+                      <div className='bg-blueCustom text-white text-center font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
+                          Regresar
+                      </div>
+                    </Link>
                     <button type="submit" 
-                      className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-slate-200 disabled:cursor-not-allowed'
+                      className='bg-redCustom text-white ml-3 text-center font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-slate-200 disabled:cursor-not-allowed'
                       disabled={!dirty || !isValid}
                       >
                         Editar Registro
                     </button>
                   </div>  
+
                 </div>
               </div>
             </Form>

@@ -1,16 +1,18 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosConfig"
-import { userAll, userItem, userLoading, userStatusFunc } from "./userSlice"
-import { User, UserPayload } from "./userInterface"
-
+import { userAll, userItem, userLoading, userRespFunc, userStatusFunc } from "./userSlice"
+import { UserPayload, UserResponse } from "./userInterface"
+import Cookies from "js-cookie"
 
 export const registerUser = ( user : UserPayload) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
     try {
-      const resp = await instancePublicAPI.post<User>('/users', user)
+      const resp = await instancePublicAPI.post<UserResponse>('/users', user)
+      Cookies.set('tokenUser', resp.data.token)
+      Cookies.set('user', JSON.stringify(resp.data.usuario))
       dispatch(userAll(resp.data));
-      dispatch(userStatusFunc(resp.status))
+      dispatch(userRespFunc('register'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -29,7 +31,7 @@ export const showOneUser = ( id : string, token : string | null ) => {
       })
       console.log(resp);
       dispatch(userItem(resp.data[0]));
-      dispatch(userStatusFunc(resp.status))
+      // dispatch(userRespFunc())
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -46,10 +48,8 @@ export const updatedUser = ( id : string, token : string | null, user : UserPayl
           'x-tokens': token,
         },
       })
-      console.log(resp?.data);
-      localStorage.setItem('user', JSON.stringify(resp.data))
-      // dispatch(userItem(resp.data[0]));
-      dispatch(userStatusFunc(resp.status))
+      Cookies.set('user', JSON.stringify(resp.data))
+      dispatch(userRespFunc('editRegister'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));

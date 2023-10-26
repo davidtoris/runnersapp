@@ -10,7 +10,8 @@ import { RootState, useAppDispatch } from '@/store';
 import { login } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import Loader from "../../components/Loader";
-import { userStatusFunc } from '@/store/slices/user/userSlice';
+import { userRespFunc, userStatusFunc } from '@/store/slices/user/userSlice';
+import { pathFunc } from '@/store/slices/path/pathSlice';
 
 const Login = () => {
 
@@ -22,15 +23,12 @@ const Login = () => {
     password: Yup.string().required('* Contraseña requerida')
   });
 
-  const { userStatus, userLoading } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userLoading, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    userStatus === 200 && router.push("/home")
-  }, [userStatus])
-
-  useEffect(() => {
-    dispatch(userStatusFunc(null))
-  }, [])
+    userResp === 'login' && router.push("/home")
+    dispatch(userRespFunc(''))
+  }, [userResp])
 
   return (
     <div className='flex justify-center items-center  h-screen'>

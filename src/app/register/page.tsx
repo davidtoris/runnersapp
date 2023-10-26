@@ -8,7 +8,7 @@ import { registerUser } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import { useSelector } from 'react-redux';
 import Loader from '@/components/Loader';
-import { userStatusFunc } from '@/store/slices/user/userSlice';
+import { userRespFunc, userStatusFunc } from '@/store/slices/user/userSlice';
 
 
 const Register = ({}) => {
@@ -16,7 +16,7 @@ const Register = ({}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { userLoading, userStatus } = useSelector((state : RootState) => state.userData);
+  const { userLoading, userStatus, userResp } = useSelector((state : RootState) => state.userData);
 
   const UserSchema = Yup.object().shape({
     nombre: Yup.string().required('* Nombre requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios').max(10, 'El nombre debe ser máximo de 10 caractéres'),
@@ -74,13 +74,9 @@ const Register = ({}) => {
 
 
   useEffect(() => {
-    userStatus === 200 && router.push("/login")
-  }, [userStatus])
-
-  useEffect(() => {
-    dispatch(userStatusFunc(null))
-  }, [])
-  
+    userResp === 'register' && router.push("/home")
+    dispatch(userRespFunc(''))
+  }, [userResp])
 
   return (
     <div className='flex m-auto justify-center container w-12/12'>
@@ -277,7 +273,7 @@ const Register = ({}) => {
 
                     {typeState === 'familiar' && (
                       <div className='my-5'>
-                        <div className='label'>Correo del Colabordador<div className='font-light'>El correo debe ser el mismo con el que el Colaborador se registró</div></div>
+                        <div className='label'>Correo institucional del Colabordador<div className='font-light'>El correo debe ser el mismo con el que el Colaborador se registró</div></div>
                         <Field
                           name="correoFamiliar"
                           placeholder="Escribe el correo"

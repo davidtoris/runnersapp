@@ -8,16 +8,18 @@ import { RootState, useAppDispatch } from '@/store';
 import { getDate } from '@/store/slices/date/dateService';
 import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
-import Link from 'next/link';
 import Cookies from "js-cookie"
 
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
+import { useRouter } from 'next/navigation';
+import { userLoading, userStatusFunc } from '@/store/slices/user/userSlice';
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<User | null>(null)
   const token = Cookies.get('tokenUser')
   const userData = Cookies.get('user')
+  const router = useRouter();
   
   useEffect(() => {
     if (userData) {
@@ -48,6 +50,17 @@ const Home = () => {
     }
     return numRunner;
   };
+
+  const editRegister = () => {
+    router.push("/editRegister")
+  }
+  
+  const logOut = () => {
+    router.push("/login")
+    dispatch(userLoading(false));
+    Cookies.remove('tokenUser');
+    Cookies.remove('user');
+  }
 
   return (
     <div className='flex justify-center items-center h-screen text-center'>
@@ -103,7 +116,7 @@ const Home = () => {
             </div>
             <div className='left'>
               { user?.genero === "H" && 'Varonil'}
-              { user?.genero === "F" && 'Femenil'}
+              { user?.genero === "M" && 'Femenil'}
             </div>
           </div>
         </div>
@@ -119,12 +132,17 @@ const Home = () => {
           />
         </div>
 
-        <Link href="/editRegister">
-          <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer'>
+        
+          <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
           </div>
-        </Link>
+
+          <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
+            onClick={logOut}>
+            <div className='ml-2'>Salir</div>
+          </div>
+        
 {/* 
         <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
           <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>

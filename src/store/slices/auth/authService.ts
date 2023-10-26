@@ -1,7 +1,7 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instancePublicAPI } from "@/config/axiosConfig"
 import { AuthPayload, ForgotPayload, NewPassPayload } from "../auth/authInterface"
-import { userItem, userLoading, userStatusFunc } from "../user/userSlice"
+import { userItem, userLoading, userRespFunc, userStatusFunc } from "../user/userSlice"
 import { UserResponse } from "../user/userInterface"
 import Cookies from "js-cookie"
 
@@ -14,7 +14,7 @@ export const login = ( user : AuthPayload) => {
       Cookies.set('tokenUser', resp.data.token)
       Cookies.set('user', JSON.stringify(resp.data.usuario))
       dispatch(userItem(resp.data));
-      dispatch(userStatusFunc(resp.status));
+      dispatch(userRespFunc('login'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -27,7 +27,7 @@ export const forgot = ( email : ForgotPayload) => {
     dispatch(userLoading(true))
     try {
       const resp = await instancePublicAPI.post('/auth/forgot', email)
-      dispatch(userStatusFunc(resp.status));
+      dispatch(userRespFunc('forgot'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -40,7 +40,7 @@ export const newPass = ( pass : NewPassPayload) => {
     dispatch(userLoading(true))
     try {
       const resp = await instanceAPI.post('/auth/newPass', pass)
-      dispatch(userStatusFunc(resp.status));
+      dispatch(userRespFunc('newPas'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -57,12 +57,12 @@ export const validateToken = ( token : string | '' ) => {
           'x-tokens': token,
         },
       })
-      dispatch(userStatusFunc(resp.status));
+      dispatch(userRespFunc(''))
     } catch (error : any) {
       console.log(error);
       Cookies.remove('tokenUser')
       Cookies.remove('user')
-      location.replace("/login")
+      // location.replace("/login")
     }
   }
 }

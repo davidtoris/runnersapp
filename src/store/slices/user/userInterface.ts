@@ -50,4 +50,5 @@ export interface UserInterface {
   userFounded: boolean | null,
   userLoading: boolean,
   userStatus: null,
+  userResp: '' | string,
 }
