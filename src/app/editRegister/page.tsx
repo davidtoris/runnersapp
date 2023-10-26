@@ -171,6 +171,8 @@ const EditRegister = ({}) => {
                   setFieldValue('correoFamiliar', userItem?.correoFamiliar || '')
                   setFieldValue('ubicacion', userItem?.ubicacion || '')
                   setFieldValue('direccion', userItem?.direccion || '')
+                  setFieldValue('ciudad', userItem?.ciudad || '')
+                  setFieldValue('estado', userItem?.estado || '')
                   setFieldValue('edad', userItem?.edad || '')
                   setFieldValue('playera', userItem?.playera || '')
                   setFieldValue('kms', userItem?.kms || '')
