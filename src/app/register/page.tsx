@@ -43,10 +43,10 @@ const Register = ({}) => {
         is: (depto:any) => depto === "Otro",
         then: (otroDepto) => otroDepto.required('Campo requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
       }),
-    correoFamiliar: Yup.string()
+    nombreFamiliar: Yup.string()
       .when(["tipo"], {
         is: (tipo:any) => tipo === "familiar",
-        then: (correoFamiliar) => correoFamiliar.required('* Elige una opción').email('Debe ser un email válido').required('* Correo requerido'),
+        then: (nombreFamiliar) => nombreFamiliar.required('* Elige una opción').email('Debe ser un email válido').required('* Correo requerido'),
       }),
     ubicacion: Yup.string().required('* Elige una opción'),
     direccion: Yup.string()
@@ -96,7 +96,7 @@ const Register = ({}) => {
               numColaborador: '',
               depto: '',
               otroDepto: '',
-              correoFamiliar: '',
+              nombreFamiliar: '',
               ubicacion: '',
               direccion: '',
               ciudad: '',
@@ -118,7 +118,7 @@ const Register = ({}) => {
                 numColaborador: values.numColaborador === '' ? null : values.numColaborador,
                 depto: values.depto === '' ? null : values.depto,
                 otroDepto: values.otroDepto === '' ? null : values.otroDepto,
-                correoFamiliar: values.correoFamiliar === '' ? null : values.correoFamiliar,
+                nombreFamiliar: values.nombreFamiliar === '' ? null : values.nombreFamiliar,
                 ubicacion: values.ubicacion === '' ? null : values.ubicacion,
                 direccion: values.direccion === '' ? null : values.direccion,
                 ciudad: values.ciudad === '' ? null : values.ciudad,
@@ -192,7 +192,7 @@ const Register = ({}) => {
                     </div>
 
                     <div className='my-5'>
-                      <div className='label'>Correo<span className='font-light ml-2'>(De preferencia use un correo personal)</span></div>
+                      <div className='label'>Correo<span className='font-light ml-2'>(Use un correo personal)</span></div>
                       <Field
                         name="correo"
                         placeholder="Escribe tu correo"
@@ -273,12 +273,12 @@ const Register = ({}) => {
 
                     {typeState === 'familiar' && (
                       <div className='my-5'>
-                        <div className='label'>Correo institucional del Colabordador<div className='font-light'>El correo debe ser el mismo con el que el Colaborador se registró</div></div>
+                        <div className='label'>Nombre completo del Colaborador</div>
                         <Field
-                          name="correoFamiliar"
-                          placeholder="Escribe el correo"
-                          type="email" />
-                        {errors.correoFamiliar && <div className='error'>{errors.correoFamiliar}</div>}
+                          name="nombreFamiliar"
+                          placeholder="Escribe el nombre completo del Colaborador"
+                          type="text" />
+                        {errors.nombreFamiliar && <div className='error'>{errors.nombreFamiliar}</div>}
                       </div>
                     )}
 

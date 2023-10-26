@@ -88,10 +88,10 @@ const Home = () => {
 
       <div className='bg-yellowCustom text-white text-left md:text-center p-7 mt-10'>
         <h3 className=' font-extrabold text-3xl mb-3 text-center'>CONVOCATORIA</h3>
-        <ul className='list-disc md:list-none'>
+        <ul className='list-disc md:list-none text-xl'>
         <li>La <span className='font-bold'>edad</span> mínima para correr: 18 años cumplidos al 30 de noviembre del 2023</li>
         <li>Cada participante correrá con: la <span className='font-bold'>app</span> de su preferencia</li>
-        <li>Al terminar la carrera: cada participante sube sus <span className='font-bold'>resultados y adjunta</span> una captura de pantalla de la app como <span className='font-bold'>evidencia,</span> en el sitio que en breve haremos llegar  </li>
+        <li>Al terminar la carrera: cada participante sube sus <span className='font-bold'>resultados y adjunta</span> una captura de pantalla de la app como <span className='font-bold'>evidencia,</span> en este sitio  </li>
         <li>La <span className='font-bold'>categoría:</span> será determinada por el género y la edad que tendrá el competidor al 30 de noviembre del 2023</li>
         <li>Participan: colaboradores <span className='font-bold'>inscritos</span> y pueden inscribir a la carrera a dos de sus familiares</li>
 
