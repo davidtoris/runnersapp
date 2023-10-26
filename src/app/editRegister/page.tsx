@@ -30,8 +30,7 @@ const EditRegister = ({}) => {
   }, [])
 
   useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    if (token !== null) {
+    if (token) {
       dispatch(validateToken(token))
     }
   }, [])
@@ -84,7 +83,7 @@ const EditRegister = ({}) => {
         then: (estado) => estado.required('Campo requerido'),
         }),
     edad: Yup.string().required('* Edad requerida'),
-    playera: Yup.string().required('* Elige una opción'),
+    // playera: Yup.string().required('* Elige una opción'),
     kms: Yup.string().required('* Elige una opción'),
     genero: Yup.string().required('* Elige una opción'),
     
@@ -385,7 +384,7 @@ const EditRegister = ({}) => {
                       {errors.edad &&<div className='error'>{errors.edad}</div>}
                     </div>
 
-                    {/* <div className='my-5'>
+                    <div className='my-5'>
                       <div className='label'>Talla de Playera</div>
                       <Field 
                         as="select"
@@ -397,7 +396,7 @@ const EditRegister = ({}) => {
                           <option value="xg">XG</option>
                       </Field>
                       {errors.playera &&<div className='error'>{errors.playera}</div>}
-                    </div> */}
+                    </div>
                     
                     <div className='my-5'>
                       <div className='label'>Kilómetros a correr</div>
