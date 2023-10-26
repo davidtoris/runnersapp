@@ -67,8 +67,8 @@ const Home = () => {
       <div className='flex justify-center flex-col pb-5 m-auto'>
         <Image 
         src='/logo.png' 
-        width={600}
-        height={500}
+        width={450}
+        height={230}
         alt="Picture of the author"
         className='m-auto'
         />
@@ -82,11 +82,11 @@ const Home = () => {
         <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[184px]'>{number()}</div>
 
         {/* <div className='text-5xl text-gray-800 mt-10 mb-2 font-semibold'>Datos de la carrera:</div> */}
-        <div className='flex text-gray-600 items-center justify-center mt-3'>
+        <div className='flex text-gray-600 items-center justify-center mt-3 flex-col md:flex-row'>
           <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center'>
             <BsSpeedometer2 className="text-blueCustom" />
           </div>
-          <div className='ml-3 text-left'>
+          <div className='ml-0 md:ml-3 text-center md:text-left'>
             <div className='text-xl font-semibold'>
               Kms a correr
             </div>
@@ -94,10 +94,10 @@ const Home = () => {
               {`${user?.kms} kms`}
             </div>
           </div>
-          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-8'>
+          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
             <BsFillPersonLinesFill className="text-blueCustom" />
           </div>
-          <div className='ml-3 text-left'>
+          <div className='ml-0 md:ml-3 text-center md:text-left'>
             <div className='text-xl font-semibold'>
               Rango de edad
             </div>
@@ -107,10 +107,10 @@ const Home = () => {
               { user?.edad === "3" && '50 0 más años'}
             </div>
           </div>
-          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-8'>
+          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
             <BsFillBookmarkStarFill className="text-blueCustom" />
           </div>
-          <div className='ml-3 text-left'>
+          <div className='ml-0 md:ml-3 text-center md:text-left'>
             <div className='text-xl font-semibold'>
               Categoría
             </div>
@@ -126,7 +126,7 @@ const Home = () => {
         <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>La carrera empieza en:</div>
         <div className='flex justify-center'>
           <CountDown
-            closeDate={'2023-11-26 08:00:00'} 
+            closeDate={'2023-11-25 06:00:00'} 
             todayDate={date} 
             size 
           />
