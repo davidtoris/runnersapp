@@ -107,6 +107,12 @@ const NewPass = () => {
                           </button>
                         </div>
 
+                        <Link href="/forgot">
+                          <div className='text-greenCustom underline text-center mt-4 text-lg'>
+                            Generar nuevo Token
+                          </div>
+                        </Link>
+
                       
                       </div>  
                     </div>
