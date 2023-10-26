@@ -111,30 +111,30 @@ const Home = () => {
           <div className='mt-5 md:mt-0'>Se premiará a los 3 Primeros Lugares de cada categoría, en la distancia de 3 y 5 km.</div>
           <div className='mt-5 md:mt-0'>Los mejores tiempos de cada categoría se darán a conocer el lunes 27 de noviembre por correo electrónico y en este sitio</div>
           <div className='ml-10 my-5'>
-            <ul className='list-disc'>
+            {/* <ul className='list-disc'>
               <li>1er lugar (mejor tiempo APP):</li>
               <li>2o lugar (mejor tiempo APP):</li>
               <li>3er lugar (mejor tiempo APP):</li>
-            </ul>
+            </ul> */}
           </div>
 
 
-          <div className='flex pb-14'>
-            <Link href="/register">
-              <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                <Image src="/tennis.png" width={30} height={30} alt=''/>
-                <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
-              </div>
-            </Link>
-            <Link href="/login">
-              <div className='bg-blueCustom ml-3 text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                <Image src="/tennis.png" width={30} height={30} alt=''/>
-                <div className="ml-3"> Inicia Sesión</div>
-              </div>
-            </Link>
-          </div>
         </div>
       </div>
+            <div className='flex justify-center pb-14 mt-3'>
+              <Link href="/register">
+                <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
+                  <Image src="/tennis.png" width={30} height={30} alt=''/>
+                  <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
+                </div>
+              </Link>
+              <Link href="/login">
+                <div className='bg-blueCustom ml-3 text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
+                  <Image src="/tennis.png" width={30} height={30} alt=''/>
+                  <div className="ml-3"> Inicia Sesión</div>
+                </div>
+              </Link>
+            </div>
 
       
     </>
