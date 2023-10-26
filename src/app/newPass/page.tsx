@@ -10,6 +10,7 @@ import { RootState, useAppDispatch } from '@/store';
 import { newPass } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
 import { userRespFunc, userStatusFunc } from '@/store/slices/user/userSlice';
+import Cookies from "js-cookie";
 
 const NewPass = () => {
 
@@ -18,9 +19,7 @@ const NewPass = () => {
   const searchParam = useSearchParams();
   const token = searchParam.get('token');
 
-  useEffect(() => {
-    localStorage.setItem('tokenUser', token ?? '');
-  }, [token])
+
   
 
   const UserSchema = Yup.object().shape({
@@ -58,7 +57,9 @@ const NewPass = () => {
               const data = {
                 password: values.password
               }
-              dispatch(newPass(data))
+              if (token) {
+                dispatch(newPass(data, token))
+              }
             }}>
 
             {({ }) => {
@@ -101,7 +102,7 @@ const NewPass = () => {
                         <div className='flex justify-center mt-10'>
                           <button type="submit">
                             <div className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
-                              <div className=""> Guardar </div>
+                              <div className=""> Crear nueva contraseña </div>
                             </div>
                           </button>
                         </div>

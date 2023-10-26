@@ -36,11 +36,16 @@ export const forgot = ( email : ForgotPayload) => {
   }
 }
 
-export const newPass = ( pass : NewPassPayload) => {
+export const newPass = ( pass : NewPassPayload, token : string) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
+    console.log(token);
     try {
-      const resp = await instanceAPI.post('/auth/newPass', pass)
+      const resp = await instanceAPI.post('/auth/newPass', pass, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
       dispatch(userRespFunc('newPass'))
     } catch (error: any) {
       console.log(error)
