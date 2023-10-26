@@ -41,7 +41,7 @@ export const newPass = ( pass : NewPassPayload) => {
     dispatch(userLoading(true))
     try {
       const resp = await instanceAPI.post('/auth/newPass', pass)
-      dispatch(userRespFunc('newPas'))
+      dispatch(userRespFunc('newPass'))
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));

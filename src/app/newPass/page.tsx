@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { RootState, useAppDispatch } from '@/store';
 import { newPass } from '@/store/slices/auth/authService';
 import { useSelector } from 'react-redux';
-import { userStatusFunc } from '@/store/slices/user/userSlice';
+import { userRespFunc, userStatusFunc } from '@/store/slices/user/userSlice';
 
 const NewPass = () => {
 
@@ -28,14 +28,12 @@ const NewPass = () => {
   });
 
 
-  const { userStatus } = useSelector((state : RootState) => state.userData)
+  const { userStatus, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    userStatus === 200 && router.push("/login")
-    return () => {
-      dispatch(userStatusFunc(null))
-    }
-  }, [userStatus])
+    userResp === 'newPass' && router.push("/login")
+    dispatch(userRespFunc(''))
+  }, [userResp])
 
   return (
     <div className='flex justify-center items-center  h-screen'>
