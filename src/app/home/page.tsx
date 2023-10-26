@@ -9,6 +9,7 @@ import { getDate } from '@/store/slices/date/dateService';
 import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
 import Cookies from "js-cookie"
+import { GiRunningShoe } from "react-icons/gi";
 
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
@@ -137,6 +138,12 @@ const Home = () => {
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
           </div>
+
+          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-slate-300 text-gray-100 w-6/12 m-auto p-2 rounded-lg cursor-not-allowed' disabled>
+            <GiRunningShoe />
+            <div className='ml-2'>Subir evindencia</div>
+          </button>
+            <div className=''>Una vez inicidad la carrera se habilitará este botón</div>
 
           <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
             onClick={logOut}>

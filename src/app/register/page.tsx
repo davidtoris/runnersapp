@@ -386,6 +386,7 @@ const Register = ({}) => {
                     {errors.agree &&<div className='error ml-10'>{errors.agree}</div>}
                   </div>
 
+                  {userStatus === 500 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Error de servidor, contacta al Administrador</div>)}
                   {userStatus === 504 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>Algo ocurrió, intentalo de nuevo</div>)}
                   {userStatus === 400 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El correo ya existe</div>)}
                   {userStatus === 401 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El Colaborador ha registrado más de 4 familiares</div>)}
