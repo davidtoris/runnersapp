@@ -12,58 +12,6 @@ import Cookies from "js-cookie"
 import { getUsers } from '@/store/slices/user/userService'
 import { User } from '@/store/slices/user/userInterface'
 
-
-const columnHelper = createColumnHelper<User[]>()
-
-const columns = [
-  columnHelper.accessor('nombre', {
-    header: () => 'nombre',
-  }),
-  columnHelper.accessor('apellido', {
-    header: () => 'apellido',
-  }),
-  columnHelper.accessor('correo', {
-    header: () => 'correo',
-  }),
-  columnHelper.accessor('playera', {
-    header: 'playera',
-  }),
-  columnHelper.accessor('tipo', {
-    header: () => 'correo',
-  }),
-  columnHelper.accessor('numColaborador', {
-    header: 'numColaborador',
-  }),
-  columnHelper.accessor('depto', {
-    header: 'depto',
-  }),
-  columnHelper.accessor('otroDepto', {
-    header: 'otroDepto',
-  }),
-  columnHelper.accessor('ubicacion', {
-    header: 'ubicacion',
-  }),
-  columnHelper.accessor('direccion', {
-    header: 'direccion',
-  }),
-  columnHelper.accessor('ciudad', {
-    header: 'ciudad',
-  }),
-  columnHelper.accessor('estado', {
-    header: 'estado',
-  }),
-  columnHelper.accessor('edad', {
-    header: 'edad',
-  }),
-  
-  columnHelper.accessor('kms', {
-    header: 'kms',
-  }),
-  columnHelper.accessor('genero', {
-    header: 'genero',
-  }),
-]
-
 const Runners = () => {
   const token = Cookies.get('tokenUser')
   const dispatch = useAppDispatch();
@@ -73,12 +21,64 @@ const Runners = () => {
   useEffect(() => {
     if (token) {
       dispatch(getUsers(token))
-      console.log(token)
     }
   }, [])
 
+  const columnHelper = createColumnHelper<User>()
+
+  const columns = [
+    columnHelper.accessor('nombre', {
+      header: () => 'nombre',
+    }),
+    columnHelper.accessor('apellido', {
+      header: () => 'apellido',
+    }),
+    columnHelper.accessor('correo', {
+      header: () => 'correo',
+    }),
+    columnHelper.accessor('playera', {
+      header: 'playera',
+    }),
+    columnHelper.accessor('tipo', {
+      header: () => 'correo',
+    }),
+    columnHelper.accessor('numColaborador', {
+      header: 'numColaborador',
+    }),
+    columnHelper.accessor('depto', {
+      header: 'depto',
+    }),
+    columnHelper.accessor('otroDepto', {
+      header: 'otroDepto',
+    }),
+    columnHelper.accessor('ubicacion', {
+      header: 'ubicacion',
+    }),
+    columnHelper.accessor('direccion', {
+      header: 'direccion',
+    }),
+    columnHelper.accessor('ciudad', {
+      header: 'ciudad',
+    }),
+    columnHelper.accessor('estado', {
+      header: 'estado',
+    }),
+    columnHelper.accessor('edad', {
+      header: 'edad',
+    }),
+    
+    columnHelper.accessor('kms', {
+      header: 'kms',
+    }),
+    columnHelper.accessor('genero', {
+      header: 'genero',
+    }),
+  ]
+
+  const usersArray: any = users || [];
+
   const table = useReactTable({
-    data: users,
+    data: usersArray,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })

@@ -48,7 +48,6 @@ export const getUsers = ( token : string | null ) => {
           'x-tokens': token,
         },
       })
-      console.log(data);
       dispatch(userAll(data))
     } catch (error: any) {
       console.log(error)
