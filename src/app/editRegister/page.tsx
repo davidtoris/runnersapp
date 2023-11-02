@@ -370,7 +370,6 @@ const EditRegister = ({}) => {
                       </>
                     )}
 
-
                     <div className='my-5'>
                       <div className='label'>Edad</div>
                       <Field 
@@ -449,10 +448,7 @@ const EditRegister = ({}) => {
             );
           }}
         </Formik>
-
-        
-        
-        </div>
+      </div>
     </div>
   );
 };

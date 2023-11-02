@@ -39,6 +39,24 @@ export const showOneUser = ( id : string, token : string | null ) => {
   }
 }
 
+export const getUsers = ( token : string | null ) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(userLoading(true))
+    try {
+      const {data} = await instanceAPI.get(`/users`, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      console.log(data);
+      dispatch(userAll(data))
+    } catch (error: any) {
+      console.log(error)
+      dispatch(userStatusFunc(error?.response?.status));
+    }
+  }
+}
+
 export const updatedUser = ( id : string, token : string | null, user : UserPayload ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
