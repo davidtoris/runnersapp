@@ -46,7 +46,7 @@ const Register = ({}) => {
     nombreFamiliar: Yup.string()
       .when(["tipo"], {
         is: (tipo:any) => tipo === "familiar",
-        then: (nombreFamiliar) => nombreFamiliar.required('* Elige una opción').email('Debe ser un email válido').required('* Correo requerido'),
+        then: (nombreFamiliar) => nombreFamiliar.required('* Campo requerido'),
       }),
     ubicacion: Yup.string().required('* Elige una opción'),
     direccion: Yup.string()
