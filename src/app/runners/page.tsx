@@ -86,8 +86,9 @@ const Runners = () => {
 
   return (
     <>
-      <Exports users={users} />
       {users && (
+        <>
+        <Exports users={users} />
         <table className="w-8/12">
           <thead>
             {table.getHeaderGroups().map(headerGroup => (
@@ -119,6 +120,7 @@ const Runners = () => {
             ))}
           </tbody>
         </table>
+        </>
       )}
     </>
   )

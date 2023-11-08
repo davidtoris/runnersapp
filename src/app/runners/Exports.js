@@ -3,7 +3,6 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 const Exports = ({ users }) => {
-  
   return (
     <div className="max-w-7xl mx-auto pb-10">
       <img src="../logo.png" width="600px" className='my-5 m-auto'/>
