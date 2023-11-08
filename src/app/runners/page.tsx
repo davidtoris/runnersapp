@@ -89,6 +89,7 @@ const Runners = () => {
       {users && (
         <>
         <Exports users={users} />
+        <div className='flex justify-center'>
         <table className="w-8/12">
           <thead>
             {table.getHeaderGroups().map(headerGroup => (
@@ -120,6 +121,7 @@ const Runners = () => {
             ))}
           </tbody>
         </table>
+        </div>
         </>
       )}
     </>
