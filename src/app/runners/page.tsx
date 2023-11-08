@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect } from 'react'
 import {
   createColumnHelper,
   flexRender,
@@ -84,7 +84,7 @@ const Runners = () => {
   })
 
   return (
-    <div className='flex justify-center'>
+    <>
       {users && (
         <table className="w-8/12">
           <thead>
@@ -118,7 +118,7 @@ const Runners = () => {
           </tbody>
         </table>
       )}
-    </div>
+    </>
   )
 }
 
