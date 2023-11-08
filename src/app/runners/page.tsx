@@ -11,6 +11,7 @@ import { RootState, useAppDispatch } from '@/store'
 import Cookies from "js-cookie"
 import { getUsers } from '@/store/slices/user/userService'
 import { User } from '@/store/slices/user/userInterface'
+import Exports from './Exports';
 
 const Runners = () => {
   const token = Cookies.get('tokenUser')
@@ -85,6 +86,7 @@ const Runners = () => {
 
   return (
     <>
+      <Exports users={users} />
       {users && (
         <table className="w-8/12">
           <thead>
