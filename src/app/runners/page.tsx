@@ -41,22 +41,25 @@ const Runners = () => {
       header: 'playera',
     }),
     columnHelper.accessor('tipo', {
-      header: () => 'correo',
+      header: () => 'tipo',
     }),
     columnHelper.accessor('numColaborador', {
-      header: 'numColaborador',
+      header: 'num Colaborador',
+    }),
+    columnHelper.accessor('nombreFamiliar', {
+      header: 'nombre Familiar',
     }),
     columnHelper.accessor('depto', {
       header: 'depto',
     }),
     columnHelper.accessor('otroDepto', {
-      header: 'otroDepto',
+      header: 'otro Depto',
     }),
     columnHelper.accessor('ubicacion', {
-      header: 'ubicacion',
+      header: 'ubicación',
     }),
     columnHelper.accessor('direccion', {
-      header: 'direccion',
+      header: 'dirección',
     }),
     columnHelper.accessor('ciudad', {
       header: 'ciudad',
@@ -72,7 +75,7 @@ const Runners = () => {
       header: 'kms',
     }),
     columnHelper.accessor('genero', {
-      header: 'genero',
+      header: 'género',
     }),
   ]
 
