@@ -395,7 +395,7 @@ const Register = ({}) => {
                   <div className='flex justify-center mt-5'>
                     <button type="submit" 
                       className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-slate-200 disabled:cursor-not-allowed'
-                      disabled={!dirty || !isValid}
+                      disabled
                       >
                         {userLoading ? ( <Loader />) : 'Registrarme'}
                     </button>
