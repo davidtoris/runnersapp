@@ -88,7 +88,7 @@ export const uploadEvidenceService = ( image : any, token : string, type : strin
     } catch (error: any) {
       console.log(error);
       console.log(error?.response);
-      dispatch(statusCodeFunc(error?.response?.status))
+      dispatch(statusCodeFunc(413))
     }
   }
 }
@@ -108,7 +108,7 @@ export const uploadPhotoService = ( image : any, token : string, type : string) 
     } catch (error:any) {
       console.log(error);
       console.log(error?.response);
-      dispatch(statusCodeFunc(error?.response?.status))
+      dispatch(statusCodeFunc(413))
     }
   }
 }
