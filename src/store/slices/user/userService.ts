@@ -106,7 +106,7 @@ export const uploadPhotoService = ( image : any, token : string, type : string) 
       console.log(data);
       
     } catch (error:any) {
-      console.log(error);
+      console.log(error.request);
       if (error === null) {
         dispatch(statusCodeFunc(413))
       }
