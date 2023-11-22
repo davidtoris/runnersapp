@@ -21,8 +21,6 @@ const Evidence = () => {
   const { userItem } = useSelector((state : RootState) => state.userData)
   const { userStatus } = useSelector((state : RootState) => state.userData)
 
-  console.log(userStatus)
-
   useEffect(() => {
     if ( userStatus === 401 ) {
       router.push("/login")

@@ -95,10 +95,6 @@ const EditRegister = ({}) => {
     userResp === 'editRegister' && router.push("/home")
     dispatch(userRespFunc(''))
   }, [userResp])
-  
-  // console.log(userItem)
-  // console.log(userRespStatus)
-  // console.log(userItem?.nombre)
 
   return (
     <div className='flex m-auto justify-center container w-12/12'>
