@@ -36,10 +36,12 @@ const imagesSlice = createSlice({
     imagesEvidence(state, action) {
       state.evidence = action.payload;
       state.evidenceLoading = false
+      state.statusCode = null
     },
     imagesPhoto(state, action) {
       state.photo = action.payload;
       state.photoLoading = false
+      state.statusCode = null
     },
     evidenceLoading(state, action) {
       state.evidenceLoading = action.payload;

@@ -93,7 +93,6 @@ const Evidence = () => {
 
           <div className='flex flex-col md:flex-row m-auto'>
             <div className='bg-gray-100 p-2 rounded-md shadow-md'>
-              {statusCode}
               {!evidence.imagen && userItem?.imgEvidence && (
                 <>
                   <div className='m-auto font-bold text-blueCustom text-3xl mt-2'>Evidencia</div>
@@ -120,7 +119,6 @@ const Evidence = () => {
             </div>
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
-              {statusCode}
               {!photo.imagen && userItem?.imgPhoto && (
                 <>
                   <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
