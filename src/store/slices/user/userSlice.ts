@@ -34,6 +34,10 @@ const userSlice = createSlice({
       state.userStatus = action.payload;
       state.userLoading = false;
     },
+    userStatusErr( state, action ) {
+      state.userStatus = action.payload;
+      state.userLoading = false;
+    },
     userRespFunc(state, action) {
       state.userResp = action.payload;
     }

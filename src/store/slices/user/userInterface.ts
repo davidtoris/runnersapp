@@ -16,6 +16,8 @@ export interface User {
   active: string,
   genero: string,
   images: string,
+  imgEvidence: string,
+  imgPhoto: string,
   kms: string,
   nombre: string,
   numColaborador: string,

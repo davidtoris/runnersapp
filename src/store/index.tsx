@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/user/userSlice';
+import imagesReducer from './slices/images/imagesSlice';
 import dateReducer from './slices/date/dateSlice';
 import pathReducer from './slices/path/pathSlice';
 
@@ -11,6 +12,7 @@ export const store = configureStore({
     pathData: pathReducer,
     dateData: dateReducer,
     userData: userReducer,
+    imagesData: imagesReducer,
   },
 })
 

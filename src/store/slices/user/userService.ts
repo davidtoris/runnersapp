@@ -3,6 +3,7 @@ import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosC
 import { userAll, userItem, userLoading, userRespFunc, userStatusFunc } from "./userSlice"
 import { UserPayload, UserResponse } from "./userInterface"
 import Cookies from "js-cookie"
+import { evidenceLoading, imagesEvidence, imagesPhoto, photoLoading } from "../images/imagesSlice"
 
 export const registerUser = ( user : UserPayload) => {
   return async (dispatch: AppDispatch) => {
@@ -29,9 +30,7 @@ export const showOneUser = ( id : string, token : string | null ) => {
           'x-tokens': token,
         },
       })
-      console.log(resp);
       dispatch(userItem(resp.data[0]));
-      // dispatch(userRespFunc())
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
@@ -74,14 +73,38 @@ export const updatedUser = ( id : string, token : string | null, user : UserPayl
   }
 }
 
-export const uploadImage = ( image : any) => {
+export const uploadEvidenceService = ( image : any, token : string, type : string) => {
   return async (dispatch: AppDispatch) => {
+    dispatch(evidenceLoading(true))
     try {
-      const {data} = await instanceAPIData.post('/users/uploadImage', image )
+      const {data} = await instanceAPIData.post(`/users/uploadEvidence`, image, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      dispatch(imagesEvidence(data))
       console.log(data);
       
     } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const uploadPhotoService = ( image : any, token : string, type : string) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(photoLoading(true))
+    try {
+      const {data} = await instanceAPIData.post(`/users/uploadPhoto`, image, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      dispatch(imagesPhoto(data))
+      console.log(data);
       
+    } catch (error) {
+      console.log(error)
     }
   }
 }

@@ -14,6 +14,7 @@ import { GiRunningShoe } from "react-icons/gi";
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
 import { userLoading, userStatusFunc } from '@/store/slices/user/userSlice';
+import Link from 'next/link';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -138,11 +139,14 @@ const Home = () => {
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
           </div>
+          
+          <Link href="/evidence">
+            <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-6/12 m-auto p-2 rounded-lg' >
+              <GiRunningShoe />
+              <span className='ml-2'>Subir evidencia</span>
+            </button>
+          </Link>
 
-          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-slate-300 text-gray-100 w-6/12 m-auto p-2 rounded-lg cursor-not-allowed' disabled>
-            <GiRunningShoe />
-            <div className='ml-2'>Subir evidencia</div>
-          </button>
           <div className=''>Una vez iniciada la carrera se habilitará este botón</div>
 
           <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
@@ -150,11 +154,11 @@ const Home = () => {
             <div className='ml-2'>Salir</div>
           </div>
         
-{/* 
-        <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
-          <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>
-          <div className='bg-gray-500 text-white rounded-full p-2 px-5 ml-5 cursor-pointer shadow-xl hover:bg-blueCustom'>Ver todos los reultados</div>
-        </div> */}
+          {/* 
+          <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
+            <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>
+            <div className='bg-gray-500 text-white rounded-full p-2 px-5 ml-5 cursor-pointer shadow-xl hover:bg-blueCustom'>Ver todos los reultados</div>
+          </div> */}
       </div>
     </div>
   )
