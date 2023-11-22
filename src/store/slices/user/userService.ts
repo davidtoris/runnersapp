@@ -3,7 +3,7 @@ import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosC
 import { userAll, userItem, userLoading, userRespFunc, userStatusFunc } from "./userSlice"
 import { UserPayload, UserResponse } from "./userInterface"
 import Cookies from "js-cookie"
-import { evidenceLoading, imagesEvidence, imagesPhoto, photoLoading } from "../images/imagesSlice"
+import { evidenceLoading, imagesEvidence, imagesPhoto, photoLoading, statusCodeFunc } from "../images/imagesSlice"
 
 export const registerUser = ( user : UserPayload) => {
   return async (dispatch: AppDispatch) => {
@@ -85,8 +85,8 @@ export const uploadEvidenceService = ( image : any, token : string, type : strin
       dispatch(imagesEvidence(data))
       console.log(data);
       
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      dispatch(statusCodeFunc(error?.response?.status))
     }
   }
 }

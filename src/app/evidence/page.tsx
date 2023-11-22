@@ -17,7 +17,7 @@ const Evidence = () => {
   
   const [idUser, setIdUser] = useState('')
 
-  const { evidence, photo, evidenceLoading, photoLoading } = useSelector((state : RootState) => state.imagesData)
+  const { evidence, photo, evidenceLoading, photoLoading, statusCode } = useSelector((state : RootState) => state.imagesData)
   const { userItem } = useSelector((state : RootState) => state.userData)
   const { userStatus } = useSelector((state : RootState) => state.userData)
 
@@ -36,7 +36,6 @@ const Evidence = () => {
   const handleEvidence = (e : any) => setSelectedEvidence(e.target.files[0])
   const handlePhoto = (e : any) => setSelectedPhoto(e.target.files[0])
 
-
   const uploadEvidence = () => {
     const formData = new FormData();
      formData.append('image', selectedEvidence);
@@ -52,7 +51,6 @@ const Evidence = () => {
       dispatch(uploadPhotoService(formData, token, 'imgPhoto'))
     }
   }
-
 
   useEffect(() => {
     if (userData && token) {
@@ -75,12 +73,17 @@ const Evidence = () => {
           className='m-auto'
           />
 
-          <div className='flex'>
-            <div>
+          <div className='text-center py-6 w-11/12 md:w-8/12 m-auto text-md text-gray-800 md:text-lg'>
+            Para subir tu evidencia y foto de la carrera primero selecciona la <span className='font-bold'>imagen de máximo (5Mb) de tamaño</span> y después de click en el botón de Subir. Recuerda que el Lunes podrás revisar los ganadores por categoría
+          </div>
+
+          <div className='flex flex-col md:flex-row m-auto'>
+            <div className='bg-gray-100 p-2 rounded-md shadow-md'>
+              {statusCode}
               {!evidence.imagen && userItem?.imgEvidence && (
                 <>
-                  <img src={userItem?.imgEvidence} width={200} className='m-auto pt-5'/>
-                  <div className='m-auto pb-5 font-bold text-greenCustom text-2xl mt-2'>Evidencia</div>
+                  <div className='m-auto font-bold text-blueCustom text-3xl mt-2'>Evidencia</div>
+                  <img src={userItem?.imgEvidence} width={200} className='m-auto py-5'/>
                 </>
               )}
               
@@ -91,18 +94,25 @@ const Evidence = () => {
                 </>
               )}
 
-              <input type="file" onChange={(e) => handleEvidence(e)} />
+              <input type="file" onChange={(e) => handleEvidence(e)} className='p-1' />
+              <div className='label mt-5'>Tiempo de la carrera<span className='font-light ml-2'></span></div>
+              <input
+                name="correo"
+                placeholder="Escribe el tiempo: 00:35:12"
+                type="text" />
+              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
 
-              <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadEvidence}>
+              <div className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadEvidence}>
                 {evidenceLoading ? ( <Loader />) : 'Subir evidencia'}
               </div>
             </div>
 
-            <div className='ml-5'>
+            <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
+              {statusCode}
               {!photo.imagen && userItem?.imgPhoto && (
                 <>
-                  <img src={userItem?.imgPhoto} width={200} className='m-auto pt-5'/>
-                  <div className='m-auto pb-5 font-bold text-greenCustom text-2xl mt-2'>Fotos de la Carrera</div>
+                  <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
+                  <img src={userItem?.imgPhoto} width={200} className='m-auto pb-5'/>
                 </>
               )}
               
@@ -114,8 +124,9 @@ const Evidence = () => {
               )}
 
               <input type="file" onChange={(e) => handlePhoto(e)} />
+              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
 
-              <div className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadPhoto}>
+              <div className='bg-greenCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadPhoto}>
                 {photoLoading ? ( <Loader />) : 'Subir Foto'}
               </div>
             </div>

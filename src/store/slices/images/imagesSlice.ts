@@ -9,9 +9,9 @@ interface ImageInterface {
     imagen: '', 
     uploaded: boolean
   },
-
   evidenceLoading: boolean,
   photoLoading: boolean,
+  statusCode: null,
 }
 
 const initialState : ImageInterface = {
@@ -23,9 +23,9 @@ const initialState : ImageInterface = {
     imagen: '',
     uploaded: false
   },
-  
   evidenceLoading: false,
   photoLoading: false,
+  statusCode: null,
 }
 
 const imagesSlice = createSlice({
@@ -33,7 +33,6 @@ const imagesSlice = createSlice({
   name: 'images',
   initialState,
   reducers: {
-
     imagesEvidence(state, action) {
       state.evidence = action.payload;
       state.evidenceLoading = false
@@ -48,9 +47,12 @@ const imagesSlice = createSlice({
     photoLoading(state, action) {
       state.photoLoading = action.payload;
     },
+    statusCodeFunc(state, action) {
+      state.statusCode = action.payload;
+    },
   }
 });
 
-export const { imagesEvidence, imagesPhoto, photoLoading, evidenceLoading} = imagesSlice.actions;
+export const { imagesEvidence, imagesPhoto, photoLoading, evidenceLoading, statusCodeFunc } = imagesSlice.actions;
 
 export default imagesSlice.reducer;
