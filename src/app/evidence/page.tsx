@@ -77,6 +77,22 @@ const Evidence = () => {
             Para subir tu evidencia y foto de la carrera primero selecciona la <span className='font-bold'>imagen de máximo (5Mb) de tamaño</span> y después de click en el botón de Subir. Recuerda que el Lunes podrás revisar los ganadores por categoría
           </div>
 
+          <div className='label mt-5'>Tiempo de la carrera<span className='font-light ml-2'></span></div>
+          <div className='flex text-center m-auto mb-10'>
+            <div>
+              Horas
+              <input type="number" name="hours" className='text-center' />
+            </div>
+            <div className='mx-2'>
+              Minutos
+              <input type="number" name="minutes" className='text-center'/>
+            </div>
+            <div>
+              Segundos
+              <input type="number" name="seconds" className='text-center'/>
+            </div>
+          </div>
+
           <div className='flex flex-col md:flex-row m-auto'>
             <div className='bg-gray-100 p-2 rounded-md shadow-md'>
               {statusCode}
@@ -95,16 +111,14 @@ const Evidence = () => {
               )}
 
               <input type="file" onChange={(e) => handleEvidence(e)} className='p-1' />
-              <div className='label mt-5'>Tiempo de la carrera<span className='font-light ml-2'></span></div>
-              <input
-                name="correo"
-                placeholder="Escribe el tiempo: 00:35:12"
-                type="text" />
-              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
-
+              
+              
               <div className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadEvidence}>
                 {evidenceLoading ? ( <Loader />) : 'Subir evidencia'}
               </div>
+              
+              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
+
             </div>
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
@@ -131,6 +145,10 @@ const Evidence = () => {
               </div>
             </div>
           </div>
+
+          <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadPhoto}>
+                {photoLoading ? ( <Loader />) : 'Guardar resultados'}
+              </div>
         </div>
 
       </div>
