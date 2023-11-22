@@ -49,6 +49,9 @@ const imagesSlice = createSlice({
     },
     statusCodeFunc(state, action) {
       state.statusCode = action.payload;
+      state.photoLoading = false
+      state.evidenceLoading = false
+      
     },
   }
 });
