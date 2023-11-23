@@ -115,16 +115,17 @@ export const uploadPhotoService = ( image : any, token : string, type : string) 
   }
 }
 
-export const saveTime = ( time : string, token : string) => {
+export const saveTime = ( time : {}, token : string) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
     try {
-      const {data} = await instanceAPIData.post(`/users/saveTime`, time, {
+      const { data } = await instanceAPI.post('/users/saveTime', time, {
         headers: {
           'x-tokens': token,
         },
       })
       dispatch(userItem(data))
+      dispatch(userRespFunc('evidence'))
       
     } catch (error:any) {
       console.log(error);

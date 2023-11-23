@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import { useSelector } from 'react-redux';
 import Loader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
+import { userRespFunc } from '@/store/slices/user/userSlice';
 
 const Evidence = () => {
 
@@ -18,8 +19,13 @@ const Evidence = () => {
   const [idUser, setIdUser] = useState('')
 
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
-  const { userItem } = useSelector((state : RootState) => state.userData)
+  const { userItem, userResp } = useSelector((state : RootState) => state.userData)
   const { userStatus } = useSelector((state : RootState) => state.userData)
+
+  useEffect(() => {
+    userResp === 'evidence' && router.push("/home")
+    dispatch(userRespFunc(''))
+  }, [userResp])
 
   useEffect(() => {
     if ( userStatus === 401 ) {
@@ -91,9 +97,11 @@ const Evidence = () => {
   }
 
   const handleSave = () =>{
-    const time = `${hours}/${minutes}/${seconds}`
+    const data = {
+      time: `${hours}:${minutes}:${seconds}`
+    }
     if (token) {
-    dispatch(saveTime(time, token));
+    dispatch(saveTime(data, token));
     }
   }
 
