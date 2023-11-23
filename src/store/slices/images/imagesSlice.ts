@@ -11,7 +11,8 @@ interface ImageInterface {
   },
   evidenceLoading: boolean,
   photoLoading: boolean,
-  statusCode: null,
+  errorPhoto: null,
+  errorEvidence: null
 }
 
 const initialState : ImageInterface = {
@@ -25,7 +26,8 @@ const initialState : ImageInterface = {
   },
   evidenceLoading: false,
   photoLoading: false,
-  statusCode: null,
+  errorPhoto: null,
+  errorEvidence: null,
 }
 
 const imagesSlice = createSlice({
@@ -36,12 +38,14 @@ const imagesSlice = createSlice({
     imagesEvidence(state, action) {
       state.evidence = action.payload;
       state.evidenceLoading = false
-      state.statusCode = null
+      state.errorPhoto = null
+      state.errorEvidence = null
     },
     imagesPhoto(state, action) {
       state.photo = action.payload;
       state.photoLoading = false
-      state.statusCode = null
+      state.errorPhoto = null
+      state.errorEvidence = null
     },
     evidenceLoading(state, action) {
       state.evidenceLoading = action.payload;
@@ -49,15 +53,17 @@ const imagesSlice = createSlice({
     photoLoading(state, action) {
       state.photoLoading = action.payload;
     },
-    statusCodeFunc(state, action) {
-      state.statusCode = action.payload;
+    errorPhotoFunc(state, action) {
+      state.errorPhoto = action.payload;
       state.photoLoading = false
+    },
+    errorEvidenceFunc(state, action) {
+      state.errorEvidence = action.payload;
       state.evidenceLoading = false
-      
     },
   }
 });
 
-export const { imagesEvidence, imagesPhoto, photoLoading, evidenceLoading, statusCodeFunc } = imagesSlice.actions;
+export const { imagesEvidence, imagesPhoto, photoLoading, evidenceLoading, errorPhotoFunc, errorEvidenceFunc } = imagesSlice.actions;
 
 export default imagesSlice.reducer;

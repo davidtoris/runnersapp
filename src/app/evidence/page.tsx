@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import { showOneUser, uploadEvidenceService, uploadPhotoService } from '@/store/slices/user/userService';
+import { saveTime, showOneUser, uploadEvidenceService, uploadPhotoService } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
 import Cookies from "js-cookie"
 import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const Evidence = () => {
   
   const [idUser, setIdUser] = useState('')
 
-  const { evidence, photo, evidenceLoading, photoLoading, statusCode } = useSelector((state : RootState) => state.imagesData)
+  const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem } = useSelector((state : RootState) => state.userData)
   const { userStatus } = useSelector((state : RootState) => state.userData)
 
@@ -59,6 +59,44 @@ const Evidence = () => {
     }
   }, [])
 
+  const [hours, setHours] = useState('')
+  const [minutes, setMinutes] = useState('')
+  const [seconds, setSeconds] = useState('')
+
+  const changeHours = (e:any) => {
+    const hours = e.target.value;
+    if(hours.length === 1){
+      setHours(`0${hours}`)
+    } else {
+      setHours(hours)
+    }
+  } 
+
+  const changeMinutes = (e:any) => {
+    const minutes = e.target.value;
+    if(minutes.length === 1){
+      setMinutes(`0${minutes}`)
+    } else {
+      setMinutes(minutes)
+    }
+  } 
+
+  const changeSeconds = (e:any) => {
+    const seconds = e.target.value;
+    if(seconds.length === 1){
+      setSeconds(`0${seconds}`)
+    } else {
+      setSeconds(seconds)
+    }
+  }
+
+  const handleSave = () =>{
+    const time = `${hours}/${minutes}/${seconds}`
+    if (token) {
+    dispatch(saveTime(time, token));
+    }
+  }
+
   return (
     <>
       <div className='flex justify-center items-center h-screen text-center'>
@@ -79,15 +117,15 @@ const Evidence = () => {
           <div className='flex text-center m-auto mb-10'>
             <div>
               Horas
-              <input type="number" name="hours" className='text-center' />
+              <input type="number" name="hours" className='text-center' onChange={changeHours} />
             </div>
             <div className='mx-2'>
               Minutos
-              <input type="number" name="minutes" className='text-center'/>
+              <input type="number" name="minutes" className='text-center' onChange={changeMinutes} />
             </div>
             <div>
               Segundos
-              <input type="number" name="seconds" className='text-center'/>
+              <input type="number" name="seconds" className='text-center' onChange={changeSeconds}/>
             </div>
           </div>
 
@@ -114,7 +152,7 @@ const Evidence = () => {
                 {evidenceLoading ? ( <Loader />) : 'Subir evidencia'}
               </div>
               
-              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
+              {errorEvidence === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
 
             </div>
 
@@ -134,7 +172,7 @@ const Evidence = () => {
               )}
 
               <input type="file" onChange={(e) => handlePhoto(e)} />
-              {statusCode === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
+              {errorPhoto === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
 
               <div className='bg-greenCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadPhoto}>
                 {photoLoading ? ( <Loader />) : 'Subir Foto'}
@@ -142,7 +180,7 @@ const Evidence = () => {
             </div>
           </div>
 
-          <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={uploadPhoto}>
+          <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6' onClick={handleSave}>
                 {photoLoading ? ( <Loader />) : 'Guardar resultados'}
               </div>
         </div>

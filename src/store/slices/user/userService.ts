@@ -3,7 +3,7 @@ import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosC
 import { userAll, userItem, userLoading, userRespFunc, userStatusFunc } from "./userSlice"
 import { UserPayload, UserResponse } from "./userInterface"
 import Cookies from "js-cookie"
-import { evidenceLoading, imagesEvidence, imagesPhoto, photoLoading, statusCodeFunc } from "../images/imagesSlice"
+import { errorEvidenceFunc, errorPhotoFunc, evidenceLoading, imagesEvidence, imagesPhoto, photoLoading } from "../images/imagesSlice"
 
 export const registerUser = ( user : UserPayload) => {
   return async (dispatch: AppDispatch) => {
@@ -88,7 +88,7 @@ export const uploadEvidenceService = ( image : any, token : string, type : strin
     } catch (error: any) {
       console.log(error);
       if (error.request.status === 0) {
-        dispatch(statusCodeFunc(413))
+        dispatch(errorEvidenceFunc(413))
       }
     }
   }
@@ -109,7 +109,27 @@ export const uploadPhotoService = ( image : any, token : string, type : string) 
     } catch (error:any) {
       console.log(error);
       if (error.request.status === 0) {
-        dispatch(statusCodeFunc(413))
+        dispatch(errorPhotoFunc(413))
+      }
+    }
+  }
+}
+
+export const saveTime = ( time : string, token : string) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(userLoading(true))
+    try {
+      const {data} = await instanceAPIData.post(`/users/saveTime`, time, {
+        headers: {
+          'x-tokens': token,
+        },
+      })
+      dispatch(userItem(data))
+      
+    } catch (error:any) {
+      console.log(error);
+      if (error.request.status === 0) {
+        dispatch(errorPhotoFunc(413))
       }
     }
   }
