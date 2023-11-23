@@ -19,8 +19,7 @@ const Evidence = () => {
   const [idUser, setIdUser] = useState('')
 
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
-  const { userItem, userResp } = useSelector((state : RootState) => state.userData)
-  const { userStatus } = useSelector((state : RootState) => state.userData)
+  const { userItem, userResp, userStatus } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
     userResp === 'evidence' && router.push("/home")

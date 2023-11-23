@@ -13,19 +13,23 @@ import { GiRunningShoe } from "react-icons/gi";
 
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
-import { userLoading, userStatusFunc } from '@/store/slices/user/userSlice';
+import { userLoading } from '@/store/slices/user/userSlice';
 import Link from 'next/link';
+import { showOneUser } from '@/store/slices/user/userService';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const [user, setUser] = useState<User | null>(null)
   const token = Cookies.get('tokenUser')
   const userData = Cookies.get('user')
   const router = useRouter();
-  
+
+  const { userItem } = useSelector((state : RootState) => state.userData)
+
   useEffect(() => {
-    if (userData) {
-      setUser( JSON.parse(userData) );
+    if (userData && token) {
+      const user = JSON.parse(userData);
+      const idUser = user._id;
+      dispatch(showOneUser(idUser, token))
     }
   }, [])
   
@@ -40,7 +44,7 @@ const Home = () => {
 
   const number = () => {
     let numRunner;
-    const num = user?.numRunner;
+    const num = userItem?.numRunner;
     if (num?.length === 1) {
       numRunner = '00' + num;
     }
@@ -77,7 +81,7 @@ const Home = () => {
 
         <div className='flex flex-col justify-center mt-20'>
           <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
-          <div className='text-4xl font-bold text-gray-600 mt-3'>{user && `${user?.nombre} ${user?.apellido}`}</div>
+          <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.nombre} ${userItem?.apellido}`}</div>
         </div>
 
         <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
@@ -93,7 +97,7 @@ const Home = () => {
               Kms a correr
             </div>
             <div className='left'>
-              {`${user?.kms} kms`}
+              {`${userItem?.kms} kms`}
             </div>
           </div>
           <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
@@ -104,9 +108,9 @@ const Home = () => {
               Rango de edad
             </div>
             <div className='left'>
-              { user?.edad === "1" && '18-39 años'}
-              { user?.edad === "2" && '40-49 años'}
-              { user?.edad === "3" && '50 0 más años'}
+              { userItem?.edad === "1" && '18-39 años'}
+              { userItem?.edad === "2" && '40-49 años'}
+              { userItem?.edad === "3" && '50 0 más años'}
             </div>
           </div>
           <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
@@ -117,13 +121,15 @@ const Home = () => {
               Categoría
             </div>
             <div className='left'>
-              { user?.genero === "H" && 'Varonil'}
-              { user?.genero === "M" && 'Femenil'}
+              { userItem?.genero === "H" && 'Varonil'}
+              { userItem?.genero === "M" && 'Femenil'}
             </div>
           </div>
         </div>
 
-        
+        <div className='flex items-center text-3xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
+          <div className='ml-2'>{`Tiempo asignado: ${userItem?.time}`}</div>
+        </div>
 
         <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>La carrera empieza en:</div>
         <div className='flex justify-center'>
@@ -139,15 +145,17 @@ const Home = () => {
             <FaRegChartBar />
             <div className='ml-2'>Editar registro</div>
           </div>
+
+          
           
           <Link href="/evidence">
-            <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-6/12 m-auto p-2 rounded-lg' >
+            <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' >
               <GiRunningShoe />
               <span className='ml-2'>Subir evidencia</span>
             </button>
           </Link>
 
-          <div className=''>Una vez iniciada la carrera se habilitará este botón</div>
+          {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
           <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
             onClick={logOut}>

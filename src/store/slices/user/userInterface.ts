@@ -27,6 +27,7 @@ export interface User {
   playera: string,
   role: string,
   tipo: string,
+  time: string,
   ubicacion: string,
 }
 
