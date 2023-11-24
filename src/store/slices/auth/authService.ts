@@ -69,7 +69,7 @@ export const validateToken = ( token : string | '' ) => {
       console.log(error);
       Cookies.remove('tokenUser')
       Cookies.remove('user')
-      // location.replace("/login")
+      location.replace("/login")
     }
   }
 }

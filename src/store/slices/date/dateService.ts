@@ -6,11 +6,7 @@ export const getDate = (token : string | null) => {
   return async (dispatch: AppDispatch) => {
     dispatch(dateLoading())
     try {
-      const {data} = await instanceAPI.get('/date', {
-        headers: {
-          'x-tokens': token,
-        },
-      })
+      const {data} = await instanceAPI.get('/date')
       dispatch(dateAll(data));
     } catch (error) {
       console.log(error);

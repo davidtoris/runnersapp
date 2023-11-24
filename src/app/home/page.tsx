@@ -131,8 +131,10 @@ const Home = () => {
           <div className='ml-2'>{`Tiempo asignado: ${userItem?.time}`}</div>
         </div>
 
+        
+
         <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>La carrera empieza en:</div>
-        <div className='flex justify-center'>
+        <div className='flex justify-center p-2'>
           <CountDown
             closeDate={'2023-11-25 06:00:00'} 
             todayDate={date} 
@@ -149,11 +151,17 @@ const Home = () => {
           
           
           <Link href="/evidence">
-            <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' >
-              <GiRunningShoe />
-              <span className='ml-2'>Subir evidencia</span>
+            <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
+              <span className='ml-2'>Subir evidencia y resultados</span>
             </button>
           </Link>
+
+          <Link href="/winners">
+          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' >
+            <GiRunningShoe />
+            <span className='ml-2'>Ver ganadores</span>
+          </button>
+        </Link>
 
           {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
