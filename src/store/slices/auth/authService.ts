@@ -29,6 +29,7 @@ export const forgot = ( email : ForgotPayload) => {
       const resp = await instancePublicAPI.post('/auth/forgot', email)
       dispatch(userRespFunc('forgot'))
       dispatch(userLoading(false))
+      dispatch(userStatusFunc(200));
     } catch (error: any) {
       console.log(error)
       dispatch(userStatusFunc(error?.response?.status));
