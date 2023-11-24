@@ -120,9 +120,9 @@ const Evidence = () => {
   }
 
   useEffect(() => {
-    userItem?.imgEvidence && setErrorEvidence(false)
-    userItem?.imgPhoto && setErrorPhoto(false)
-  }, [])
+    userItem?.imgEvidence === '' ? setErrorEvidence(true) : setErrorEvidence(false)
+    userItem?.imgPhoto === '' ? setErrorPhoto(true) : setErrorPhoto(false)
+  }, [userItem])
   
 
   useEffect(() => {
