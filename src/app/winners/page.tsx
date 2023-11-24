@@ -79,7 +79,7 @@ const Winners = () => {
         alt="Picture of the author"
         />
       </Link>
-      <div className='flex w-8/12 m-auto py-8'>
+      <div className='flex w-12/12 md:w-8/12 m-auto py-8'>
         <select name="genero" id="" onChange={(e) => setGenero(e.target.value)}>
           <option value='M'>Mujeres</option>
           <option value='H'>Hombres</option>
