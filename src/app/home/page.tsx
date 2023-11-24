@@ -36,7 +36,14 @@ const Home = () => {
   useEffect(() => {
     if (token) {
       dispatch(getDate(token))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (token) {
       dispatch(validateToken(token))
+    } else {
+      router.push("/login")
     }
   }, [])
   

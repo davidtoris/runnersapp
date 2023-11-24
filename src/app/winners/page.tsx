@@ -9,25 +9,20 @@ import {
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '@/store'
 import Cookies from "js-cookie"
-import { getUsers } from '@/store/slices/user/userService'
 import { User } from '@/store/slices/user/userInterface'
 import { getWinners } from '@/store/slices/winners/winnersService'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { validateToken } from '@/store/slices/auth/authService'
 
 
 const Winners = () => {
   const token = Cookies.get('tokenUser')
   const dispatch = useAppDispatch();
-  
-  const { users } = useSelector((state : RootState) => state.userData)
-  const { winners } = useSelector((state : RootState) => state.winnersData)
+  const router = useRouter();
 
-  useEffect(() => {
-    if (token) {
-      dispatch(getUsers(token))
-    }
-  }, [])
+  const { winners } = useSelector((state : RootState) => state.winnersData)
 
   const columnHelper = createColumnHelper<User>()
 
@@ -63,10 +58,14 @@ const Winners = () => {
       dispatch(getWinners(genero, kms, edad, token))
     }
   }, [genero, edad, kms])
-  
-  console.log(genero)
-  console.log(edad)
-  console.log(kms)
+
+  useEffect(() => {
+    if (token) {
+      dispatch(validateToken(token))
+    } else {
+      router.push("/login")
+    }
+  }, [])
 
   return (
     <>
@@ -96,11 +95,8 @@ const Winners = () => {
         </select>
       </div>
 
-      {users && (
+      {(
         <>
-
-
-
         <div className='flex justify-center mb-6 font-extrabold text-lg'><span>{winners?.total} corredores en esta categoría</span> </div>
         <div className='flex justify-center'>
         <table className="w-8/12">
