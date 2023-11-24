@@ -120,6 +120,12 @@ const Evidence = () => {
   }
 
   useEffect(() => {
+    userItem?.imgEvidence && setErrorEvidence(false)
+    userItem?.imgPhoto && setErrorPhoto(false)
+  }, [])
+  
+
+  useEffect(() => {
     console.log({hours, minutes, seconds})
     hours === '' ? setErrorHours(true) : setErrorHours(false);
     minutes === '' ? setErrorMinutes(true) : setErrorMinutes(false);
