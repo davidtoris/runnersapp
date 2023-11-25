@@ -34,10 +34,13 @@ const Winners = () => {
       header: () => 'apellido',
     }),
     columnHelper.accessor('numRunner', {
-      header: () => 'numRunner',
+      header: () => 'numero',
     }),
-    columnHelper.accessor('time', {
-      header: 'time',
+    columnHelper.accessor('timeNumber', {
+      header: 'Tiempo',
+    }),
+    columnHelper.accessor('estado', {
+      header: 'estado',
     }),
   ]
 
@@ -122,9 +125,14 @@ const Winners = () => {
               <tr key={row.id}>
                 <td>{i+1}</td>
                 {row.getVisibleCells().map(cell => (
+                  <>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
+                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
+                    {cell.row.id}
+                  </td>
+                  </>
                 ))}
               </tr>
             ))}

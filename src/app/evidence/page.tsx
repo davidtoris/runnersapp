@@ -110,7 +110,7 @@ const Evidence = () => {
         dispatch(uploadPhotoService(formData, token, 'imgPhoto'))
       }
 
-      const timeNumber = (hours * 3600) + (minutes * 60) + seconds;
+      const timeNumber = (Number(hours) * 3600) + (Number(minutes) * 60) + Number(seconds);
       const data = {
         time: `${hours}:${minutes}:${seconds}`,
         timeNumber

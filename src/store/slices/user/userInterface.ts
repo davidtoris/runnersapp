@@ -28,6 +28,7 @@ export interface User {
   role: string,
   tipo: string,
   time: string,
+  timeNumber: string,
   ubicacion: string,
 }
 

@@ -8,6 +8,7 @@ export interface WinnerResponse {
   nombre: string,
   numRunner: string,
   time: string,
+  timeNumber: string,
 }
 
 export interface Winner {
