@@ -135,7 +135,7 @@ const Evidence = () => {
   
 
   useEffect(() => {
-    if (userResp === 'evidence' && errorEvidence !== 413 && errorPhoto !== 413 && errorSize === false) {
+    if (userResp === 'evidence' && (errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
       setOk(true)
     }
   }, [userResp, errorEvidence, errorPhoto, errorSize])
@@ -237,7 +237,7 @@ const Evidence = () => {
             >
             Regresar
           </button>
-          2
+          3
         </div>
 
       </div>
