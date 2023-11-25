@@ -226,6 +226,8 @@ const Evidence = () => {
           </button>
 
           {ok && 'Se han guardado con éxito los tiempos y evidencias'}
+          {errorEvidence}
+          {errorPhoto}
           
           <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
           
