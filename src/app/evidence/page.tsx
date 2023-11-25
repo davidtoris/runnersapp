@@ -23,7 +23,7 @@ const Evidence = () => {
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userResp === 'evidence' && !errorSize ) {
+    if (userResp === 'evidence' && !errorSize && !errorEvidence && !errorPhoto ) {
       router.push("/home")
       dispatch(userRespFunc(''))
     }
@@ -137,6 +137,7 @@ const Evidence = () => {
     minutes === '' ? setErrorMinutes(true) : setErrorMinutes(false);
     seconds === '' ? setErrorSeconds(true) : setErrorSeconds(false);
     errorPhoto === 413 ? setErrorSize(true) : setErrorSize(false);
+    errorEvidence === 413 ? setErrorSize(true) : setErrorSize(false);
     console.log({errorHours, errorMinutes, errorSeconds})
   }, [hours, minutes, seconds, errorPhoto, errorEvidence, errorSize])
   
