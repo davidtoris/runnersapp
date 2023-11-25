@@ -24,7 +24,7 @@ const Evidence = () => {
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userResp === 'evidence' && errorEvidence !== 413 && errorEvidence !== 413) {
+    if (userResp === 'evidence' && errorEvidence !== 413 && errorEvidence !== 413 && errorSize === false) {
       setOk(true)
     }
   }, [userResp])
