@@ -149,7 +149,7 @@ const Home = () => {
           />
         </div> */}
 
-<a href='tel:+525525011974'>
+<a href='https://wa.me/525525011974?text=Necesito%20ayuda%20con...'>
 <div className='text-xl underline text-greenCustom'>Si tienes dudas para subir tus evidencias o tiempos. 
         Puedes enviarlas y/o contactar al Administrador 
          Aquí</div></a>
