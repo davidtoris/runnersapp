@@ -56,11 +56,13 @@ const Evidence = () => {
 
   const handleEvidence = (e : any) => {
     setErrorEvidence(false)
+    setOk('')
     setSelectedEvidence(e.target.files[0])
   } 
   
   const handlePhoto = (e : any) => {
     setErrorPhoto(false)
+    setOk('')
     setSelectedPhoto(e.target.files[0])
   } 
 
@@ -232,8 +234,6 @@ const Evidence = () => {
           </button>
 
           {ok}
-          {errorEvidence}
-          {errorPhoto}
           
           <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
           
