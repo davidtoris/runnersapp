@@ -140,14 +140,20 @@ const Home = () => {
 
         
 
-        <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>La carrera empieza en:</div>
-        <div className='flex justify-center p-2'>
+        <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>La carrera ya empezó</div>
+        {/* <div className='flex justify-center p-2'>
           <CountDown
             closeDate={'2023-11-25 06:00:00'} 
             todayDate={date} 
             size 
           />
-        </div>
+        </div> */}
+
+<a href='tel:+525525011974'>
+<div className='text-xl underline text-greenCustom'>Si tienes dudas para subir tus evidencias o tiempos. 
+        Puedes enviarlas y/o contactar al Administrador 
+         Aquí</div></a>
+        
 
         
           <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
