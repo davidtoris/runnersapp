@@ -58,6 +58,7 @@ const Evidence = () => {
   const handleEvidence = (e : any) => {
     setErrorEvidence(false)
     dispatch(errorEvidenceFunc(null))
+    dispatch(userRespFunc(''))
     setOk('')
     setSelectedEvidence(e.target.files[0])
   } 
@@ -65,6 +66,7 @@ const Evidence = () => {
   const handlePhoto = (e : any) => {
     setErrorPhoto(false)
     dispatch(errorPhotoFunc(null))
+    dispatch(userRespFunc(''))
     setOk('')
     setSelectedPhoto(e.target.files[0])
   } 
