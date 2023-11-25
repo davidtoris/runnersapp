@@ -23,9 +23,15 @@ const Evidence = () => {
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    userResp === 'evidence' && router.push("/home")
-    dispatch(userRespFunc(''))
+    if (userResp === 'evidence' && !errorSize ) {
+      router.push("/home")
+      dispatch(userRespFunc(''))
+    }
   }, [userResp])
+
+  // const regresar = () => {
+    
+  // }
 
   useEffect(() => {
     if (token) {
@@ -132,9 +138,7 @@ const Evidence = () => {
     seconds === '' ? setErrorSeconds(true) : setErrorSeconds(false);
     errorPhoto === 413 ? setErrorSize(true) : setErrorSize(false);
     console.log({errorHours, errorMinutes, errorSeconds})
-  }, [hours, minutes, seconds])
-  
-  
+  }, [hours, minutes, seconds, errorPhoto, errorEvidence, errorSize])
   
 
   return (
@@ -218,6 +222,12 @@ const Evidence = () => {
             >
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
           </button>
+          {/* <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
+          
+          onClick={regresar}
+            >
+            Regresar
+          </button> */}
         </div>
 
       </div>
