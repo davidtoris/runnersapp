@@ -23,14 +23,13 @@ const Evidence = () => {
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userResp === 'evidence' && !errorSize && !errorEvidence && !errorPhoto ) {
+    if (userResp === 'evidence' && errorEvidence === 200 && errorPhoto === 200 ) {
       router.push("/home")
       dispatch(userRespFunc(''))
     }
   }, [userResp])
 
   // const regresar = () => {
-    
   // }
 
   useEffect(() => {
