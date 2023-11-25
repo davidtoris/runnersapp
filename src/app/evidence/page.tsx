@@ -57,15 +57,15 @@ const Evidence = () => {
 
   const handleEvidence = (e : any) => {
     setErrorEvidence(false)
+    dispatch(errorEvidenceFunc(null))
     setOk('')
-    dispatch(errorEvidenceFunc(200))
     setSelectedEvidence(e.target.files[0])
   } 
   
   const handlePhoto = (e : any) => {
     setErrorPhoto(false)
+    dispatch(errorPhotoFunc(null))
     setOk('')
-    dispatch(errorPhotoFunc(200))
     setSelectedPhoto(e.target.files[0])
   } 
 
