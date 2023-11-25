@@ -18,19 +18,21 @@ const Evidence = () => {
   const userData = Cookies.get('user')
   
   const [idUser, setIdUser] = useState('')
+  const [ok, setOk] = useState(false)
 
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userResp === 'evidence' && errorEvidence === 200 && errorPhoto === 200 ) {
-      router.push("/home")
-      dispatch(userRespFunc(''))
+    if (userResp === 'evidence' && (errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) ) {
+      setOk(true)
     }
   }, [userResp])
-
-  // const regresar = () => {
-  // }
+  
+  const regresar = () => {
+    router.push("/home")
+    dispatch(userRespFunc(''))
+  }
 
   useEffect(() => {
     if (token) {
@@ -222,12 +224,15 @@ const Evidence = () => {
             >
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
           </button>
-          {/* <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
+
+          {ok && 'Se han guardado con éxito los tiempos y evidencias'}
+          
+          <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
           
           onClick={regresar}
             >
             Regresar
-          </button> */}
+          </button>
         </div>
 
       </div>
