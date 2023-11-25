@@ -18,7 +18,7 @@ const Evidence = () => {
   const userData = Cookies.get('user')
   
   const [idUser, setIdUser] = useState('')
-  const [ok, setOk] = useState(false)
+  const [ok, setOk] = useState('')
 
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
@@ -136,9 +136,9 @@ const Evidence = () => {
 
   useEffect(() => {
     if (userResp === 'evidence' && (errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
-      setOk(true)
+      setOk('Se han guardado con éxito los tiempos y evidencias')
     }else{
-      setOk(false)
+      setOk('Verifica los errores')
     }
   }, [userResp, errorEvidence, errorPhoto, errorSize])
   
@@ -229,7 +229,7 @@ const Evidence = () => {
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
           </button>
 
-          {ok ? 'Se han guardado con éxito los tiempos y evidencias' : 'Verifica los errores'}
+          {ok}
           {errorEvidence}
           {errorPhoto}
           
