@@ -24,7 +24,7 @@ const Evidence = () => {
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
   useEffect(() => {
-    if (userResp === 'evidence' && (errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) ) {
+    if (userResp === 'evidence' && !errorSize) {
       setOk(true)
     }
   }, [userResp])
@@ -219,7 +219,7 @@ const Evidence = () => {
           </div>
 
           <button className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
-          disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState || errorPhotoState || errorSize}
+          disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState || errorPhotoState }
           onClick={handleSave}
             >
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
