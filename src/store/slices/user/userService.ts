@@ -105,7 +105,7 @@ export const uploadPhotoService = ( image : any, token : string, type : string) 
         },
       })
       dispatch(imagesPhoto(data))
-      dispatch(errorEvidenceFunc(200))
+      dispatch(errorPhotoFunc(200))
     } catch (error:any) {
       console.log(error);
       if (error.request.status === 0) {

@@ -9,6 +9,7 @@ import Loader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
 import { userRespFunc } from '@/store/slices/user/userSlice';
 import { validateToken } from '@/store/slices/auth/authService';
+import { errorEvidenceFunc, errorPhotoFunc } from '@/store/slices/images/imagesSlice';
 
 const Evidence = () => {
 
@@ -57,12 +58,14 @@ const Evidence = () => {
   const handleEvidence = (e : any) => {
     setErrorEvidence(false)
     setOk('')
+    dispatch(errorEvidenceFunc(200))
     setSelectedEvidence(e.target.files[0])
   } 
   
   const handlePhoto = (e : any) => {
     setErrorPhoto(false)
     setOk('')
+    dispatch(errorPhotoFunc(200))
     setSelectedPhoto(e.target.files[0])
   } 
 
