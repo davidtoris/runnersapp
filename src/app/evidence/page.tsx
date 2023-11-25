@@ -229,7 +229,7 @@ const Evidence = () => {
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
           </button>
 
-          {ok && 'Se han guardado con éxito los tiempos y evidencias'}
+          {ok ? 'Se han guardado con éxito los tiempos y evidencias' : 'Verifica los errores'}
           {errorEvidence}
           {errorPhoto}
           
@@ -239,7 +239,6 @@ const Evidence = () => {
             >
             Regresar
           </button>
-          6
         </div>
 
       </div>
