@@ -23,16 +23,7 @@ const Evidence = () => {
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
-  useEffect(() => {
-    if (userResp === 'evidence' && errorEvidence !== 413 && errorEvidence !== 413 && errorSize === false) {
-      setOk(true)
-    }
-  }, [userResp])
-  
-  const regresar = () => {
-    router.push("/home")
-    dispatch(userRespFunc(''))
-  }
+ 
 
   useEffect(() => {
     if (token) {
@@ -143,6 +134,17 @@ const Evidence = () => {
   }, [hours, minutes, seconds, errorPhoto, errorEvidence, errorSize])
   
 
+  useEffect(() => {
+    if (userResp === 'evidence' && errorEvidence !== 413 && errorPhoto !== 413 && errorSize === false) {
+      setOk(true)
+    }
+  }, [userResp, errorEvidence, errorPhoto, errorSize])
+  
+  const regresar = () => {
+    router.push("/home")
+    dispatch(userRespFunc(''))
+  }
+
   return (
     <>
       <div className='flex justify-center items-center h-screen text-center'>
@@ -235,7 +237,7 @@ const Evidence = () => {
             >
             Regresar
           </button>
-          1
+          2
         </div>
 
       </div>
