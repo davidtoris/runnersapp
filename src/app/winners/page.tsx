@@ -36,12 +36,6 @@ const Winners = () => {
     columnHelper.accessor('numRunner', {
       header: () => 'numero',
     }),
-    columnHelper.accessor('timeNumber', {
-      header: 'Tiempo',
-    }),
-    columnHelper.accessor('estado', {
-      header: 'estado',
-    }),
   ]
 
   const winnersArray: any = winners?.users || [];
@@ -128,9 +122,6 @@ const Winners = () => {
                   <>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
-                    {cell.row.id}
                   </td>
                   </>
                 ))}

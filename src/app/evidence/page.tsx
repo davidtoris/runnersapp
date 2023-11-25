@@ -135,10 +135,12 @@ const Evidence = () => {
   
 
   useEffect(() => {
-    if (userResp === 'evidence' && (errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
-      setOk('Se han guardado con éxito los tiempos y evidencias')
-    }else{
-      setOk('Verifica los errores')
+    if (userResp === 'evidence') {
+      if((errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
+        setOk('Se han guardado con éxito los tiempos y evidencias')
+      }else{
+        setOk('Verifica los errores')
+      }
     }
   }, [userResp, errorEvidence, errorPhoto, errorSize])
   
