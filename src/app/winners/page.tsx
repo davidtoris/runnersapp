@@ -82,9 +82,9 @@ const Winners = () => {
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Nombre</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Número de Corredor</th>
             
-            {/* <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
-            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo Total</th> */}
-            {/* <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Evidencia</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
+            {/* <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo Total</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Evidencia</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Foto</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Depto</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tipo</th>
@@ -99,9 +99,9 @@ const Winners = () => {
               
                 <td className='border-2 p-2'>{`${s.nombre} ${s.apellido}`}</td>
                 <td className='border-2 p-2'>{s.numRunner}</td>
-                {/* <td className='border-2 p-2'>{s.time}</td>
-                <td className='border-2 p-2'>{s.timeNumber}</td> */}
-                {/* <td className='border-2 p-2'><img src={s.imgEvidence} width={200}/></td>
+                <td className='border-2 p-2'>{s.time}</td>
+                {/* <td className='border-2 p-2'>{s.timeNumber}</td>
+                <td className='border-2 p-2'><img src={s.imgEvidence} width={200}/></td>
                 <td className='border-2 p-2'><img src={s.imgPhoto} width={200}/></td>
                 <td className='border-2 p-2'>{s.depto}</td>
                 <td className='border-2 p-2'>{s.tipo}</td>
