@@ -24,28 +24,6 @@ const Winners = () => {
 
   const { winners } = useSelector((state : RootState) => state.winnersData)
 
-  const columnHelper = createColumnHelper<User>()
-
-  const columns = [
-    columnHelper.accessor('nombre', {
-      header: () => 'nombre',
-    }),
-    columnHelper.accessor('apellido', {
-      header: () => 'apellido',
-    }),
-    columnHelper.accessor('numRunner', {
-      header: () => 'numero',
-    }),
-  ]
-
-  const winnersArray: any = winners?.users || [];
-
-  const table = useReactTable({
-    data: winnersArray,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
-
   const [genero, setGenero] = useState('M')
   const [edad, setEdad] = useState('1')
   const [kms, setKms] = useState('3')
@@ -63,6 +41,8 @@ const Winners = () => {
       router.push("/login")
     }
   }, [])
+
+  console.log(winners?.users)
 
   return (
     <>
@@ -96,39 +76,43 @@ const Winners = () => {
         <>
         <div className='flex justify-center mb-6 font-extrabold text-lg'><span>{winners?.total} corredores en esta categoría</span> </div>
         <div className='flex justify-center'>
-        <table className="w-8/12">
-          <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Num</th>
-                {headerGroup.headers.map(header => (
-                  <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider' key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row,i) => (
-              <tr key={row.id}>
-                <td>{i+1}</td>
-                {row.getVisibleCells().map(cell => (
-                  <>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                  </>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <table id="table-to-xls" className="table-auto max-w-7xl mx-auto pb-10 mt-8">
+        <thead>
+          <tr>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Nombre</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Número de Corredor</th>
+            
+            {/* <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo Total</th> */}
+            {/* <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Evidencia</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Foto</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Depto</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tipo</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>OtroDepto</th> */}
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {winners?.users.length && winners?.users.map((s : any) => (
+            
+              <tr className='border-2 text-center' key={s._id}>
+              
+                <td className='border-2 p-2'>{`${s.nombre} ${s.apellido}`}</td>
+                <td className='border-2 p-2'>{s.numRunner}</td>
+                {/* <td className='border-2 p-2'>{s.time}</td>
+                <td className='border-2 p-2'>{s.timeNumber}</td> */}
+                {/* <td className='border-2 p-2'><img src={s.imgEvidence} width={200}/></td>
+                <td className='border-2 p-2'><img src={s.imgPhoto} width={200}/></td>
+                <td className='border-2 p-2'>{s.depto}</td>
+                <td className='border-2 p-2'>{s.tipo}</td>
+                <td className='border-2 p-2'>{s.otroDepto}</td> */}
+                <td className='border-2 p-2'>{s.estado === null ? 'CDMX' : s.estado}</td>
+                
+              </tr> 
+            )
+          )}
+        </tbody>
+      </table>
         </div>
         </>
       )}
