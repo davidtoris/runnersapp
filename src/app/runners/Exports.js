@@ -22,6 +22,8 @@ const Exports = ({ users }) => {
           <tr>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Nombre</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Apellido</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>TiempoNumero</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Correo</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Playera</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tipo</th>
@@ -43,6 +45,8 @@ const Exports = ({ users }) => {
               <tr className='border-2 text-center' key={s._id}>
                 <td className='border-2 p-2'>{s.nombre}</td>
                 <td className='border-2 p-2'>{s.apellido}</td>
+                <td className='border-2 p-2'>{s.time}</td>
+                <td className='border-2 p-2'>{s.timeNumber}</td>
                 <td className='border-2 p-2'>{s.correo}</td>
                 <td className='border-2 p-2'>{s.playera}</td>
                 <td className='border-2 p-2'>{s.tipo}</td>

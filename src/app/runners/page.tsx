@@ -34,6 +34,12 @@ const Runners = () => {
     columnHelper.accessor('apellido', {
       header: () => 'apellido',
     }),
+    columnHelper.accessor('time', {
+      header: () => 'tiempo',
+    }),
+    columnHelper.accessor('timeNumber', {
+      header: () => 'tiempo Número',
+    }),
     columnHelper.accessor('correo', {
       header: () => 'correo',
     }),
