@@ -64,12 +64,12 @@ const Runners = () => {
     columnHelper.accessor('ubicacion', {
       header: 'ubicación',
     }),
-    columnHelper.accessor('direccion', {
-      header: 'dirección',
-    }),
-    columnHelper.accessor('ciudad', {
-      header: 'ciudad',
-    }),
+    // columnHelper.accessor('direccion', {
+    //   header: 'dirección',
+    // }),
+    // columnHelper.accessor('ciudad', {
+    //   header: 'ciudad',
+    // }),
     columnHelper.accessor('estado', {
       header: 'estado',
     }),
