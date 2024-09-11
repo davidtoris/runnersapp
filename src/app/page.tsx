@@ -10,14 +10,11 @@ const Home = () => {
         <Image src="/logo.png" width={700} height={230} alt='' />
       </div>
       <h2 className="text-3xl font-bold text-center text-grayLight mt-5 mt:mt-0 px-3">
-        ¡Bienvenidos a la 2da. Carrera por el Servicio 2023!
+        ¡Carrera por el Servicio 2024!
       </h2> 
       <h3 className="text-4xl font-extrabold text-center text-greenCustom uppercase mt-3 px-5">
-      MODALIDAD VIRTUAL
-      </h3>  
-      <h2 className="text-xl font-bold text-center text-gray-700 mt-5 mt:mt-0 px-3">
-        Este año la carrera es virtual. Corre en tu lugar favorito: parque, bosque, playa, montaña, etc.
-      </h2> 
+        MODALIDAD HíBRIDA
+      </h3> 
 
       <div className="bg-[url('/fondo-puntos.jpg')] bg-cover bg-center py-10">
         <div className='w-6/12 m-auto text-center flex justify-center'>
@@ -29,34 +26,54 @@ const Home = () => {
         
 
           {/* Presencial */}
-          <div className='bg-blueCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md w-12/12 md:w-6/12'>
-            {/* <h3 className='uppercase font-bold text-2xl mb-3 text-center'>presencial</h3> */}
-            <p className='mb-3 flex items-center justify-center'>
-              <FaCalendarAlt className='mr-3'/>Sábado 25 de noviembre 2023</p>
-            
-            <div className=''>
-              <div className='mb-3 flex items-center justify-center'>
-                <FaMapMarkerAlt className=''/>
-                <div className='ml-3'>
-                  Tu lugar favorito
+          <div className='grid grid-cols-2 gap-6'>
+            <div className='bg-blueCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
+              <h3 className='uppercase font-bold text-2xl mb-3 text-center'>presencial</h3>
+              <p className='mb-3 flex items-center justify-center'>
+                <FaCalendarAlt className='mr-3'/>Sábado 9 de noviembre 2024</p>
+              <div className=''>
+                <div className='mb-3 flex items-center justify-center'>
+                  <FaMapMarkerAlt className=''/>
+                  <div className='ml-3'>
+                    CCM
+                  </div>
                 </div>
+              </div>
+              <div className=''>
+                <div className='mb-3 flex items-center justify-center'>
+                  <FaClock className='mr-1'/>
+                  <div className='ml-3'>
+                   8:00 AM
+                  </div>
+                </div>
+                <div className='font-light ml-3 flex justify-center'>(Hora del centro)</div>
               </div>
             </div>
-            
-            <div className=''>
-              <div className='mb-3 flex items-center justify-center'>
-                <FaClock className='mr-1'/>
-                <div className='ml-3'>
-                  Desde las 6:00 am hasta las 7:00 pm
+
+            <div className='bg-greenCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
+              <h3 className='uppercase font-bold text-2xl mb-3 text-center'>Virtual</h3>
+              <p className='mb-3 flex items-center justify-center'>
+                <FaCalendarAlt className='mr-3'/>Sábado 9 de noviembre 2024</p>
+              <div className=''>
+                <div className='mb-3 flex items-center justify-center'>
+                  <FaMapMarkerAlt className=''/>
+                  <div className='ml-3'>
+                    En tu lugar favorito (Parque, bosque, playa, etc.)
+                  </div>
                 </div>
               </div>
-              <div className='font-light ml-3 flex justify-center'>(Hora del centro)</div>
+              <div className=''>
+                <div className='mb-3 flex items-center justify-center'>
+                  <FaClock className='mr-1'/>
+                  <div className='ml-3'>
+                   A partir de las 6:00 AM hasta las 2:00 PM
+                  </div>
+                </div>
+                <div className='font-light ml-3 flex justify-center'>(Hora del centro)</div>
+              </div>
             </div>
           </div>
         </div>
-          <h2 className="text-xl font-bold text-center text-gray-700 mt-5 mt:mt-0 px-3">
-            Envía tu evidencia a más tardar a las 11:59 pm del 25 de noviembre 2023
-          </h2> 
       </div>
 
 
@@ -87,41 +104,87 @@ const Home = () => {
       </div>
 
       <div className='bg-blueCustom text-white text-left md:text-center p-7 mt-10'>
-        <h3 className=' font-extrabold text-3xl mb-3 text-center'>CONVOCATORIA</h3>
-        <ul className='list-disc md:list-none text-2xl'>
-        <li>La <span className='font-bold text-gray-800'>edad</span> mínima para correr: 18 años cumplidos al 30 de noviembre del 2023</li>
-        <li>Cada participante correrá con: la <span className='font-bold text-gray-800'>app</span> de su preferencia</li>
-        <li>Al terminar la carrera: cada participante sube sus <span className='font-bold text-gray-800'>resultados y adjunta</span> una captura de pantalla de la app como <span className='font-bold text-gray-800'>evidencia,</span> en este sitio  </li>
-        <li>La <span className='font-bold text-gray-800'>categoría:</span> será determinada por el género y la edad que tendrá el competidor al 30 de noviembre del 2023</li>
-        <li>Participan: colaboradores <span className='font-bold text-gray-800'>inscritos</span> y pueden inscribir a la carrera a dos de sus familiares</li>
-
+        <h3 className=' font-extrabold text-3xl mb-3 text-center'>Notas importantes:</h3>
+        <ul className='list-disc md:list-none text-lg'>
+          <li>La edad mínima para participar es de 18 años cumplidos al 30 de noviembre del 2024.</li>
+          <li>La categoría será determinada por la edad que tendrá el competidor al 30 de noviembre del 2024.</li>
+          <li>Participan colaboradores y pueden invitar a correr a sus familiares mayores de edad</li>
+          <li>Registro para la carrera en ambas modalidades virtual y presencial</li>
         </ul>
+        Habrá un link para realizar el registro. ¡Esperalo!
 
       </div>
 
-      <div className="bg-[url('/nubes.jpg')] py-10 bg-cover">
-        <div className='uppercase text-grayCustom text-center text-3xl font-bold'>premiación</div>
-      </div>
-      
-      <div className='flex flex-col md:flex-row w-12/12 md:w-6/12 justify-center text-grayCustom m-auto mt-10 items-center'>
-        <div className='w-3/12 ml-7 -mt-16'>
-          <Image src="/premio.jpg" width={280} height={330} alt=''/>
-        </div>
-        <div className='ml-5 w-11/12'>
-          <div className='mt-5 md:mt-0'>Se premiará a los 3 Primeros Lugares de cada categoría, en la distancia de 3 y 5 km.</div>
-          <div className='mt-5 md:mt-0'>Los mejores tiempos de cada categoría se darán a conocer el lunes 27 de noviembre por correo electrónico y en este sitio</div>
-          <div className='ml-10 my-5'>
-            {/* <ul className='list-disc'>
-              <li>1er lugar (mejor tiempo APP):</li>
-              <li>2o lugar (mejor tiempo APP):</li>
-              <li>3er lugar (mejor tiempo APP):</li>
-            </ul> */}
+      <div className="bg-[url('/nubes.jpg')] py-10 bg-cover p-4">
+        <div className='grid grid-cols-2 gap-20 mx-20'>
+          <div>
+            <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Virtual:</div>
+            <div className='flex justify-center'>
+              <ul className='list-disc mt-5'>
+                <li>Los participantes virtuales correrán con la app de su preferencia podrás bajar en los próximos días en tu teléfono celular.</li>
+                <li>Al terminar la carrera: cada participante sube sus resultados y adjunta una captura de pantalla de la app como evidencia, en este sitio</li>
+                <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
+                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 11 de noviembre por correo electrónico y en el sitio de sharepoint del Área México.</li>
+              </ul>
+            </div>
           </div>
-
-
+          <div>
+            <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Presencial:</div>
+            <div className='flex justify-center'>
+              <ul className='list-disc mt-5'>
+                <li>La entrada al CCM será a partir de las 7:00 am únicamente hasta las 8:00 am del sábado 09 de noviembre 2024</li>
+                <li>La carrera iniciará a las 8:00 am en punto</li>
+                <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
+                <li>Los acompañantes animarán a los corredores y habrá actividades recreativas.</li>
+                <li>Los corredores al terminar la carrera participarán en una actividad de servicio junto con su familia.</li>
+                <li>Para ingresar a las instalaciones del CCM regístrate en el link que se les proporcionará más adelante.</li>
+                <li>Se enviará el reglamento del CCM posteriormente a tu registro</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       
+      <div className='bg-greenCustom text-white p-10 '>
+
+        <div className='flex mx-20'>
+          <div className='w-4/12'>
+            <Image src="/misionaries.png" width={500} height={30} alt=''/>
+          </div>
+          <div className='w-8/12 ml-10'>
+            <div className='font-extrabold text-2xl'>Actividad de Servicio “Ayudar a otros” (presencial CCM)</div>
+              <div>
+                Propósito: Ayudar a los misioneros a tener experiencias reales de enseñanza.
+              </div>
+              <div>
+                Inicio: Inmediatamente después de la carrera, pero debes llegar antes de las 8:00 am.
+              </div>
+              <div>
+                Lugar: Se te darán indicaciones terminando la carrera.
+              </div>
+              <div>
+                Próximamente enviaremos el link para el registro
+              </div>
+
+              <div className='mt-2'>
+                <div>
+                  <div className='text-lg font-bold'>Participantes:</div>
+                  <ul className='list-disc md:list-none'>
+                    <li>Todos participan tanto colaboradores y familiares.</li>
+                    <li>Los corredores también participan.</li>
+                    <li>La participación será por familia.</li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+ 
+
+        
+      </div>
+
       <div className='flex justify-center flex-col md:flex-row pb-14 mt-3 p-4'>
         {/* <Link href="/register">
           <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>

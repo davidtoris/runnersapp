@@ -23,6 +23,7 @@ const Register = ({}) => {
     apellido: Yup.string().required('* Apellido requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
     correo: Yup.string().email('Debe ser un email válido').required('* Correo requerido'),
     password: Yup.string().required('* Contraseña requerida').min(6, 'La contraseña debe tener al menos 6 caractéres'),
+    modalidad: Yup.string().required('* El campo es requerido'),
     tipo: Yup.string()
       .when(["familiar"], {
         is: (familiar:any) => familiar === "familiar",    
@@ -93,6 +94,7 @@ const Register = ({}) => {
               correo: '',
               password: '',
               tipo: '',
+              modalidad: '',
               numColaborador: '',
               depto: '',
               otroDepto: '',
@@ -115,6 +117,7 @@ const Register = ({}) => {
                 correo: values.correo === '' ? null : values.correo,
                 password: values.password === '' ? null : values.password,
                 tipo: values.tipo === '' ? null : values.tipo,
+                modalidad: values.modalidad === '' ? null : values.modalidad,
                 numColaborador: values.numColaborador === '' ? null : values.numColaborador,
                 depto: values.depto === '' ? null : values.depto,
                 otroDepto: values.otroDepto === '' ? null : values.otroDepto,
@@ -219,6 +222,18 @@ const Register = ({}) => {
                           <option value="familiar">Familiar</option>
                       </Field>
                       {errors.tipo && <div className='error'>{errors.tipo}</div>}
+                    </div>
+
+                    <div className='my-5'>
+                      <div className='label'>Modalidad</div>
+                      <Field 
+                        as="select"
+                        name="modalidad">
+                          <option value="">Selecciona una opción</option>
+                          <option value="virtual">Virtual</option>
+                          <option value="presencial">Presencial</option>
+                      </Field>
+                      {errors.modalidad && <div className='error'>{errors.modalidad}</div>}
                     </div>
 
                     {typeState === 'colaborador' && (
