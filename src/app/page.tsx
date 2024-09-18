@@ -110,8 +110,9 @@ const Home = () => {
           <li>La categoría será determinada por la edad que tendrá el competidor al 30 de noviembre del 2024.</li>
           <li>Participan colaboradores y pueden invitar a correr a sus familiares mayores de edad</li>
           <li>Registro para la carrera en ambas modalidades virtual y presencial</li>
+          <li>Los participantes virtuales correrán con la app de su preferencia</li>
+          <li className='text-bold'>Habrá un link para realizar el registro. ¡Esperalo!</li>
         </ul>
-        Habrá un link para realizar el registro. ¡Esperalo!
 
       </div>
 
