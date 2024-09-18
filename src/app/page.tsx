@@ -26,13 +26,13 @@ const Home = () => {
         
 
           {/* Presencial */}
-          <div className='grid grid-cols-2 gap-6'>
-            <div className='bg-blueCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
-              <h3 className='uppercase font-bold text-2xl mb-3 text-center'>presencial</h3>
-              <p className='mb-3 flex items-center justify-center'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            <div className='bg-blueCustom text-white text-lg md:text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
+              <h3 className='uppercase font-black text-lg md:text-3xl mb-3 text-center'>presencial</h3>
+              <p className='mb-1 md:mb-3 flex items-center justify-center'>
                 <FaCalendarAlt className='mr-3'/>Sábado 9 de noviembre 2024</p>
               <div className=''>
-                <div className='mb-3 flex items-center justify-center'>
+                <div className='mb-1 md:mb-3 flex items-center justify-center'>
                   <FaMapMarkerAlt className=''/>
                   <div className='ml-3'>
                     CCM
@@ -40,7 +40,7 @@ const Home = () => {
                 </div>
               </div>
               <div className=''>
-                <div className='mb-3 flex items-center justify-center'>
+                <div className='mb-1 md:mb-33 flex items-center justify-center'>
                   <FaClock className='mr-1'/>
                   <div className='ml-3'>
                    8:00 AM
@@ -50,12 +50,12 @@ const Home = () => {
               </div>
             </div>
 
-            <div className='bg-greenCustom text-white text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
-              <h3 className='uppercase font-bold text-2xl mb-3 text-center'>Virtual</h3>
-              <p className='mb-3 flex items-center justify-center'>
+            <div className='bg-greenCustom text-white text-lg md:text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
+              <h3 className='uppercase font-black text-lg md:text-3xl mb-3 text-center'>Virtual</h3>
+              <p className='mb-1 md:mb-3 flex items-center justify-center'>
                 <FaCalendarAlt className='mr-3'/>Sábado 9 de noviembre 2024</p>
               <div className=''>
-                <div className='mb-3 flex items-center justify-center'>
+                <div className='mb-1 md:mb-3 flex items-center justify-center'>
                   <FaMapMarkerAlt className=''/>
                   <div className='ml-3'>
                     En tu lugar favorito (Parque, bosque, playa, etc.)
@@ -63,7 +63,7 @@ const Home = () => {
                 </div>
               </div>
               <div className=''>
-                <div className='mb-3 flex items-center justify-center'>
+                <div className='mb-1 md:mb-3 flex items-center justify-center'>
                   <FaClock className='mr-1'/>
                   <div className='ml-3'>
                    A partir de las 6:00 AM hasta las 2:00 PM
@@ -116,7 +116,7 @@ const Home = () => {
       </div>
 
       <div className="bg-[url('/nubes.jpg')] py-10 bg-cover p-4">
-        <div className='grid grid-cols-2 gap-20 mx-20'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-20 mx-4 md:mx-20'>
           <div>
             <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Virtual:</div>
             <div className='flex justify-center'>
@@ -145,13 +145,13 @@ const Home = () => {
         </div>
       </div>
       
-      <div className='bg-greenCustom text-white p-10 '>
+      <div className='bg-greenCustom text-white p-4 md:p-10 '>
 
-        <div className='flex mx-20'>
-          <div className='w-4/12'>
+        <div className='flex flex-col md:flex-row mx-0 md:mx-20'>
+          <div className='w-12/12 md:w-4/12'>
             <Image src="/misionaries.png" width={500} height={30} alt=''/>
           </div>
-          <div className='w-8/12 ml-10'>
+          <div className='w-12/12 md:w-8/12 ml-0 md:ml-10 mt-3 md:mt-0'>
             <div className='font-extrabold text-2xl'>Actividad de Servicio “Ayudar a otros” (presencial CCM)</div>
               <div>
                 Propósito: Ayudar a los misioneros a tener experiencias reales de enseñanza.
@@ -166,10 +166,10 @@ const Home = () => {
                 Próximamente enviaremos el link para el registro
               </div>
 
-              <div className='mt-2'>
+              <div className='mt-2 ml-4'>
                 <div>
-                  <div className='text-lg font-bold'>Participantes:</div>
-                  <ul className='list-disc md:list-none'>
+                  <div className='text-lg font-bold -ml-4'>Participantes:</div>
+                  <ul className='list-disc'>
                     <li>Todos participan tanto colaboradores y familiares.</li>
                     <li>Los corredores también participan.</li>
                     <li>La participación será por familia.</li>
@@ -178,14 +178,9 @@ const Home = () => {
               </div>
           </div>
         </div>
-
-
- 
-
-        
       </div>
 
-      <div className='flex justify-center flex-col md:flex-row pb-14 mt-3 p-4'>
+      <div className='flex justify-center flex-col md:flex-row pb-3 md:pb-14 mt-0 md:mt-3 p-4'>
         {/* <Link href="/register">
           <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>

@@ -134,13 +134,13 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='flex items-center text-3xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
+        {/* <div className='flex items-center text-3xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
           <div className='ml-2'>{`Tiempo asignado: ${userItem?.time}`}</div>
-        </div>
+        </div> */}
 
         
 
-        <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div>
+        {/* <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div> */}
         {/* <div className='flex justify-center p-2'>
           <CountDown
             closeDate={'2023-11-25 06:00:00'} 
@@ -149,11 +149,11 @@ const Home = () => {
           />
         </div> */}
 
-        <a href='https://wa.me/525525011974?text=Necesito%20ayuda%20con...'>
+        {/* <a href='https://wa.me/525525011974?text=Necesito%20ayuda%20con...'>
           <div className='text-xl underline text-greenCustom'>
             Si tienes dudas para subir tus evidencias o tiempos. Puedes enviarlas y/o contactar al Administrador Aquí
           </div>
-        </a>
+        </a> */}
         
 
         
@@ -168,12 +168,12 @@ const Home = () => {
           </button>
         </Link> */}
 
-        <Link href="/winners">
+        {/* <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' >
             <GiRunningShoe />
             <span className='ml-2'>Ver ganadores</span>
           </button>
-        </Link>
+        </Link> */}
 
           {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
