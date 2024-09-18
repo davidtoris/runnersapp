@@ -110,7 +110,6 @@ const Home = () => {
           <li>La categoría será determinada por la edad que tendrá el competidor al 30 de noviembre del 2024.</li>
           <li>Participan colaboradores y pueden invitar a correr a sus familiares mayores de edad</li>
           <li>Registro para la carrera en ambas modalidades virtual y presencial</li>
-          <li>Los participantes virtuales correrán con la app de su preferencia</li>
           <li className='text-bold'>Habrá un link para realizar el registro. ¡Esperalo!</li>
         </ul>
 
@@ -122,10 +121,10 @@ const Home = () => {
             <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Virtual:</div>
             <div className='flex justify-center'>
               <ul className='list-disc mt-5'>
-                <li>Los participantes virtuales correrán con la app de su preferencia podrás bajar en los próximos días en tu teléfono celular.</li>
+                <li>Los participantes virtuales correrán con la app de su preferencia</li>
                 <li>Al terminar la carrera: cada participante sube sus resultados y adjunta una captura de pantalla de la app como evidencia, en este sitio</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
-                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 11 de noviembre por correo electrónico y en el sitio de sharepoint del Área México.</li>
+                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 11 de noviembre por correo electrónico y en el sitio de sharepoint del Área México</li>
               </ul>
             </div>
           </div>
@@ -137,8 +136,8 @@ const Home = () => {
                 <li>La carrera iniciará a las 8:00 am en punto</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
                 <li>Los acompañantes animarán a los corredores y habrá actividades recreativas.</li>
-                <li>Los corredores al terminar la carrera participarán en una actividad de servicio junto con su familia.</li>
-                <li>Para ingresar a las instalaciones del CCM regístrate en el link que se les proporcionará más adelante.</li>
+                <li>Los corredores al terminar la carrera participarán en una actividad de servicio junto con su familia</li>
+                <li>Para ingresar a las instalaciones del CCM regístrate en el link que se les proporcionará más adelante</li>
                 <li>Se enviará el reglamento del CCM posteriormente a tu registro</li>
               </ul>
             </div>
