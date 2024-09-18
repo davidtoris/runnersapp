@@ -157,10 +157,10 @@ const Home = () => {
         
 
         
-        {/* <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
+        <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
           <FaRegChartBar />
           <div className='ml-2'>Editar registro</div>
-        </div> */}
+        </div>
   
         {/* <Link href="/evidence">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
