@@ -76,6 +76,13 @@ const Home = () => {
         </div>
       </div>
 
+      <Link href="/register">
+        <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
+          <Image src="/tennis.png" width={30} height={30} alt=''/>
+          <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
+        </div>
+      </Link>
+
 
       <div className='flex justify-center mt-10'>
         <Image src="/logo-fundamentos.jpg" width={200} height={190} className="mt-8" alt=''/>
@@ -108,9 +115,8 @@ const Home = () => {
         <ul className='list-disc md:list-none text-lg'>
           <li>La edad mínima para participar es de 18 años cumplidos al 30 de noviembre del 2024.</li>
           <li>La categoría será determinada por la edad que tendrá el competidor al 30 de noviembre del 2024.</li>
-          <li>Participan colaboradores y pueden invitar a correr a sus familiares mayores de edad</li>
+          <li>Participan colaboradores y pueden invitar a correr a sus <span className='font-bold'>familiares</span> mayores de edad</li>
           <li>Registro para la carrera en ambas modalidades virtual y presencial</li>
-          <li className='text-bold'>Habrá un link para realizar el registro. ¡Esperalo!</li>
         </ul>
 
       </div>
@@ -132,7 +138,7 @@ const Home = () => {
             <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Presencial:</div>
             <div className='flex justify-center'>
               <ul className='list-disc mt-5'>
-                <li>La entrada al CCM será a partir de las 7:00 am únicamente hasta las 8:00 am del sábado 09 de noviembre 2024</li>
+                <li>La entrada al CCM será de 7:00 am a 8:00 am del sábado 09 de noviembre 2024</li>
                 <li>La carrera iniciará a las 8:00 am en punto</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
                 <li>Los acompañantes animarán a los corredores y habrá actividades recreativas.</li>
@@ -154,10 +160,10 @@ const Home = () => {
           <div className='w-12/12 md:w-8/12 ml-0 md:ml-10 mt-3 md:mt-0'>
             <div className='font-extrabold text-2xl'>Actividad de Servicio “Ayudar a otros” (presencial CCM)</div>
               <div>
-                Propósito: Ayudar a los misioneros a tener experiencias reales de enseñanza.
+                Propósito: Ayudar a los misioneros a tener experiencias reales de enseñanza
               </div>
               <div>
-                Inicio: Inmediatamente después de la carrera, pero debes llegar antes de las 8:00 am.
+                Inicio: Inmediatamente después de la carrera
               </div>
               <div>
                 Lugar: Se te darán indicaciones terminando la carrera.
@@ -181,12 +187,12 @@ const Home = () => {
       </div>
 
       <div className='flex justify-center flex-col md:flex-row pb-3 md:pb-14 mt-0 md:mt-3 p-4'>
-        {/* <Link href="/register">
+        <Link href="/register">
           <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>
             <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
           </div>
-        </Link> */}
+        </Link>
         <Link href="/login">
           <div className='bg-blueCustom text-white w-12/12 ml-0 md:ml-4 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>
