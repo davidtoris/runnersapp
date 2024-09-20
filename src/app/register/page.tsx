@@ -186,10 +186,10 @@ const Register = ({}) => {
                     </div>
 
                     <div className='mb-5'>
-                      <div className='label'>Primer Apellido</div>
+                      <div className='label'>Apellidos</div>
                       <Field
                         name="apellido"
-                        placeholder="Escribe tu pimer Apellido"
+                        placeholder="Escribe tus Apellidos"
                         className="bg-gray-100 w-full p-2 rounded-full pl-5" />
                       {errors.apellido && <div className='error'>{errors.apellido}</div>}
                     </div>
