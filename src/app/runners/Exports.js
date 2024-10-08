@@ -25,6 +25,7 @@ const Exports = ({ users }) => {
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>TiempoNumero</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Correo</th>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Modalidad</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Playera</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tipo</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>NumColaborador</th>
@@ -48,6 +49,7 @@ const Exports = ({ users }) => {
                 <td className='border-2 p-2'>{s.time}</td>
                 <td className='border-2 p-2'>{s.timeNumber}</td>
                 <td className='border-2 p-2'>{s.correo}</td>
+                <td className='border-2 p-2'>{s.modalidad}</td>
                 <td className='border-2 p-2'>{s.playera}</td>
                 <td className='border-2 p-2'>{s.tipo}</td>
                 <td className='border-2 p-2'>{s.numColaborador}</td>

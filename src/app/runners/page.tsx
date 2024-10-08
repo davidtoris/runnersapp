@@ -18,6 +18,7 @@ const Runners = () => {
   const dispatch = useAppDispatch();
   
   const { users } = useSelector((state : RootState) => state.userData)
+  console.log(users);
 
   useEffect(() => {
     if (token) {
@@ -42,6 +43,9 @@ const Runners = () => {
     }),
     columnHelper.accessor('correo', {
       header: () => 'correo',
+    }),
+    columnHelper.accessor('modalidad', {
+      header: () => 'modalidad',
     }),
     columnHelper.accessor('playera', {
       header: 'playera',

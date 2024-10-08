@@ -25,6 +25,7 @@ export interface User {
   otroDepto: string,
   password: string,
   playera: string,
+  modalidad: string,
   role: string,
   tipo: string,
   time: string,
