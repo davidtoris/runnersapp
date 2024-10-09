@@ -407,14 +407,14 @@ const Register = ({}) => {
                   {userStatus === 401 && (<div className='text-2xl text-redCustom font-bold my-4 text-center w-8/12 m-auto'>El Colaborador ha registrado más de 4 familiares</div>)}
                   {userStatus === 200 && (<div className='m-auto w-10/12 text-1xl font-bold text-center bg-greenCustom text-white rounded-md p-2'>Registro con éxito</div>)}
 
-                  <div className='flex justify-center mt-5'>
+                  {/* <div className='flex justify-center mt-5'>
                     <button type="submit" 
                       className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-slate-200 disabled:cursor-not-allowed'
                       // disabled
                       >
                         {userLoading ? ( <Loader />) : 'Registrarme'}
                     </button>
-                  </div>  
+                  </div>   */}
                 </div>
               </div>
             </Form>
