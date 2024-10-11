@@ -76,14 +76,14 @@ const Home = () => {
         </div>
       </div>
 
-      {/* <div className='flex justify-center flex-col md:flex-row pb-3 md:pb-14 mt-0 md:mt-3 p-4'>
+      <div className='flex justify-center flex-col md:flex-row pb-3 md:pb-14 mt-0 md:mt-3 p-4'>
         <Link href="/register">
           <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>
             <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
           </div>
         </Link>
-      </div> */}
+      </div>
 
 
       <div className='flex justify-center mt-10'>
@@ -189,12 +189,12 @@ const Home = () => {
       </div>
 
       <div className='flex justify-center flex-col md:flex-row pb-3 md:pb-14 mt-0 md:mt-3 p-4'>
-        {/* <Link href="/register">
+        <Link href="/register">
           <div className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>
             <div className="ml-3"> Regístrate AQUÍ para la carrera</div>
           </div>
-        </Link> */}
+        </Link>
         <Link href="/login">
           <div className='bg-blueCustom text-white w-12/12 ml-0 md:ml-4 text-center m-auto font-extrabold p-3 rounded-md mt-8 flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'>
             <Image src="/tennis.png" width={30} height={30} alt=''/>
