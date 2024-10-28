@@ -162,20 +162,20 @@ const Home = () => {
           <div className='ml-2'>Editar registro</div>
         </div>
   
-        {/* <Link href="/evidence">
+        <Link href="/evidence">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
             <span className='ml-2'>Subir evidencia y resultados</span>
           </button>
-        </Link> */}
+        </Link>
 
-        {/* <Link href="/winners">
-          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' >
+        <Link href="/winners">
+          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' disabled >
             <GiRunningShoe />
             <span className='ml-2'>Ver ganadores</span>
           </button>
-        </Link> */}
+        </Link>
 
-          {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
+          <div className=''>Una vez iniciada la carrera se habilitará este botón</div>
 
           <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
             onClick={logOut}>
