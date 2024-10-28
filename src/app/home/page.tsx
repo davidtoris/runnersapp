@@ -169,7 +169,7 @@ const Home = () => {
         </Link>
 
         <Link href="/winners">
-          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg' disabled >
+          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-400' disabled >
             <GiRunningShoe />
             <span className='ml-2'>Ver ganadores</span>
           </button>
