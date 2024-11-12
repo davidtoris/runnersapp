@@ -54,7 +54,7 @@ export interface UserPayload {
 }
 
 export interface UserInterface {
-  users: User | null,
+  users: User[] | null,
   userItem: User | null,
   userFounded: boolean | null,
   userLoading: boolean,

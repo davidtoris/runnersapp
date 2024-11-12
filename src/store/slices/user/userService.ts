@@ -1,7 +1,7 @@
 import { AppDispatch } from "@/store"
 import { instanceAPI, instanceAPIData, instancePublicAPI } from "@/config/axiosConfig"
 import { userAll, userItem, userLoading, userRespFunc, userStatusFunc } from "./userSlice"
-import { UserPayload, UserResponse } from "./userInterface"
+import { User, UserPayload, UserResponse } from "./userInterface"
 import Cookies from "js-cookie"
 import { errorEvidenceFunc, errorPhotoFunc, evidenceLoading, imagesEvidence, imagesPhoto, photoLoading } from "../images/imagesSlice"
 
@@ -42,7 +42,7 @@ export const getUsers = ( token : string | null ) => {
   return async (dispatch: AppDispatch) => {
     dispatch(userLoading(true))
     try {
-      const {data} = await instanceAPI.get(`/users`, {
+      const {data} = await instanceAPI.get<User>(`/users`, {
         headers: {
           'x-tokens': token,
         },
