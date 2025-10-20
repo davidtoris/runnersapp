@@ -49,7 +49,11 @@ const Register = ({}) => {
         is: (tipo:any) => tipo === "familiar",
         then: (nombreFamiliar) => nombreFamiliar.required('* Campo requerido'),
       }),
-    ubicacion: Yup.string().required('* Elige una opción'),
+    ubicacion: Yup.string().when("modalidad", {
+      is: "virtual",
+      then: (schema) => schema.required("Campo requerido"),
+      otherwise: (schema) => schema.notRequired()
+    }),
     direccion: Yup.string()
       .when(["ubicacion"], {
         is: (ubicacion:any) => ubicacion === "otraUbicacion",
@@ -132,7 +136,7 @@ const Register = ({}) => {
                 genero: values.genero === '' ? null : values.genero,
               };
               console.log(data);
-              dispatch(registerUser(data))
+              // dispatch(registerUser(data))
             }}>
 
             {
@@ -165,7 +169,15 @@ const Register = ({}) => {
                     setUbicacionIsOtro(false);
                   }
                 }, [values.ubicacion])
-            
+                
+                const [modalidadVirtual, setModalidadVirtual] = useState(false)
+                useEffect(() => {
+                  if (values.modalidad === 'virtual' ) {
+                    setModalidadVirtual(true);
+                  } else {
+                    setModalidadVirtual(false);
+                  }
+                }, [values.modalidad])
             
             return (
 
@@ -298,19 +310,21 @@ const Register = ({}) => {
                     )}
 
 
-                    <div className='my-5'>
-                      <div className='label'>Ubicación para entrega de playera<span className='font-light'> </span></div>
-                      <Field 
-                        as="select"
-                        name="ubicacion">
-                          <option value="">Selecciona una opción</option>
-                          <option value="tecamachalco">Tecamachalco</option>
-                          <option value="CCM">CCM</option>
-                          <option value="Aragón">Aragón</option>
-                          <option value="otraUbicacion">Otra</option>
-                      </Field>
-                      {errors.ubicacion &&<div className='error'>{errors.ubicacion}</div>}
-                    </div>
+                    {modalidadVirtual && (
+                      <div className='my-5'>
+                        <div className='label'>Ubicación para entrega de playera<span className='font-light'> </span></div>
+                        <Field 
+                          as="select"
+                          name="ubicacion">
+                            <option value="">Selecciona una opción</option>
+                            <option value="tecamachalco">Tecamachalco</option>
+                            <option value="CCM">CCM</option>
+                            <option value="Aragón">Aragón</option>
+                            <option value="otraUbicacion">Otra</option>
+                        </Field>
+                        {errors.ubicacion &&<div className='error'>{errors.ubicacion}</div>}
+                      </div>
+                    )}
 
                     {ubicacionIsOtro && (
                       <>
