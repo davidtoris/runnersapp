@@ -132,7 +132,7 @@ const saveCanvas = async () => {
     script.onload = () => {
       const fabric = (window as any).fabric;
       const canvas = new fabric.Canvas(canvasRef.current, {
-        width: 400,
+        width: 360,
         height: 540,
         selection: true,
         subTargetCheck: true // permite seleccionar objetos detrás de otros
@@ -180,16 +180,17 @@ const saveCanvas = async () => {
         </div>
       </div>
 
-    {!userImage && (
-      <input type="file" onChange={handleUpload} className='mt-3' />
-    )}
-
+      {!userImage && (
+        <input type="file" onChange={handleUpload} className='mt-3' />
+      )}
+      <div className='w-[360px] m-auto mt-2'>
       {userImage && (
         <canvas
           ref={canvasRef}
-          style={{ border: '1px solid #ccc', marginTop: '10px' }}
+          style={{ borderRadius: '10px' }}
         />
       )}
+      </div>
 
       <div className="mt-4">
         <div className='flex'>
@@ -198,7 +199,7 @@ const saveCanvas = async () => {
             <div className='flex' key={sticker}>
             <img
               src={`${sticker}-min.png`}
-              className="w-10 h-12 cursor-pointer mx-2"
+              className="w-10 h-12 cursor-pointer mx-2 rounded-md"
               onClick={() => addSmallSticker(`${sticker}.png`)}
             />
             </div>
