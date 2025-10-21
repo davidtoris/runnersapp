@@ -134,6 +134,7 @@ const Register = ({}) => {
                 playera: values.playera === '' ? null : values.playera,
                 kms: values.kms === '' ? null : values.kms,
                 genero: values.genero === '' ? null : values.genero,
+
               };
               console.log(data);
               // dispatch(registerUser(data))
@@ -238,6 +239,7 @@ const Register = ({}) => {
 
                     <div className='my-5'>
                       <div className='label'>Modalidad</div>
+                      <div className='ml-3 text-xs mb-1 -mt-1 text-gray-700'>Para la modalidad presencial la playera se entregará en el CCM</div>
                       <Field 
                         as="select"
                         name="modalidad">
