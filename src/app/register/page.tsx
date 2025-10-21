@@ -24,11 +24,7 @@ const Register = ({}) => {
     correo: Yup.string().email('Debe ser un email válido').required('* Correo requerido'),
     password: Yup.string().required('* Contraseña requerida').min(6, 'La contraseña debe tener al menos 6 caractéres'),
     modalidad: Yup.string().required('* El campo es requerido'),
-    tipo: Yup.string()
-      .when(["familiar"], {
-        is: (familiar:any) => familiar === "familiar",    
-        then: (depto) => depto.required('Campo requerido'),
-      }),
+    tipo: Yup.string().required('Campo requerido'),
     numColaborador: Yup.string()
       .when(["tipo"], {
         is: (tipo:any) => tipo === "colaborador",
