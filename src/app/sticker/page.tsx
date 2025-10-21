@@ -197,7 +197,7 @@ const saveCanvas = async () => {
 
         {/* Botones de control */}
         <button className="px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
-          Eliminar
+          Eliminar Sticker
         </button>
         
         <button className="px-3 py-1 bg-green-500 text-white rounded" onClick={saveCanvas}>
