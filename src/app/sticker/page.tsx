@@ -6,7 +6,8 @@ const smallStickers = [
 ]
 
 const backgroundStickers = [
-  '/fondo1.png', // sticker grande de fondo
+  '/fondo1.png', 
+  '/fondo1a.png', 
 ]
 
 const EvidenceEditor = () => {
@@ -76,19 +77,28 @@ const EvidenceEditor = () => {
 
   // Guardar imagen final
   const saveCanvas = () => {
-    if (!fabricCanvas) return;
-    fabricCanvas.discardActiveObject();
-    const dataUrl = fabricCanvas.toDataURL({ format: 'png', quality: 0.9 });
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    link.download = 'evidence.png';
-    link.click();
-  };
+  if (!fabricCanvas) return;
+  fabricCanvas.discardActiveObject();
+
+  // usa devicePixelRatio o un valor fijo (2, 3)
+  const multiplier = window.devicePixelRatio || 2;
+
+  const dataUrl = fabricCanvas.toDataURL({
+    format: 'png',
+    quality: 1,
+    multiplier, // <-- importante para mejorar nitidez
+  });
+
+  const link = document.createElement('a');
+  link.href = dataUrl;
+  link.download = 'evidence-highres.png';
+  link.click();
+};
 
   // Funciones de control de capas
   const moveToBack = () => {
     const obj = fabricCanvas?.getActiveObject();
-    if (obj) {
+    if (obj && obj.customType !== 'userImage') {
       fabricCanvas.sendToBack(obj);
       fabricCanvas.renderAll();
     }
@@ -103,41 +113,20 @@ const EvidenceEditor = () => {
   };
 
   const moveBackward = () => {
-  if (!fabricCanvas) return;
-  const obj = fabricCanvas.getActiveObject();
-  if (!obj) return;
+    const obj = fabricCanvas?.getActiveObject();
+    if (obj && obj.customType !== 'userImage') {
+      fabricCanvas.sendBackwards(obj);
+      fabricCanvas.renderAll();
+    }
+  };
 
-  const objects = fabricCanvas.getObjects();
-  const baseIndex = objects.findIndex((o:any) => o.customType === 'userImage');
-
-  let currentIndex = objects.indexOf(obj);
-
-  // Evitar que la imagen base o sticker superior se pase de sus límites
-  if (obj.customType === 'background' && currentIndex > baseIndex + 1) {
-    fabricCanvas.sendBackwards(obj);
-    fabricCanvas.renderAll();
-  } else if (obj.customType === 'sticker' && currentIndex > 0) {
-    fabricCanvas.sendBackwards(obj);
-    fabricCanvas.renderAll();
-  }
-};
-
-const moveForward = () => {
-  if (!fabricCanvas) return;
-  const obj = fabricCanvas.getActiveObject();
-  if (!obj) return;
-
-  const objects = fabricCanvas.getObjects();
-  const lastIndex = objects.length - 1;
-
-  let currentIndex = objects.indexOf(obj);
-
-  // Stickers siempre pueden ir hasta la cima
-  if (currentIndex < lastIndex) {
-    fabricCanvas.bringForward(obj);
-    fabricCanvas.renderAll();
-  }
-};
+  const moveForward = () => {
+    const obj = fabricCanvas?.getActiveObject();
+    if (obj) {
+      fabricCanvas.bringForward(obj);
+      fabricCanvas.renderAll();
+    }
+  };
 
   // Inicializar canvas cuando el usuario sube su imagen
   useEffect(() => {
@@ -148,13 +137,13 @@ const moveForward = () => {
     script.onload = () => {
       const fabric = (window as any).fabric;
       const canvas = new fabric.Canvas(canvasRef.current, {
-        width: 500,
-        height: 500,
+        width: 400,
+        height: 700,
         selection: true,
         subTargetCheck: true // permite seleccionar objetos detrás de otros
       });
 
-      // Imagen del usuario (base)
+      // Imagen del usuario (base) — ya NO seleccionable ni evented: queda fija
       fabric.Image.fromURL(userImage, (img: any) => {
         const scale = 500 / img.width;
         img.set({
@@ -162,13 +151,14 @@ const moveForward = () => {
           top: 0,
           scaleX: scale,
           scaleY: scale,
-          selectable: true,
-          evented: true,
-          perPixelTargetFind: true
+          selectable: false,    // <-- bloqueado: no se puede seleccionar ni mover
+          evented: false,       // <-- no recibe eventos de pointer
+          hasControls: false,
+          perPixelTargetFind: false
         });
         img.customType = 'userImage';
         canvas.add(img);
-        canvas.moveTo(img, 0); // capa base
+        canvas.moveTo(img, 0); // capa base fija
         canvas.renderAll();
       });
 
