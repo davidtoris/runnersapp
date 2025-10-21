@@ -234,7 +234,7 @@ const Register = ({}) => {
 
                     <div className='my-5'>
                       <div className='label'>Modalidad</div>
-                      <div className='ml-3 text-xs mb-1 -mt-1 text-gray-700'>Para la modalidad presencial la playera se entregará en el CCM</div>
+                      <div className='ml-3 text-xs mb-1 -mt-1 text-gray-700'>Para la modalidad presencial la playera se entregará en el CCM el día 15 de Noviembre</div>
                       <Field 
                         as="select"
                         name="modalidad">

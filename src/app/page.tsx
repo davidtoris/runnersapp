@@ -60,6 +60,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className='font-light ml-3 flex justify-center'>(Hora del centro)</div>
+                <div className='mt-2 text-center'>
+                  La playera se entregará el día del evento (15 de noviembre)
+                </div>
               </div>
             </div>
 
@@ -83,6 +86,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className='font-light ml-3 flex justify-center'>(Hora del centro)</div>
+                <div className='mt-2 text-center'>
+                  La carrera en modalidad virtual estará disponible solo para aquellos colaboradores que trabajen fuera del área metropolitana
+                </div>
               </div>
             </div>
           </div>
@@ -145,7 +151,7 @@ const Home = () => {
                 <li>Los participantes virtuales correrán con la app de su preferencia</li>
                 <li>Al terminar la carrera: cada participante sube sus resultados y adjunta una captura de pantalla de la app como evidencia, en este sitio</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
-                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 11 de noviembre por correo electrónico y en el sitio de sharepoint del Área México</li>
+                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 17 de noviembre por correo electrónico y en el sitio de sharepoint del Área México</li>
               </ul>
             </div>
           </div>
