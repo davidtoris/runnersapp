@@ -85,8 +85,8 @@ const EvidenceEditor = () => {
 
   const dataUrl = fabricCanvas.toDataURL({
     format: 'png',
-    quality: 1,
-    multiplier, // <-- importante para mejorar nitidez
+    quality: 2,
+    multiplier,
   });
 
   const link = document.createElement('a');
@@ -94,39 +94,6 @@ const EvidenceEditor = () => {
   link.download = 'evidence-highres.png';
   link.click();
 };
-
-  // Funciones de control de capas
-  const moveToBack = () => {
-    const obj = fabricCanvas?.getActiveObject();
-    if (obj && obj.customType !== 'userImage') {
-      fabricCanvas.sendToBack(obj);
-      fabricCanvas.renderAll();
-    }
-  };
-
-  const moveToFront = () => {
-    const obj = fabricCanvas?.getActiveObject();
-    if (obj) {
-      fabricCanvas.bringToFront(obj);
-      fabricCanvas.renderAll();
-    }
-  };
-
-  const moveBackward = () => {
-    const obj = fabricCanvas?.getActiveObject();
-    if (obj && obj.customType !== 'userImage') {
-      fabricCanvas.sendBackwards(obj);
-      fabricCanvas.renderAll();
-    }
-  };
-
-  const moveForward = () => {
-    const obj = fabricCanvas?.getActiveObject();
-    if (obj) {
-      fabricCanvas.bringForward(obj);
-      fabricCanvas.renderAll();
-    }
-  };
 
   // Inicializar canvas cuando el usuario sube su imagen
   useEffect(() => {
@@ -138,14 +105,14 @@ const EvidenceEditor = () => {
       const fabric = (window as any).fabric;
       const canvas = new fabric.Canvas(canvasRef.current, {
         width: 400,
-        height: 700,
+        height: 550,
         selection: true,
         subTargetCheck: true // permite seleccionar objetos detrás de otros
       });
 
       // Imagen del usuario (base) — ya NO seleccionable ni evented: queda fija
       fabric.Image.fromURL(userImage, (img: any) => {
-        const scale = 500 / img.width;
+        const scale = 400 / img.width;
         img.set({
           left: 0,
           top: 0,
@@ -208,19 +175,7 @@ const EvidenceEditor = () => {
         <button className="px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
           Eliminar
         </button>
-        <button className="px-3 py-1 bg-gray-300 rounded" onClick={moveToBack}>
-          Enviar atrás
-        </button>
-        <button className="px-3 py-1 bg-gray-300 rounded" onClick={moveToFront}>
-          Traer al frente
-        </button>
-        <button className="px-3 py-1 bg-gray-300 rounded" onClick={moveBackward}>
-          Mover atrás
-        </button>
-        <button className="px-3 py-1 bg-gray-300 rounded" onClick={moveForward}>
-          Mover adelante
-        </button>
-
+        
         <button className="px-3 py-1 bg-green-500 text-white rounded" onClick={saveCanvas}>
           Guardar imagen final
         </button>
