@@ -194,9 +194,8 @@ const saveCanvas = async () => {
         <div className='flex'>
           {/* Botones para agregar stickers pequeños */}
           {smallStickers.map((sticker) => (
-            <div className='flex'>
+            <div className='flex' key={sticker}>
             <img
-              key={sticker}
               src={`${sticker}-min.png`}
               className="w-10 h-12 cursor-pointer mx-2"
               onClick={() => addSmallSticker(`${sticker}.png`)}
