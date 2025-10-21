@@ -134,10 +134,9 @@ const Register = ({}) => {
                 playera: values.playera === '' ? null : values.playera,
                 kms: values.kms === '' ? null : values.kms,
                 genero: values.genero === '' ? null : values.genero,
-
               };
-              console.log(data);
-              // dispatch(registerUser(data))
+
+              dispatch(registerUser(data))
             }}>
 
             {
