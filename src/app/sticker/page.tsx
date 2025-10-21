@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
+import { PiTrashLight } from "react-icons/pi";
 
 const smallStickers = [
   '/logo-runners',
@@ -204,14 +205,14 @@ const saveCanvas = async () => {
           ))}
         </div>
 
-        <div className='mt-2'>
+        <div className='mt-2 flex'>
           {/* Botones de control */}
-          <button className="px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
-            Eliminar Sticker
+          <button className="flex items-center px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
+            <PiTrashLight className='mr-1' /> Eliminar Sticker
           </button>
           
           <button className="px-3 py-1 bg-green-500 text-white rounded ml-2" onClick={saveCanvas}>
-            Guardar imagen
+            Enviar evidencia
           </button>
         </div>
       </div>
