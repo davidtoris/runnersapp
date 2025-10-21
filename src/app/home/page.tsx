@@ -85,54 +85,57 @@ const Home = () => {
         alt="Picture of the author"
         className='m-auto'
         />
+        {userItem && (
+          <div>
+            <div className='flex flex-col justify-center mt-20'>
+              <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
+              <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.nombre} ${userItem?.apellido}`}</div>
+            </div>
+    
+            <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
+            <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[184px]'>{`${userItem?.kms}-${number()}` }</div>
 
-        <div className='flex flex-col justify-center mt-20'>
-          <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
-          <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.nombre} ${userItem?.apellido}`}</div>
-        </div>
+            <div className='flex text-gray-600 items-center justify-center mt-3 flex-col md:flex-row'>
+              <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center'>
+                <BsSpeedometer2 className="text-blueCustom" />
+              </div>
+              <div className='ml-0 md:ml-3 text-center md:text-left'>
+                <div className='text-xl font-semibold'>
+                  Kms a correr
+                </div>
+                <div className='left'>
+                  {`${userItem?.kms} kms`}
+                </div>
+              </div>
+              <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
+                <BsFillPersonLinesFill className="text-blueCustom" />
+              </div>
+              <div className='ml-0 md:ml-3 text-center md:text-left'>
+                <div className='text-xl font-semibold'>
+                  Rango de edad
+                </div>
+                <div className='left'>
+                  { userItem?.edad === "1" && '18-39 años'}
+                  { userItem?.edad === "2" && '40-49 años'}
+                  { userItem?.edad === "3" && '50 0 más años'}
+                </div>
+              </div>
+              <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
+                <BsFillBookmarkStarFill className="text-blueCustom" />
+              </div>
+              <div className='ml-0 md:ml-3 text-center md:text-left'>
+                <div className='text-xl font-semibold'>
+                  Categoría
+                </div>
+                <div className='left'>
+                  { userItem?.genero === "H" && 'Varonil'}
+                  { userItem?.genero === "M" && 'Femenil'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-        <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
-        <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[184px]'>{number()}</div>
-
-        {/* <div className='text-5xl text-gray-800 mt-10 mb-2 font-semibold'>Datos de la carrera:</div> */}
-        <div className='flex text-gray-600 items-center justify-center mt-3 flex-col md:flex-row'>
-          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center'>
-            <BsSpeedometer2 className="text-blueCustom" />
-          </div>
-          <div className='ml-0 md:ml-3 text-center md:text-left'>
-            <div className='text-xl font-semibold'>
-              Kms a correr
-            </div>
-            <div className='left'>
-              {`${userItem?.kms} kms`}
-            </div>
-          </div>
-          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
-            <BsFillPersonLinesFill className="text-blueCustom" />
-          </div>
-          <div className='ml-0 md:ml-3 text-center md:text-left'>
-            <div className='text-xl font-semibold'>
-              Rango de edad
-            </div>
-            <div className='left'>
-              { userItem?.edad === "1" && '18-39 años'}
-              { userItem?.edad === "2" && '40-49 años'}
-              { userItem?.edad === "3" && '50 0 más años'}
-            </div>
-          </div>
-          <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
-            <BsFillBookmarkStarFill className="text-blueCustom" />
-          </div>
-          <div className='ml-0 md:ml-3 text-center md:text-left'>
-            <div className='text-xl font-semibold'>
-              Categoría
-            </div>
-            <div className='left'>
-              { userItem?.genero === "H" && 'Varonil'}
-              { userItem?.genero === "M" && 'Femenil'}
-            </div>
-          </div>
-        </div>
 
         {/* <div className='flex items-center text-3xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
           <div className='ml-2'>{`Tiempo asignado: ${userItem?.time}`}</div>
