@@ -2,12 +2,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 const smallStickers = [
-  '/logo-runners.png',
+  '/logo-runners',
+  '/sticker1',
+  '/sticker2',
+  '/sticker3',
+  '/sticker4',
 ]
 
 const backgroundStickers = [
-  '/fondo1.png', 
-  '/fondo1a.png', 
+  // '/fondo1.png', 
 ]
 
 const EvidenceEditor = () => {
@@ -129,7 +132,7 @@ const saveCanvas = async () => {
       const fabric = (window as any).fabric;
       const canvas = new fabric.Canvas(canvasRef.current, {
         width: 400,
-        height: 550,
+        height: 540,
         selection: true,
         subTargetCheck: true // permite seleccionar objetos detrás de otros
       });
@@ -164,8 +167,21 @@ const saveCanvas = async () => {
   }, [userImage]);
 
   return (
-    <div className="flex flex-col items-center">
-      <input type="file" onChange={handleUpload} />
+    <div className="flex flex-col items-center p-4">
+
+      <div>
+        <div className='font-light text-3xl text-gray-800 text-center mb-4'>
+          <span className='font-bold'>Personaliza</span> tu foto
+        </div>
+        <div className='text-sm font-light text-gray-700'>
+          Selecciona tu foto y da clic en las miniaturas para agregar los stickers, estos los puedes mover, rotar y cambiar de tamaño,
+          al finalizar envía tu evidencia
+        </div>
+      </div>
+
+    {!userImage && (
+      <input type="file" onChange={handleUpload} className='mt-3' />
+    )}
 
       {userImage && (
         <canvas
@@ -174,35 +190,31 @@ const saveCanvas = async () => {
         />
       )}
 
-      <div className="flex gap-2 mt-4 flex-wrap">
-        {/* Botones para agregar fondos */}
-        {backgroundStickers.map((bg) => (
-          <img
-            key={bg}
-            src={bg}
-            className="w-16 h-16 cursor-pointer"
-            onClick={() => addBackgroundSticker(bg)}
-          />
-        ))}
+      <div className="mt-4">
+        <div className='flex'>
+          {/* Botones para agregar stickers pequeños */}
+          {smallStickers.map((sticker) => (
+            <div className='flex'>
+            <img
+              key={sticker}
+              src={`${sticker}-min.png`}
+              className="w-10 h-12 cursor-pointer mx-2"
+              onClick={() => addSmallSticker(`${sticker}.png`)}
+            />
+            </div>
+          ))}
+        </div>
 
-        {/* Botones para agregar stickers pequeños */}
-        {smallStickers.map((sticker) => (
-          <img
-            key={sticker}
-            src={sticker}
-            className="w-12 h-12 cursor-pointer"
-            onClick={() => addSmallSticker(sticker)}
-          />
-        ))}
-
-        {/* Botones de control */}
-        <button className="px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
-          Eliminar Sticker
-        </button>
-        
-        <button className="px-3 py-1 bg-green-500 text-white rounded" onClick={saveCanvas}>
-          Guardar imagen final
-        </button>
+        <div className='mt-2'>
+          {/* Botones de control */}
+          <button className="px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
+            Eliminar Sticker
+          </button>
+          
+          <button className="px-3 py-1 bg-green-500 text-white rounded ml-2" onClick={saveCanvas}>
+            Guardar imagen
+          </button>
+        </div>
       </div>
     </div>
   );
