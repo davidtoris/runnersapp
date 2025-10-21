@@ -76,24 +76,48 @@ const EvidenceEditor = () => {
   };
 
   // Guardar imagen final
-  const saveCanvas = () => {
+ // reemplaza tu saveCanvas por esta función
+const saveCanvas = async () => {
   if (!fabricCanvas) return;
   fabricCanvas.discardActiveObject();
 
-  // usa devicePixelRatio o un valor fijo (2, 3)
-  const multiplier = window.devicePixelRatio || 2;
+  // Exportar con mayor resolución para evitar pixelado
+  const multiplier = Math.max(2, Math.round(window.devicePixelRatio || 2));
+  const dataUrl = fabricCanvas.toDataURL({ format: 'png', multiplier });
 
-  const dataUrl = fabricCanvas.toDataURL({
-    format: 'png',
-    quality: 2,
-    multiplier,
-  });
+  // Convertir dataURL a Blob
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
 
-  const link = document.createElement('a');
-  link.href = dataUrl;
-  link.download = 'evidence-highres.png';
-  link.click();
+  const fileName = 'evidence-highres.png';
+  const blobUrl = URL.createObjectURL(blob);
+
+  // Detectar iOS (no respeta download para blobs)
+  const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
+
+  if (isIOS) {
+    // iOS: abrir en nueva pestaña para que el usuario haga "guardar imagen"
+    window.open(blobUrl, '_blank');
+    // liberar URL después de un tiempo
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+    return;
+  }
+
+  // Desktop / Android (intentar forzar descarga)
+  const a = document.createElement('a');
+  a.href = blobUrl;
+  a.download = fileName;
+  // Por seguridad/accessibilidad
+  a.rel = 'noopener';
+  // Firefox necesita que el <a> esté en el DOM para disparar click
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  // liberar URL después de un rato
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
 };
+
 
   // Inicializar canvas cuando el usuario sube su imagen
   useEffect(() => {
