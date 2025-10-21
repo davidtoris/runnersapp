@@ -43,7 +43,7 @@ const Home = () => {
             <div className='bg-blueCustom text-white text-lg md:text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
               <h3 className='uppercase font-black text-lg md:text-3xl mb-3 text-center'>presencial</h3>
               <p className='mb-1 md:mb-3 flex items-center justify-center'>
-                <FaCalendarAlt className='mr-3'/>Sábado 20 de noviembre 2025</p>
+                <FaCalendarAlt className='mr-3'/>Sábado 15 de noviembre 2025</p>
               <div className=''>
                 <div className='mb-1 md:mb-3 flex items-center justify-center'>
                   <FaMapMarkerAlt className=''/>
@@ -66,7 +66,7 @@ const Home = () => {
             <div className='bg-greenCustom text-white text-lg md:text-2xl mx-7 p-5 mt-5 md:mt-0 rounded-md'>
               <h3 className='uppercase font-black text-lg md:text-3xl mb-3 text-center'>Virtual</h3>
               <p className='mb-1 md:mb-3 flex items-center justify-center'>
-                <FaCalendarAlt className='mr-3'/>Sábado 20 de noviembre 2025</p>
+                <FaCalendarAlt className='mr-3'/>Sábado 15 de noviembre 2025</p>
               <div className=''>
                 <div className='mb-1 md:mb-3 flex items-center justify-center'>
                   <FaMapMarkerAlt className=''/>
@@ -128,8 +128,8 @@ const Home = () => {
       <div className='bg-blueCustom text-white text-left md:text-center p-7 mt-10'>
         <h3 className=' font-extrabold text-3xl mb-3 text-center'>Notas importantes:</h3>
         <ul className='list-disc md:list-none text-lg'>
-          <li>La edad mínima para participar es de 18 años cumplidos al 20 de noviembre del 2025.</li>
-          <li>La categoría será determinada por la edad que tendrá el competidor al 20 de noviembre del 2025.</li>
+          <li>La edad mínima para participar es de 18 años cumplidos al 15 de noviembre del 2025.</li>
+          <li>La categoría será determinada por la edad que tendrá el competidor al 15 de noviembre del 2025.</li>
           <li>Participan colaboradores y pueden invitar a correr a sus <span className='font-bold'>familiares</span> mayores de edad</li>
           <li>Registro para la carrera en ambas modalidades virtual y presencial</li>
         </ul>
