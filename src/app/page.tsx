@@ -151,7 +151,7 @@ const Home = () => {
                 <li>Los participantes virtuales correrán con la app de su preferencia</li>
                 <li>Al terminar la carrera: cada participante sube sus resultados y adjunta una captura de pantalla de la app como evidencia, en este sitio</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
-                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el lunes 17 de noviembre por correo electrónico y en el sitio de sharepoint del Área México</li>
+                <li>Los mejores TIEMPOS de cada categoría se darán a conocer el martes 18 de noviembre por correo electrónico y en el sitio de sharepoint del Área México</li>
               </ul>
             </div>
           </div>
@@ -159,7 +159,7 @@ const Home = () => {
             <div className='uppercase text-grayCustom text-center text-3xl font-bold'>modalidad Presencial:</div>
             <div className='flex justify-center'>
               <ul className='list-disc mt-5'>
-                <li>La entrada al CCM será de 7:00 am a 8:00 am del sábado 09 de noviembre 2024</li>
+                <li>La entrada al CCM será de 7:00 am a 8:00 am del sábado 15 de noviembre 2025</li>
                 <li>La carrera iniciará a las 8:00 am en punto</li>
                 <li>Se premiará a los 3 Primeros Lugares de CADA CATEGORÍA, femenil y varonil, en la distancia de 3 y 5 km.</li>
                 <li>Los acompañantes animarán a los corredores y habrá actividades recreativas.</li>
