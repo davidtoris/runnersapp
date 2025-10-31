@@ -37,57 +37,58 @@ const EditRegister = ({}) => {
   
 
   const UserSchema = Yup.object().shape({
-    nombre: Yup.string().required('* Nombre requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios').max(10, 'El nombre debe ser máximo de 10 caractéres'),
-    apellido: Yup.string().required('* Apellido requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
-    correo: Yup.string().email('Debe ser un email válido').required('* Correo requerido'),
-    password: Yup.string().required('* Contraseña requerida').min(6, 'La contraseña debe tener al menos 6 caractéres'),
-    tipo: Yup.string()
-      .when(["familiar"], {
-        is: (familiar:any) => familiar === "familiar",    
-        then: (depto) => depto.required('Campo requerido'),
-      }),
-    numColaborador: Yup.string()
-      .when(["tipo"], {
-        is: (tipo:any) => tipo === "colaborador",
-        then: (numColaborador) => numColaborador.required('* Campo requerido').min(6, 'El número debe tener al menos 6 caractéres').max(9, 'El número debe tener máximo 9 caractéres'),
-      }),
-    depto: Yup.string()
-      .when(["tipo"], {
-        is: (tipo:any) => tipo === "colaborador",
-        then: (depto) => depto.required('* Selecciona una opción'),
-      }),
-    otroDepto: Yup.string()
-      .when(["depto"], {
-        is: (depto:any) => depto === "Otro",
-        then: (otroDepto) => otroDepto.required('Campo requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
-      }),
-    nombreFamiliar: Yup.string()
-      .when(["tipo"], {
-        is: (tipo:any) => tipo === "familiar",
-        then: (nombreFamiliar) => nombreFamiliar.required('* Elige una opción').email('Debe ser un email válido').required('* Correo requerido'),
-      }),
-    ubicacion: Yup.string().required('* Elige una opción'),
-    direccion: Yup.string()
-      .when(["ubicacion"], {
-        is: (ubicacion:any) => ubicacion === "otraUbicacion",
-        then: (direccion) => direccion.required('Campo requerido'),
-      }),
-    ciudad: Yup.string()
-      .when(["ubicacion"], {
-        is: (ubicacion:any) => ubicacion === "otraUbicacion",
-        then: (ciudad) => ciudad.required('Campo requerido'),
-      }),
-    estado: Yup.string()
-      .when(["ubicacion"], {
-        is: (ubicacion:any) => ubicacion === "otraUbicacion",
-        then: (estado) => estado.required('Campo requerido'),
+      nombre: Yup.string().required('* Nombre requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios').max(10, 'El nombre debe ser máximo de 10 caractéres'),
+      apellido: Yup.string().required('* Apellido requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
+      correo: Yup.string().email('Debe ser un email válido').required('* Correo requerido'),
+      password: Yup.string().required('* Contraseña requerida').min(6, 'La contraseña debe tener al menos 6 caractéres'),
+      tipo: Yup.string().required('Campo requerido'),
+      numColaborador: Yup.string()
+        .when(["tipo"], {
+          is: (tipo:any) => tipo === "colaborador",
+          then: (numColaborador) => numColaborador.required('* Campo requerido').min(6, 'El número debe tener al menos 6 caractéres').max(9, 'El número debe tener máximo 9 caractéres'),
         }),
-    edad: Yup.string().required('* Edad requerida'),
-    // playera: Yup.string().required('* Elige una opción'),
-    kms: Yup.string().required('* Elige una opción'),
-    genero: Yup.string().required('* Elige una opción'),
-    
-  });
+      depto: Yup.string()
+        .when(["tipo"], {
+          is: (tipo:any) => tipo === "colaborador",
+          then: (depto) => depto.required('* Selecciona una opción'),
+        }),
+      otroDepto: Yup.string()
+        .when(["depto"], {
+          is: (depto:any) => depto === "Otro",
+          then: (otroDepto) => otroDepto.required('Campo requerido').matches(/^[aA-zZ\u00C0-\u024F\u1E00-\u1EFF\s]+$/, 'Solo letras y espacios'),
+        }),
+      nombreFamiliar: Yup.string()
+        .when(["tipo"], {
+          is: (tipo:any) => tipo === "familiar",
+          then: (nombreFamiliar) => nombreFamiliar.required('* Campo requerido'),
+        }),
+      ubicacion: Yup.string().when("modalidad", {
+        is: "virtual",
+        then: (schema) => schema.required("Campo requerido"),
+        otherwise: (schema) => schema.notRequired()
+      }),
+      direccion: Yup.string()
+        .when(["ubicacion"], {
+          is: (ubicacion:any) => ubicacion === "otraUbicacion",
+          then: (direccion) => direccion.required('Campo requerido'),
+        }),
+      ciudad: Yup.string()
+        .when(["ubicacion"], {
+          is: (ubicacion:any) => ubicacion === "otraUbicacion",
+          then: (ciudad) => ciudad.required('Campo requerido'),
+        }),
+      estado: Yup.string()
+        .when(["ubicacion"], {
+          is: (ubicacion:any) => ubicacion === "otraUbicacion",
+          then: (estado) => estado.required('Campo requerido'),
+        }),
+      edad: Yup.string().required('* Edad requerida'),
+      playera: Yup.string().required('* Elige una opción'),
+      kms: Yup.string().required('* Elige una opción'),
+      genero: Yup.string().required('* Elige una opción'),
+
+      
+    });
 
   const { userStatus, userItem, userResp } = useSelector((state : RootState) => state.userData)
 
@@ -95,6 +96,15 @@ const EditRegister = ({}) => {
     userResp === 'editRegister' && router.push("/home")
     dispatch(userRespFunc(''))
   }, [userResp])
+
+  const [modalidadVirtual, setModalidadVirtual] = useState(false)
+    useEffect(() => {
+      if (userItem && userItem.modalidad === 'virtual' ) {
+        setModalidadVirtual(true);
+      } else {
+        setModalidadVirtual(false);
+      }
+    }, [userItem])
 
   return (
     <div className='flex m-auto justify-center container w-12/12'>
@@ -202,8 +212,7 @@ const EditRegister = ({}) => {
                     setUbicacionIsOtro(false);
                   }
                 }, [values.ubicacion])
-            
-            
+
             return (
 
             <Form>
@@ -223,7 +232,7 @@ const EditRegister = ({}) => {
                     </div>
 
                     <div className='mb-5'>
-                      <div className='label'>Primer Apellido</div>
+                      <div className='label'>Apellidos</div>
                       <Field
                         name="apellido"
                         placeholder="Escribe tu pimer Apellido"
@@ -240,14 +249,14 @@ const EditRegister = ({}) => {
                       {errors.correo && <div className='error'>{errors.correo}</div>}
                     </div>
 
-                    <div className='my-5'>
+                    {/* <div className='my-5'>
                       <div className='label'>Contraseña<span className='font-light ml-2'>(Cree una contraseña de 6 caractéres mínimo)</span></div>
                       <Field
                         name="password"
                         placeholder="Escribe tu Contraseña"
                         type="password" />
                       {errors.password && <div className='error'>{errors.password}</div>}
-                    </div>
+                    </div> */}
 
                     <div className='my-5'>
                       <div className='label'>Colaborador / Familiar</div>
@@ -322,7 +331,7 @@ const EditRegister = ({}) => {
                       </div>
                     )}
 
-
+                  {modalidadVirtual && (
                     <div className='my-5'>
                       <div className='label'>Ubicación para entrega de playera<span className='font-light'> </span></div>
                       <Field 
@@ -336,6 +345,7 @@ const EditRegister = ({}) => {
                       </Field>
                       {errors.ubicacion &&<div className='error'>{errors.ubicacion}</div>}
                     </div>
+                  )}
 
                     {ubicacionIsOtro && (
                       <>

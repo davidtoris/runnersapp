@@ -144,13 +144,13 @@ const Home = () => {
         
 
         {/* <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div> */}
-        {/* <div className='flex justify-center p-2'>
+        <div className='flex justify-center p-2'>
           <CountDown
-            closeDate={'2023-11-25 06:00:00'} 
+            closeDate={'2025-11-14 06:00:00'} 
             todayDate={date} 
             size 
           />
-        </div> */}
+        </div>
 
         {/* <a href='https://wa.me/525525011974?text=Necesito%20ayuda%20con...'>
           <div className='text-xl underline text-greenCustom'>
@@ -164,20 +164,20 @@ const Home = () => {
           <div className='ml-2'>Editar registro</div>
         </div>
   
-        <Link href="/evidence">
+        {/* <Link href="/evidence">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
             <span className='ml-2'>Subir evidencia y resultados</span>
           </button>
-        </Link>
+        </Link> */}
 
-        <Link href="/winners">
+        {/* <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed' >
             <GiRunningShoe />
             <span className='ml-2'>Ver ganadores</span>
           </button>
         </Link>
 
-          <div className=''>Una vez iniciada la carrera se habilitará este botón</div>
+          <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
           <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
             onClick={logOut}>
