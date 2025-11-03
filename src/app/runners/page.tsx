@@ -12,6 +12,7 @@ import Cookies from "js-cookie"
 import { getUsers } from '@/store/slices/user/userService'
 import { User } from '@/store/slices/user/userInterface'
 import Exports from './Exports';
+import { NumberFunc } from '../helper/Number'
 
 const Runners = () => {
   const token = Cookies.get('tokenUser')
@@ -29,6 +30,17 @@ const Runners = () => {
   const columnHelper = createColumnHelper<User>()
 
   const columns = [
+    columnHelper.accessor('numColaborador', {
+      header: () => 'Num · Kms',
+      cell: info => {
+        const row = info.row.original as User;
+        return (
+          <div className="flex flex-col">
+            <div className="">{row.kms}-{NumberFunc(row.numRunner)}</div>
+          </div>
+        );
+      },
+    }),
     columnHelper.accessor('nombre', {
       header: () => 'nombre',
     }),

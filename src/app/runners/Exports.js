@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { NumberFunc } from '../helper/Number';
 
 
 const Exports = ({ users }) => {
+  
   return (
     <div className="max-w-7xl mx-auto pb-10">
       <img src="../logo.png" width="600px" className='my-5 m-auto'/>
@@ -20,6 +22,7 @@ const Exports = ({ users }) => {
        <table id="table-to-xls" className="table-auto max-w-7xl mx-auto pb-10 mt-8 hidden">
         <thead>
           <tr>
+            <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Num</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Nombre</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Apellido</th>
             <th className='font-bold text-xl bg-blueCustom p-2 text-white'>Tiempo</th>
@@ -44,6 +47,7 @@ const Exports = ({ users }) => {
         <tbody>
           {users !== undefined && users.map(s => (
               <tr className='border-2 text-center' key={s._id}>
+                <td className='border-2 p-2'>{`${s.kms}-${NumberFunc(s.numRunner)}`}</td>
                 <td className='border-2 p-2'>{s.nombre}</td>
                 <td className='border-2 p-2'>{s.apellido}</td>
                 <td className='border-2 p-2'>{s.time}</td>

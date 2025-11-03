@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { userLoading } from '@/store/slices/user/userSlice';
 import Link from 'next/link';
 import { showOneUser } from '@/store/slices/user/userService';
+import { NumberFunc } from '../helper/Number';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -89,7 +90,7 @@ const Home = () => {
           <div>
             <div className='flex flex-col justify-center mt-20'>
               <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
-              <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.nombre} ${userItem?.apellido}`}</div>
+              <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.kms}-${ NumberFunc(userItem?.numRunner) }`}</div>
             </div>
     
             <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
