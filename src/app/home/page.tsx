@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { validateToken } from '@/store/slices/auth/authService';
 import Cookies from "js-cookie"
 import { GiRunningShoe } from "react-icons/gi";
-
+import { MdOutlineFileUpload } from "react-icons/md";
 import { BsPersonCircle, BsSpeedometer2, BsFillPersonLinesFill, BsFillBookmarkStarFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
 import { userLoading } from '@/store/slices/user/userSlice';
@@ -94,7 +94,7 @@ const Home = () => {
             </div>
     
             <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
-            <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[184px]'>{`${userItem?.kms}-${number()}` }</div>
+            <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[124px]'>{`${userItem?.kms}-${number()}` }</div>
 
             <div className='flex text-gray-600 items-center justify-center mt-3 flex-col md:flex-row'>
               <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center'>
@@ -147,7 +147,7 @@ const Home = () => {
         {/* <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div> */}
         <div className='flex justify-center p-2'>
           <CountDown
-            closeDate={'2025-11-14 06:00:00'} 
+            closeDate={'2025-11-15 06:00:00'} 
             todayDate={date} 
             size 
           />
@@ -165,11 +165,11 @@ const Home = () => {
           <div className='ml-2'>Editar registro</div>
         </div>
   
-        {/* <Link href="/evidence">
-          <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
-            <span className='ml-2'>Subir evidencia y resultados</span>
+        <Link href="/evidence">
+          <button className='flex items-center text-xl md:text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
+            <span className='ml-2 flex items-center'><MdOutlineFileUpload className='mr-2' /> Subir evidencia y resultados</span>
           </button>
-        </Link> */}
+        </Link>
 
         {/* <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed' >

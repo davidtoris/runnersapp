@@ -1,6 +1,9 @@
 'use client'
 import React, { useEffect, useState, useRef } from 'react';
 import { PiTrashLight } from "react-icons/pi";
+import Modal from 'react-modal';
+import { FaSave } from 'react-icons/fa';
+
 
 const smallStickers = [
   '/logo-runners',
@@ -167,18 +170,91 @@ const saveCanvas = async () => {
     };
   }, [userImage]);
 
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
+
+  useEffect(() => {
+    openModal()
+  }, [])
+  
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
   return (
     <div className="flex flex-col items-center p-4">
 
-      <div>
-        <div className='font-light text-3xl text-gray-800 text-center mb-4'>
-          <span className='font-bold'>Personaliza</span> tu foto
+      <Modal
+        style={customStyles}
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        
+        {/* <button className='font-bold text-2xl w-full flex justify-end text-red-500' onClick={closeModal}>
+          <IoMdCloseCircle />
+        </button> */}
+
+        <div className=''>
+          <div className='font-light text-3xl text-gray-800 text-center mb-4'>
+            <span className='font-bold'>Personaliza</span> tu foto de la carrera
+          </div>
+          <div className='text-sm font-light text-gray-700'>
+            
+          <div className='font-bold'>1. Selecciona tu foto</div>
+            <li className='ml-3'> Da clic en el botón “Seleccionar archivo” para elegir la imagen que quieras editar.</li>
+
+          <div className='mt-2 font-bold'>2. Elige un sticker desde las miniaturas</div>
+            
+            <div className='flex my-2'>
+            {smallStickers.map((sticker) => (
+              <div className='flex' key={sticker}>
+                <img
+                  src={`${sticker}-min.png`}
+                  className="w-10 h-12 cursor-pointer mx-2 rounded-md flex"
+                  onClick={() => addSmallSticker(`${sticker}.png`)}
+                />
+              </div>
+            ))}
+            </div>
+
+            <li className='ml-3'>Haz clic en cualquiera de las miniaturas para agregar ese sticker a tu foto.</li>
+
+          <div className='mt-2 font-bold'>3. Mueve, rota y cambia el tamaño de los stickers</div>
+            <span className='ml-3'>Una vez colocado el sticker, puedes:</span>
+            <li className='ml-3'>Moverlo arrastrándolo con el cursor.</li>
+            <li className='ml-3'>Rotarlo usando el control de rotación.</li>
+            <li className='ml-3'>Ajustar su tamaño jalando desde las esquinas.</li>
+
+          <div className='mt-2 font-bold text-greenCustom'>4. Eliminar un sticker</div>
+            <li className='ml-3'>Selecciona el sticker que quieres quitar.</li>
+            <li className='ml-3'>Presiona el botón “Eliminar” Sticker para removerlo.</li>
+
+          {/* <div className='mt-2 font-bold'>6. Finaliza tu edición</div>
+            <li className='ml-3'>Cuando tu diseño esté listo, da clic en “Descargar imagen” para guardar tu foto editada en tu dispositivo.</li> */}
+              
+          <div className='mt-2 font-bold text-blueCustom'>5. Envía tu evidencia</div>
+            <li className='ml-3'>Al finalizar súbe tu imagen como evidencia.</li>
+          
+          </div>
+          
+          <div className='flex justify-center'>
+            <button className='font-bold text-md flex justify-center bg-greenCustom text-white p-2 mt-2 rounded-lg' onClick={closeModal}>
+              Cerrar
+            </button>
+          </div>
         </div>
-        <div className='text-sm font-light text-gray-700'>
-          Selecciona tu foto y da clic en las miniaturas para agregar los stickers, estos los puedes mover, rotar y cambiar de tamaño,
-          al finalizar envía tu evidencia
-        </div>
-      </div>
+      </Modal>
+
 
       {!userImage && (
         <input type="file" onChange={handleUpload} className='mt-3' />
@@ -206,14 +282,14 @@ const saveCanvas = async () => {
           ))}
         </div>
 
-        <div className='mt-2 flex'>
+        <div className='mt-3 flex'>
           {/* Botones de control */}
-          <button className="flex items-center px-3 py-1 bg-gray-300 rounded" onClick={removeSelected}>
-            <PiTrashLight className='mr-1' /> Eliminar Sticker
+          <button className="flex items-center px-3 py-1 bg-red-400 text-white rounded" onClick={removeSelected}>
+            <PiTrashLight className='mr-1' /> Borrar Sticker
           </button>
           
-          <button className="px-3 py-1 bg-green-500 text-white rounded ml-2" onClick={saveCanvas}>
-            Enviar evidencia
+          <button className="flex items-center px-3 py-1 bg-green-500 text-white rounded ml-2" onClick={saveCanvas}>
+            <FaSave className='mr-1' /> Enviar evidencia
           </button>
         </div>
       </div>

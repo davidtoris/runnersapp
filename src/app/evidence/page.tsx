@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { userRespFunc } from '@/store/slices/user/userSlice';
 import { validateToken } from '@/store/slices/auth/authService';
 import { errorEvidenceFunc, errorPhotoFunc } from '@/store/slices/images/imagesSlice';
+import EvidenceEditor from '../sticker/page';
 
 const Evidence = () => {
 
@@ -158,36 +159,36 @@ const Evidence = () => {
 
   return (
     <>
-      <div className='flex justify-center items-center h-screen text-center'>
+      <div className='flex justify-center items-center h-screen text-center p-2'>
         <div className='flex justify-center flex-col pb-5 m-auto'>
           <Image 
           src='/logo.png' 
-          width={650}
+          width={300}
           height={230}
           alt="Picture of the author"
           className='m-auto'
           />
 
-          <div className='text-center py-6 w-11/12 md:w-8/12 m-auto text-md text-gray-800 md:text-lg'>
+          {/* <div className='text-center py-6 w-11/12 md:w-8/12 m-auto text-md text-gray-800 md:text-lg'>
             Sube la evidencia de tu resultado de la app y sube tu fotografía de tu experiencia de la carrera, estas 
             <span className='font-bold'> deben pesar máximo (5Mb)</span>. Recuerda que el Lunes podrás revisar los ganadores por categoría.
-          </div>
+          </div> */}
 
-          <div className='label mt-5'>Tiempo de la carrera<span className='font-light ml-2'></span></div>
+          <div className='label mt-5 text-xl'>Tiempo de la carrera</div>
           <div className='flex text-center m-auto mb-10'>
             <div>
               Horas
-              <input type="number" name="hours" className='text-center' onChange={changeHours} />
+              <input type="number" name="hours" className='text-center p-1' onChange={changeHours} />
               {errorHours && (<div className='text-redCustom'>*Campo obligatorio</div>)}
             </div>
             <div className='mx-2'>
               * Minutos
-              <input type="number" name="minutes" className='text-center' onChange={changeMinutes} />
+              <input type="number" name="minutes" className='text-center p-1' onChange={changeMinutes} />
               {errorMinutes && (<div className='text-redCustom'>*Campo obligatorio</div>)}
             </div>
             <div>
               Segundos
-              <input type="number" name="seconds" className='text-center' onChange={changeSeconds}/>
+              <input type="number" name="seconds" className='text-center p-1' onChange={changeSeconds}/>
               {errorSeconds && (<div className='text-redCustom'>*Campo obligatorio</div>)}
             </div>
           </div>
@@ -213,6 +214,9 @@ const Evidence = () => {
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
             <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
+
+              <EvidenceEditor />
+
               {!photo.imagen && userItem?.imgPhoto && (
                 <>
                   <img src={userItem?.imgPhoto} width={200} className='m-auto pb-5'/>
