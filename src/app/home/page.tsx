@@ -136,16 +136,10 @@ const Home = () => {
             </div>
           </div>
         )}
-
-
-        {/* <div className='flex items-center text-3xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
-          <div className='ml-2'>{`Tiempo asignado: ${userItem?.time}`}</div>
-        </div> */}
-
         
 
         {/* <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div> */}
-        <div className='flex justify-center p-2'>
+        <div className='flex justify-center p-2 mt-5'>
           <CountDown
             closeDate={'2025-11-15 06:00:00'} 
             todayDate={date} 
@@ -164,9 +158,14 @@ const Home = () => {
           <FaRegChartBar />
           <div className='ml-2'>Editar registro</div>
         </div>
+
+        <div className='text-xl mt-7 justify-center font-thin cursor-pointer' onClick={editRegister}>
+          <div>Tiempo asignado:</div>
+          <div className='ml-2 text-sm'>{`${userItem?.time !== '' ? userItem?.time : 'No se ha registrado un tiempo'}`}</div>
+        </div>
   
         <Link href="/evidence">
-          <button className='flex items-center text-xl md:text-2xl mt-10 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
+          <button className='flex items-center text-xl md:text-2xl mt-5 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
             <span className='ml-2 flex items-center'><MdOutlineFileUpload className='mr-2' /> Subir evidencia y resultados</span>
           </button>
         </Link>

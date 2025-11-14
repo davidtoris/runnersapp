@@ -1,5 +1,6 @@
+// Evidence.tsx
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image';
 import { saveTime, showOneUser, uploadEvidenceService, uploadPhotoService } from '@/store/slices/user/userService';
 import { RootState, useAppDispatch } from '@/store';
@@ -9,8 +10,12 @@ import Loader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
 import { userRespFunc } from '@/store/slices/user/userSlice';
 import { validateToken } from '@/store/slices/auth/authService';
-import { errorEvidenceFunc, errorPhotoFunc } from '@/store/slices/images/imagesSlice';
+import { errorEvidenceFunc } from '@/store/slices/images/imagesSlice';
 import EvidenceEditor from '../sticker/page';
+
+type EditorHandle = {
+  exportImage: () => Promise<File | null>;
+};
 
 const Evidence = () => {
 
@@ -25,7 +30,7 @@ const Evidence = () => {
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
- 
+  const editorRef = useRef<EditorHandle | null>(null);
 
   useEffect(() => {
     if (token) {
@@ -33,6 +38,7 @@ const Evidence = () => {
     } else {
       router.push("/login")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -42,10 +48,13 @@ const Evidence = () => {
       setIdUser(user._id);
       dispatch(showOneUser(idUser, token))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const [selectedEvidence, setSelectedEvidence] = useState<string | Blob>('');
-  const [selectedPhoto, setSelectedPhoto] = useState<string | Blob>('');
+  // evidence (padre) sigue siendo input del padre
+  const [selectedEvidence, setSelectedEvidence] = useState<File | Blob | null>(null);
+  // ya no dependemos de selectedPhoto proveniente del input del padre:
+  // el hijo exportará su imagen cuando el padre lo pida
   const [hours, setHours] = useState<any>('')
   const [minutes, setMinutes] = useState<any>('')
   const [seconds, setSeconds] = useState<any>('')
@@ -61,15 +70,7 @@ const Evidence = () => {
     dispatch(errorEvidenceFunc(null))
     dispatch(userRespFunc(''))
     setOk('')
-    setSelectedEvidence(e.target.files[0])
-  } 
-  
-  const handlePhoto = (e : any) => {
-    setErrorPhoto(false)
-    dispatch(errorPhotoFunc(null))
-    dispatch(userRespFunc(''))
-    setOk('')
-    setSelectedPhoto(e.target.files[0])
+    setSelectedEvidence(e.target.files?.[0] ?? null)
   } 
 
   const changeHours = (e:any) => {
@@ -99,30 +100,45 @@ const Evidence = () => {
     }
   }
 
-  const handleSave = () =>{
- 
-    if (token) {
-      if(selectedEvidence !== '') {
-        console.log('entroEvidence')
-        const formData = new FormData();
-        formData.append('image', selectedEvidence);
-        dispatch(uploadEvidenceService(formData, token, 'imgEvidence'))
-      }
+  const handleSave = async () => {
+    if (!token) return;
 
-      if(selectedPhoto !== '') {
-        console.log('entroPhoto')
-        const formData = new FormData();
-        formData.append('image', selectedPhoto);
-        dispatch(uploadPhotoService(formData, token, 'imgPhoto'))
-      }
-
-      const timeNumber = (Number(hours) * 3600) + (Number(minutes) * 60) + Number(seconds);
-      const data = {
-        time: `${hours}:${minutes}:${seconds}`,
-        timeNumber
-      }
-      dispatch(saveTime(data, token));
+    // 1) subir evidencia del padre (input de evidencia)
+    if (selectedEvidence) {
+      console.log('Subiendo evidence (padre) ...');
+      const formData = new FormData();
+      formData.append('image', selectedEvidence as Blob);
+      dispatch(uploadEvidenceService(formData, token, 'imgEvidence'));
     }
+
+    // 2) pedir al hijo que exporte su canvas y subimos si existe
+    if (editorRef.current && typeof editorRef.current.exportImage === 'function') {
+      try {
+        console.log('Pidiendo exportImage al hijo...');
+        const fileFromChild = await editorRef.current.exportImage();
+        if (fileFromChild) {
+          console.log('Archivo recibido del hijo, subiendo...');
+          const formData = new FormData();
+          formData.append('image', fileFromChild as Blob);
+          dispatch(uploadPhotoService(formData, token, 'imgPhoto'));
+        } else {
+          console.log('No hay imagen en el editor (hijo).');
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Error exportImage desde hijo:', err);
+      }
+    } else {
+      console.log('editorRef no disponible o exportImage no implementado.');
+    }
+
+    // 3) guardar tiempo (se hace independientemente)
+    const timeNumber = (Number(hours || 0) * 3600) + (Number(minutes || 0) * 60) + Number(seconds || 0);
+    const data = {
+      time: `${hours}:${minutes}:${seconds}`,
+      timeNumber
+    };
+    dispatch(saveTime(data, token));
   }
 
   useEffect(() => {
@@ -132,13 +148,11 @@ const Evidence = () => {
   
 
   useEffect(() => {
-    console.log({hours, minutes, seconds})
     hours === '' ? setErrorHours(true) : setErrorHours(false);
     minutes === '' ? setErrorMinutes(true) : setErrorMinutes(false);
     seconds === '' ? setErrorSeconds(true) : setErrorSeconds(false);
     errorPhoto === 413 ? setErrorSize(true) : setErrorSize(false);
     errorEvidence === 413 ? setErrorSize(true) : setErrorSize(false);
-    console.log({errorHours, errorMinutes, errorSeconds})
   }, [hours, minutes, seconds, errorPhoto, errorEvidence, errorSize, userResp])
   
 
@@ -162,24 +176,19 @@ const Evidence = () => {
       <div className='flex justify-center items-center h-screen text-center p-2'>
         <div className='flex justify-center flex-col pb-5 m-auto'>
           <Image 
-          src='/logo.png' 
-          width={300}
-          height={230}
-          alt="Picture of the author"
-          className='m-auto'
+            src='/logo.png' 
+            width={300}
+            height={230}
+            alt="Picture of the author"
+            className='m-auto'
           />
-
-          {/* <div className='text-center py-6 w-11/12 md:w-8/12 m-auto text-md text-gray-800 md:text-lg'>
-            Sube la evidencia de tu resultado de la app y sube tu fotografía de tu experiencia de la carrera, estas 
-            <span className='font-bold'> deben pesar máximo (5Mb)</span>. Recuerda que el Lunes podrás revisar los ganadores por categoría.
-          </div> */}
 
           <div className='label mt-5 text-xl'>Tiempo de la carrera</div>
           <div className='flex text-center m-auto mb-10'>
             <div>
               Horas
               <input type="number" name="hours" className='text-center p-1' onChange={changeHours} />
-              {errorHours && (<div className='text-redCustom'>*Campo obligatorio</div>)}
+              {errorHours && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
             </div>
             <div className='mx-2'>
               * Minutos
@@ -197,15 +206,11 @@ const Evidence = () => {
             <div className='bg-gray-100 p-2 rounded-md shadow-md'>
               <div className='m-auto font-bold text-blueCustom text-3xl mt-2'>Foto de la Evidencia</div>
               {!evidence.imagen && userItem?.imgEvidence && (
-                <>
-                  <img src={userItem?.imgEvidence} width={200} className='m-auto py-5'/>
-                </>
+                <img src={userItem?.imgEvidence} width={200} className='m-auto py-5' alt="evidence" />
               )}
               
               {evidence.imagen && (
-                <>
-                  <img src={evidence.imagen} width={200} className='m-auto py-5'/>
-                </>
+                <img src={evidence.imagen} width={200} className='m-auto py-5' alt="evidence preview" />
               )}
               <input type="file" onChange={(e) => handleEvidence(e)} className='p-1' />
               {errorEvidenceState && (<div className='text-redCustom'>*Campo obligatorio</div>)}
@@ -213,41 +218,33 @@ const Evidence = () => {
             </div>
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
-            <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
+              <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
 
-              <EvidenceEditor />
+              {/* Pasamos ref al hijo para poder pedirle la imagen cuando guardemos */}
+              <EvidenceEditor ref={editorRef} />
 
               {!photo.imagen && userItem?.imgPhoto && (
-                <>
-                  <img src={userItem?.imgPhoto} width={200} className='m-auto pb-5'/>
-                </>
+                <img src={userItem?.imgPhoto} width={200} className='m-auto pb-5' alt="user photo" />
               )}
               
               {photo.imagen && (
-                <>
-                  <img src={photo.imagen} width={200} className='m-auto py-5'/>
-                </>
+                <img src={photo.imagen} width={200} className='m-auto py-5' alt="photo preview" />
               )}
-
-              <input type="file" onChange={(e) => handlePhoto(e)} />
-              {errorPhotoState && (<div className='text-redCustom'>*Campo obligatorio</div>)}
-              {errorPhoto === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
             </div>
           </div>
 
           <button className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
-          disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState || errorPhotoState }
-          onClick={handleSave}
-            >
+            disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState  }
+            onClick={handleSave}
+          >
             {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
           </button>
 
-          {ok}
+          <div className='mt-3 text-center'>{ok}</div>
           
           <button className='bg-blueCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
-          
-          onClick={regresar}
-            >
+            onClick={regresar}
+          >
             Regresar
           </button>
         </div>
