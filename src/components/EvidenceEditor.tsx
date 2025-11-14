@@ -246,10 +246,10 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
       </Modal>
 
       {!userImage && (
-        <input type="file" onChange={handleUpload} className='mt-3' />
+        <input type="file" onChange={handleUpload} className='' />
       )}
 
-      <div className='w-[360px] m-auto mt-2'>
+      <div className='w-[360px] m-auto'>
         {userImage && (
           <canvas
             ref={canvasRef}
@@ -258,7 +258,7 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
         )}
       </div>
 
-      <div className="mt-4">
+      <div className="">
         <div className='flex'>
           {smallStickers.map((sticker) => (
             <div className='flex' key={sticker}>
@@ -279,6 +279,8 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
           {/* Botón "Enviar evidencia" removido intencionalmente.
               Ahora el padre llamará exportImage() en su handleSave. */}
         </div>
+
+        <div className='text-sm mt-3 text-blueCustom mb-2 italic underline font-bold cursor-pointer' onClick={() => setIsOpen(true)}>Abrir instrucciones</div>
       </div>
     </div>
   );

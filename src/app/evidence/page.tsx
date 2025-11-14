@@ -12,6 +12,7 @@ import { userRespFunc } from '@/store/slices/user/userSlice';
 import { validateToken } from '@/store/slices/auth/authService';
 import { errorEvidenceFunc } from '@/store/slices/images/imagesSlice';
 import EvidenceEditor from '../../components/EvidenceEditor';
+import Modal from 'react-modal';
 
 type EditorHandle = {
   exportImage: () => Promise<File | null>;
@@ -155,12 +156,12 @@ const Evidence = () => {
     errorEvidence === 413 ? setErrorSize(true) : setErrorSize(false);
   }, [hours, minutes, seconds, errorPhoto, errorEvidence, errorSize, userResp])
   
+  const [modalIsOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     if (userResp === 'evidence') {
       if((errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
-        setOk('Se han guardado con éxito los tiempos y evidencias')
-        router.back();
+        setIsOpen(true)
       }else{
         setOk('Verifica los errores')
       }
@@ -172,9 +173,52 @@ const Evidence = () => {
     dispatch(userRespFunc(''))
   }
 
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  useEffect(() => {
+    if(modalIsOpen){
+      setTimeout(() => {
+        router.back()
+      }, 2000);
+    }
+  }, [modalIsOpen])
+
+  
+    
+
   return (
     <>
       <div className='flex justify-center items-center h-screen text-center p-2'>
+
+      <Modal
+        style={customStyles}
+        isOpen={modalIsOpen}
+        onRequestClose={() => setIsOpen(false)}
+        contentLabel="Personaliza tu foto"
+      >
+        <div className=''>
+          <div className='font-light text-xl text-gray-800 text-center mb-4'>
+            Se han guardado con
+            <span className='font-bold mx-2'>éxito</span>los tiempos y las evidencias
+          </div>
+          
+          <div className='flex justify-center'>
+            <button className='font-bold text-md flex justify-center bg-greenCustom text-white p-2 rounded-lg' onClick={() => setIsOpen(false)}>
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </Modal>
+
         <div className='flex justify-center flex-col pb-5 m-auto'>
           <Image 
             src='/logo.png' 
@@ -184,7 +228,7 @@ const Evidence = () => {
             className='m-auto'
           />
 
-          <div className='label mt-5 text-xl'>Tiempo de la carrera</div>
+          <div className='label mt-5 text-xl' onClick={() => setIsOpen(true)}>Tiempo de la carrera</div>
           <div className='flex text-center m-auto mb-10'>
             <div>
               Horas
@@ -206,6 +250,7 @@ const Evidence = () => {
           <div className='flex flex-col md:flex-row m-auto'>
             <div className='bg-gray-100 p-2 rounded-md shadow-md'>
               <div className='m-auto font-bold text-blueCustom text-3xl mt-2'>Foto de la Evidencia</div>
+              <div className='text-sm -mt-1 text-gray-800 mb-2 italic'>Imagen de máximo (5Mb) de peso</div>
               {!evidence.imagen && userItem?.imgEvidence && (
                 <img src={userItem?.imgEvidence} width={200} className='m-auto py-5' alt="evidence" />
               )}
@@ -219,10 +264,13 @@ const Evidence = () => {
             </div>
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
-              <div className='m-auto pb-5 font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
+              <div className='m-auto font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
+              <div className='text-sm -mt-1 text-gray-800 mb-2 italic'>Imagen de máximo (5Mb) de peso</div>
+              
 
-              {/* Pasamos ref al hijo para poder pedirle la imagen cuando guardemos */}
-              <EvidenceEditor ref={editorRef} />
+              <div className='p-5'>
+                <EvidenceEditor ref={editorRef} />
+              </div>
 
               {!photo.imagen && userItem?.imgPhoto && (
                 <img src={userItem?.imgPhoto} width={200} className='m-auto pb-5' alt="user photo" />
