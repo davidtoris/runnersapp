@@ -160,6 +160,7 @@ const Evidence = () => {
     if (userResp === 'evidence') {
       if((errorEvidence === 200 || errorEvidence === null) && (errorPhoto === 200 || errorPhoto === null) && errorSize === false) {
         setOk('Se han guardado con éxito los tiempos y evidencias')
+        router.back();
       }else{
         setOk('Verifica los errores')
       }
