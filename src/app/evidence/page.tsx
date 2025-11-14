@@ -267,7 +267,10 @@ const Evidence = () => {
             <div className='flex flex-col items-center '>
               Horas
               <input
-                type="text"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={2}
                 name="hours"
                 className='text-center p-1 w-[80%]'
                 onChange={changeHours}
@@ -298,7 +301,10 @@ const Evidence = () => {
             <div className='flex flex-col items-center '>
               Segundos
               <input
-                type="text"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={2}
                 name="seconds"
                 className='text-center p-1 w-[80%]'
                 onChange={changeSeconds}
