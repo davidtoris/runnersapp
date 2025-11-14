@@ -74,32 +74,21 @@ const Evidence = () => {
     setSelectedEvidence(e.target.files?.[0] ?? null)
   } 
 
-  const changeHours = (e:any) => {
-    const hours = e.target.value;
-    if(hours.length === 1){
-      setHours(`0${hours}`)
-    } else {
-      setHours(hours)
-    }
-  }
+  // handlers simples — no añaden ceros
+const changeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const raw = e.target.value.replace(/\D/g, ''); // solo dígitos
+  setHours(raw); // asigna tal cual (ej: "045" se mantiene)
+};
 
-  const changeMinutes = (e:any) => {
-    const minutes = e.target.value;
-    if(minutes.length === 1){
-      setMinutes(`0${minutes}`)
-    } else {
-      setMinutes(minutes)
-    }
-  } 
+const changeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const raw = e.target.value.replace(/\D/g, '').slice(0, 2); // opcional: limitar a 2 dígitos
+  setMinutes(raw);
+};
 
-  const changeSeconds = (e:any) => {
-    const seconds = e.target.value;
-    if(seconds.length === 1){
-      setSeconds(`0${seconds}`)
-    } else {
-      setSeconds(seconds)
-    }
-  }
+const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const raw = e.target.value.replace(/\D/g, '').slice(0, 2);
+  setSeconds(raw);
+};
 
   const handleSave = async () => {
     if (!token) return;
@@ -193,7 +182,22 @@ const Evidence = () => {
   }, [modalIsOpen])
 
   
-    
+  useEffect(() => {
+  // si userItem.time existe y no es cadena vacía, parseamos HH:MM:SS
+    if (userItem?.time && typeof userItem.time === 'string' && userItem.time.trim() !== '') {
+      const parts = userItem.time.split(':'); // espera "HH:MM:SS"
+      const [h = '00', m = '00', s = '00'] = parts;
+      setHours(h.padStart(2, '0'));
+      setMinutes(m.padStart(2, '0'));
+      setSeconds(s.padStart(2, '0'));
+
+      // actualizar validaciones si quieres (opcional)
+      setErrorHours(false);
+      setErrorMinutes(false);
+      setErrorSeconds(false);
+    }
+    // si no hay userItem.time no hacemos nada (los inputs quedan vacíos y editables)
+  }, [userItem]);
 
   return (
     <>
@@ -228,23 +232,50 @@ const Evidence = () => {
             className='m-auto'
           />
 
-          <div className='label mt-5 text-xl' onClick={() => setIsOpen(true)}>Tiempo de la carrera</div>
+          <div className='label mt-5 text-xl'>Tiempo de la carrera</div>
           <div className='flex text-center m-auto mb-10'>
             <div>
-              Horas
-              <input type="number" name="hours" className='text-center p-1' onChange={changeHours} />
-              {errorHours && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
-            </div>
-            <div className='mx-2'>
-              * Minutos
-              <input type="number" name="minutes" className='text-center p-1' onChange={changeMinutes} />
-              {errorMinutes && (<div className='text-redCustom'>*Campo obligatorio</div>)}
-            </div>
-            <div>
-              Segundos
-              <input type="number" name="seconds" className='text-center p-1' onChange={changeSeconds}/>
-              {errorSeconds && (<div className='text-redCustom'>*Campo obligatorio</div>)}
-            </div>
+  Horas
+  <input
+    type="number"
+    name="hours"
+    className='text-center p-1'
+    onChange={changeHours}
+    value={hours}
+    // optional: limitar min/max para evitar valores raros
+    min={0}
+    max={99}
+  />
+  {errorHours && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+</div>
+
+<div className='mx-2'>
+  Minutos
+  <input
+    type="number"
+    name="minutes"
+    className='text-center p-1'
+    onChange={changeMinutes}
+    value={minutes}
+    min={0}
+    max={59}
+  />
+  {errorMinutes && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+</div>
+
+<div>
+  Segundos
+  <input
+    type="number"
+    name="seconds"
+    className='text-center p-1'
+    onChange={changeSeconds}
+    value={seconds}
+    min={0}
+    max={59}
+  />
+  {errorSeconds && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+</div>
           </div>
 
           <div className='flex flex-col md:flex-row m-auto'>
