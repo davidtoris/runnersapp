@@ -281,7 +281,10 @@ const Evidence = () => {
             <div className='flex flex-col items-center '>
               Minutos
               <input
-                type="text"
+                type="tel"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={2}
                 name="minutes"
                 className='text-center p-1 w-[80%]'
                 onChange={changeMinutes}
