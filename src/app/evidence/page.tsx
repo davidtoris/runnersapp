@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { userRespFunc } from '@/store/slices/user/userSlice';
 import { validateToken } from '@/store/slices/auth/authService';
 import { errorEvidenceFunc } from '@/store/slices/images/imagesSlice';
-import EvidenceEditor from '../sticker/page';
+import EvidenceEditor from '../../components/EvidenceEditor';
 
 type EditorHandle = {
   exportImage: () => Promise<File | null>;

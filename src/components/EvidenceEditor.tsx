@@ -207,7 +207,7 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
           </div>
           <div className='text-sm font-light text-gray-700'>
             <div className='font-bold'>1. Selecciona tu foto</div>
-            <li className='ml-3'> Da clic en el botón “Seleccionar archivo” para elegir la imagen que quieras editar.</li>
+            <li className='ml-3'> Da clic en el botón &quot;Seleccionar archivo&quot; para elegir la imagen que quieras editar.</li>
 
             <div className='mt-2 font-bold'>2. Elige un sticker desde las miniaturas</div>
             <div className='flex my-2'>
@@ -234,7 +234,7 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
             <li className='ml-3'>Presiona el botón “Eliminar” Sticker para removerlo.</li>
 
             <div className='mt-2 font-bold text-blueCustom'>5. Envía tu evidencia</div>
-            <li className='ml-3'>Al finalizar, presiona "Guardar resultados" (en la pantalla principal) para subir la imagen.</li>
+            <li className='ml-3'>Al finalizar, presiona &quot;Guardar resultados&quot; (en la pantalla principal) para subir la imagen.</li>
           </div>
 
           <div className='flex justify-center'>
@@ -283,5 +283,6 @@ const EvidenceEditor = forwardRef<ExportHandle>((_, ref) => {
     </div>
   );
 });
+EvidenceEditor.displayName = 'EvidenceEditor';
 
 export default EvidenceEditor;
