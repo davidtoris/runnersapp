@@ -84,6 +84,14 @@ const Evidence = () => {
     setSeconds(raw);
   };
 
+  const normalizePart = (raw: string, clamp59 = false) => {
+    const digits = (raw ?? '').toString().replace(/\D/g, '');
+    if (digits === '') return '00';
+    let n = Number(digits);
+    if (clamp59) n = Math.max(0, Math.min(59, n));
+    return String(n).padStart(2, '0');
+  };
+
   const handleSave = async () => {
     if (!token) return;
 
@@ -130,11 +138,16 @@ const Evidence = () => {
     }
 
     // ---------- GUARDAR TIEMPO ----------
-    const timeNumber = (Number(hours || 0) * 3600) + (Number(minutes || 0) * 60) + Number(seconds || 0);
-    const data = {
-      time: `${hours}:${minutes}:${seconds}`,
-      timeNumber
-    };
+    const hh = normalizePart(hours, false);
+    const mm = normalizePart(minutes, true);
+    const ss = normalizePart(seconds, true);
+
+    setHours(hh);
+    setMinutes(mm);
+    setSeconds(ss);
+
+    const timeNumber = (Number(hh) * 3600) + (Number(mm) * 60) + Number(ss);
+    const data = { time: `${hh}:${mm}:${ss}`, timeNumber };
     dispatch(saveTime(data, token));
   }
 
@@ -250,48 +263,48 @@ const Evidence = () => {
           />
 
           <div className='label mt-5 text-xl'>Tiempo de la carrera</div>
-          <div className='flex text-center m-auto mb-10'>
-            <div>
-  Horas
-  <input
-    type="text"
-    name="hours"
-    className='text-center p-1'
-    onChange={changeHours}
-    value={hours}
-    min={0}
-    max={99}
-  />
-  {errorHours && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
-</div>
+          <div className='flex justify-center text-center ml-[15%] mb-10  w-[70%]'>
+            <div className='flex flex-col items-center '>
+              Horas
+              <input
+                type="text"
+                name="hours"
+                className='text-center p-1 w-[80%]'
+                onChange={changeHours}
+                value={hours}
+                min={0}
+                max={99}
+              />
+              {errorHours && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+            </div>
 
-<div className='mx-2'>
-  Minutos
-  <input
-    type="text"
-    name="minutes"
-    className='text-center p-1'
-    onChange={changeMinutes}
-    value={minutes}
-    min={0}
-    max={59}
-  />
-  {errorMinutes && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
-</div>
+            <div className='flex flex-col items-center '>
+              Minutos
+              <input
+                type="text"
+                name="minutes"
+                className='text-center p-1 w-[80%]'
+                onChange={changeMinutes}
+                value={minutes}
+                min={0}
+                max={59}
+              />
+              {errorMinutes && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+            </div>
 
-<div>
-  Segundos
-  <input
-    type="text"
-    name="seconds"
-    className='text-center p-1'
-    onChange={changeSeconds}
-    value={seconds}
-    min={0}
-    max={59}
-  />
-  {errorSeconds && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
-</div>
+            <div className='flex flex-col items-center '>
+              Segundos
+              <input
+                type="text"
+                name="seconds"
+                className='text-center p-1 w-[80%]'
+                onChange={changeSeconds}
+                value={seconds}
+                min={0}
+                max={59}
+              />
+              {errorSeconds && ( <div className='text-redCustom'>*Campo obligatorio</div>)}
+            </div>
           </div>
 
           <div className='flex flex-col md:flex-row m-auto'>

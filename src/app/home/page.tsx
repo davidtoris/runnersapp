@@ -159,7 +159,7 @@ const Home = () => {
           <div className='ml-2'>Editar registro</div>
         </div>
 
-        <div className='text-xl mt-7 justify-center font-thin cursor-pointer' onClick={editRegister}>
+        <div className='text-xl mt-7 justify-center font-thin '>
           <div>Tiempo asignado:</div>
           <div className='ml-2 text-sm'>{`${userItem?.time !== '' ? userItem?.time : 'No se ha registrado un tiempo'}`}</div>
         </div>
