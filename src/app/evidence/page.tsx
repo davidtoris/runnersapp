@@ -31,7 +31,13 @@ const Evidence = () => {
   const { evidence, photo, evidenceLoading, photoLoading, errorEvidence, errorPhoto } = useSelector((state : RootState) => state.imagesData)
   const { userItem, userResp } = useSelector((state : RootState) => state.userData)
 
-  const editorRef = useRef<EditorHandle | null>(null);
+  // refs para ambos editors
+  const editorRef = useRef<EditorHandle | null>(null); // para foto de la carrera
+  const evidenceEditorRef = useRef<EditorHandle | null>(null); // para foto de la evidencia
+
+  // flags que indican si el editor local tiene imagen (antes de subir)
+  const [evidenceEditorHasImage, setEvidenceEditorHasImage] = useState(false);
+  const [raceEditorHasImage, setRaceEditorHasImage] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -52,10 +58,6 @@ const Evidence = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // evidence (padre) sigue siendo input del padre
-  const [selectedEvidence, setSelectedEvidence] = useState<File | Blob | null>(null);
-  // ya no dependemos de selectedPhoto proveniente del input del padre:
-  // el hijo exportará su imagen cuando el padre lo pida
   const [hours, setHours] = useState<any>('')
   const [minutes, setMinutes] = useState<any>('')
   const [seconds, setSeconds] = useState<any>('')
@@ -66,63 +68,68 @@ const Evidence = () => {
   const [errorPhotoState, setErrorPhoto] = useState(true)
   const [errorSize, setErrorSize] = useState(false)
 
-  const handleEvidence = (e : any) => {
-    setErrorEvidence(false)
-    dispatch(errorEvidenceFunc(null))
-    dispatch(userRespFunc(''))
-    setOk('')
-    setSelectedEvidence(e.target.files?.[0] ?? null)
-  } 
+  // handlers simples — no añaden ceros (permiten "045")
+  const changeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, ''); // solo dígitos
+    setHours(raw);
+  };
 
-  // handlers simples — no añaden ceros
-const changeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const raw = e.target.value.replace(/\D/g, ''); // solo dígitos
-  setHours(raw); // asigna tal cual (ej: "045" se mantiene)
-};
+  const changeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 2); // limitar a 2 dígitos
+    setMinutes(raw);
+  };
 
-const changeMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const raw = e.target.value.replace(/\D/g, '').slice(0, 2); // opcional: limitar a 2 dígitos
-  setMinutes(raw);
-};
-
-const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const raw = e.target.value.replace(/\D/g, '').slice(0, 2);
-  setSeconds(raw);
-};
+  const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 2);
+    setSeconds(raw);
+  };
 
   const handleSave = async () => {
     if (!token) return;
 
-    // 1) subir evidencia del padre (input de evidencia)
-    if (selectedEvidence) {
-      console.log('Subiendo evidence (padre) ...');
-      const formData = new FormData();
-      formData.append('image', selectedEvidence as Blob);
-      dispatch(uploadEvidenceService(formData, token, 'imgEvidence'));
-    }
-
-    // 2) pedir al hijo que exporte su canvas y subimos si existe
-    if (editorRef.current && typeof editorRef.current.exportImage === 'function') {
+    // ---------- EVIDENCE (editor) ----------
+    if (evidenceEditorRef.current && typeof evidenceEditorRef.current.exportImage === 'function') {
       try {
-        console.log('Pidiendo exportImage al hijo...');
-        const fileFromChild = await editorRef.current.exportImage();
-        if (fileFromChild) {
-          console.log('Archivo recibido del hijo, subiendo...');
-          const formData = new FormData();
-          formData.append('image', fileFromChild as Blob);
-          dispatch(uploadPhotoService(formData, token, 'imgPhoto'));
+        console.log('Exportando imagen desde EvidenceEditor (evidence)...');
+        const evidenceImg = await evidenceEditorRef.current.exportImage();
+        if (evidenceImg) {
+          console.log('Archivo evidence recibido, subiendo...');
+          const fd = new FormData();
+          fd.append('image', evidenceImg as Blob);
+          dispatch(uploadEvidenceService(fd, token, 'imgEvidence'));
         } else {
-          console.log('No hay imagen en el editor (hijo).');
+          console.log('No hay imagen en EvidenceEditor (evidence).');
         }
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.error('Error exportImage desde hijo:', err);
+        console.error('Error exportEvidence:', err);
+      }
+    } else {
+      console.log('evidenceEditorRef no disponible o exportImage no implementado.');
+    }
+
+    // ---------- RACE PHOTO (editor) ----------
+    if (editorRef.current && typeof editorRef.current.exportImage === 'function') {
+      try {
+        console.log('Exportando imagen desde EvidenceEditor (race)...');
+        const raceImg = await editorRef.current.exportImage();
+        if (raceImg) {
+          console.log('Archivo race recibido, subiendo...');
+          const fd2 = new FormData();
+          fd2.append('image', raceImg as Blob);
+          dispatch(uploadPhotoService(fd2, token, 'imgPhoto'));
+        } else {
+          console.log('No hay imagen en EvidenceEditor (race).');
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Error exportRace:', err);
       }
     } else {
       console.log('editorRef no disponible o exportImage no implementado.');
     }
 
-    // 3) guardar tiempo (se hace independientemente)
+    // ---------- GUARDAR TIEMPO ----------
     const timeNumber = (Number(hours || 0) * 3600) + (Number(minutes || 0) * 60) + Number(seconds || 0);
     const data = {
       time: `${hours}:${minutes}:${seconds}`,
@@ -132,10 +139,20 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
   }
 
   useEffect(() => {
-    userItem?.imgEvidence === '' ? setErrorEvidence(true) : setErrorEvidence(false)
-    userItem?.imgPhoto === '' ? setErrorPhoto(true) : setErrorPhoto(false)
-  }, [userItem])
-  
+    const hasEvidenceFromUser = !!(userItem?.imgEvidence && userItem.imgEvidence !== '');
+    const hasEvidenceFromState = !!(evidence?.imagen && evidence.imagen !== '');
+    const hasEvidence = hasEvidenceFromUser || hasEvidenceFromState || evidenceEditorHasImage;
+
+    const hasPhotoFromUser = !!(userItem?.imgPhoto && userItem.imgPhoto !== '');
+    const hasPhotoFromState = !!(photo?.imagen && photo.imagen !== '');
+    const hasPhoto = hasPhotoFromUser || hasPhotoFromState || raceEditorHasImage;
+
+    setErrorEvidence(!hasEvidence);
+    setErrorPhoto(!hasPhoto);
+
+    // debug
+    // console.log('validación imágenes ->', { hasEvidence, hasPhoto, evidenceEditorHasImage, raceEditorHasImage });
+  }, [userItem, evidence, photo, evidenceEditorHasImage, raceEditorHasImage]);
 
   useEffect(() => {
     hours === '' ? setErrorHours(true) : setErrorHours(false);
@@ -183,7 +200,7 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   
   useEffect(() => {
-  // si userItem.time existe y no es cadena vacía, parseamos HH:MM:SS
+    // si userItem.time existe y no es cadena vacía, parseamos HH:MM:SS
     if (userItem?.time && typeof userItem.time === 'string' && userItem.time.trim() !== '') {
       const parts = userItem.time.split(':'); // espera "HH:MM:SS"
       const [h = '00', m = '00', s = '00'] = parts;
@@ -237,12 +254,11 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
             <div>
   Horas
   <input
-    type="number"
+    type="text"
     name="hours"
     className='text-center p-1'
     onChange={changeHours}
     value={hours}
-    // optional: limitar min/max para evitar valores raros
     min={0}
     max={99}
   />
@@ -252,7 +268,7 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
 <div className='mx-2'>
   Minutos
   <input
-    type="number"
+    type="text"
     name="minutes"
     className='text-center p-1'
     onChange={changeMinutes}
@@ -266,7 +282,7 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
 <div>
   Segundos
   <input
-    type="number"
+    type="text"
     name="seconds"
     className='text-center p-1'
     onChange={changeSeconds}
@@ -282,6 +298,15 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
             <div className='bg-gray-100 p-2 rounded-md shadow-md'>
               <div className='m-auto font-bold text-blueCustom text-3xl mt-2'>Foto de la Evidencia</div>
               <div className='text-sm -mt-1 text-gray-800 mb-2 italic'>Imagen de máximo (5Mb) de peso</div>
+              {errorEvidenceState && (
+                <div className='text-redCustom mt-2'>*Campo obligatorio</div>
+              )}
+
+              <div className='p-5'>
+                {/* Evidence editor para la evidencia */}
+                <EvidenceEditor ref={evidenceEditorRef} onHasImage={setEvidenceEditorHasImage} />
+              </div>
+
               {!evidence.imagen && userItem?.imgEvidence && (
                 <img src={userItem?.imgEvidence} width={200} className='m-auto py-5' alt="evidence" />
               )}
@@ -289,18 +314,18 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
               {evidence.imagen && (
                 <img src={evidence.imagen} width={200} className='m-auto py-5' alt="evidence preview" />
               )}
-              <input type="file" onChange={(e) => handleEvidence(e)} className='p-1' />
-              {errorEvidenceState && (<div className='text-redCustom'>*Campo obligatorio</div>)}
-              {errorEvidence === 413 && ( <div className='text-redCustom'>La foto pesa más de 5Mb</div> )}
+
             </div>
 
             <div className='bg-gray-100 p-2 rounded-md shadow-md mt-6 md:mt-0 ml-0 md:ml-8'>
               <div className='m-auto font-bold text-greenCustom text-3xl mt-2'>Foto de la Carrera</div>
               <div className='text-sm -mt-1 text-gray-800 mb-2 italic'>Imagen de máximo (5Mb) de peso</div>
-              
+              {errorPhotoState && (
+                <div className='text-redCustom mt-2'>*Campo obligatorio</div>
+              )}              
 
               <div className='p-5'>
-                <EvidenceEditor ref={editorRef} />
+                <EvidenceEditor ref={editorRef} onHasImage={setRaceEditorHasImage} />
               </div>
 
               {!photo.imagen && userItem?.imgPhoto && (
@@ -310,15 +335,22 @@ const changeSeconds = (e: React.ChangeEvent<HTMLInputElement>) => {
               {photo.imagen && (
                 <img src={photo.imagen} width={200} className='m-auto py-5' alt="photo preview" />
               )}
+
+              
             </div>
           </div>
-
-          <button className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer mt-6 disabled:bg-gray-300'
-            disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState  }
+          
+          <div className='mt-6'>
+          {(errorHours || errorMinutes || errorSeconds || errorEvidenceState || errorPhotoState) && (
+            <div className='text-red-500 font-bold italic text-xs mb-2'>Revisa que todos los campos estèn llenos, y que hayas agregado las fotos de evidencia y de la carrera</div>
+          )}
+          <button className='bg-redCustom text-white w-12/12 text-center m-auto font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer disabled:bg-gray-200 disabled:cursor-not-allowed'
+            disabled={errorHours || errorMinutes || errorSeconds || errorEvidenceState || errorPhotoState }
             onClick={handleSave}
-          >
-            {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados'}
+            >
+            {(photoLoading || evidenceLoading) ? ( <Loader />) : 'Guardar resultados y evidencias'}
           </button>
+          </div>
 
           <div className='mt-3 text-center'>{ok}</div>
           
