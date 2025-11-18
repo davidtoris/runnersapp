@@ -164,11 +164,11 @@ const Home = () => {
           <div className='ml-2 text-sm'>{`${userItem?.time !== '' ? userItem?.time : 'No se ha registrado un tiempo'}`}</div>
         </div>
   
-        {/* <Link href="/evidence">
+        <Link href="/evidence">
           <button className='flex items-center text-xl md:text-2xl mt-5 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
             <span className='ml-2 flex items-center'><MdOutlineFileUpload className='mr-2' /> Subir evidencia y resultados</span>
           </button>
-        </Link> */}
+        </Link>
 
         <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed' >
