@@ -39,6 +39,7 @@ export interface UserPayload {
   correo: string | null,
   password: string | null,
   tipo: string | null,
+  modalidad?: string | null,
   numColaborador: string | null,
   depto: string | null,
   otroDepto: string | null,

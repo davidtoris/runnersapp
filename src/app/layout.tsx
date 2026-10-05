@@ -5,7 +5,7 @@ import { Providers } from '@/store/Providers';
 
 export const metadata: Metadata = {
   title: 'Runners',
-  description: '4ta Carrera por el Servicio',
+  description: '5ta Carrera por el Servicio',
 }
 
 export default function RootLayout({

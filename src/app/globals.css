@@ -9,7 +9,7 @@ html {
 }
 
 @layer base {
-  input {
+  input:not([type="checkbox"]):not([type="radio"]) {
     @apply bg-gray-100 shadow-sm w-full rounded-3xl p-3 border-4 border-b-gray-100;
   }
   select {
