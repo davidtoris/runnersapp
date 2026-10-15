@@ -79,12 +79,12 @@ const Home = () => {
                 <span>Inicia Sesión</span>
               </div>
             </Link>
-            <Link href="/register">
+            {/* <Link href="/register">
               <div className="px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-redCustom to-rose-600 hover:from-rose-600 hover:to-redCustom text-white text-xs sm:text-sm font-extrabold shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer flex items-center gap-2">
                 <FaRunning className="text-xs" />
                 <span>Regístrate</span>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
 
@@ -165,12 +165,12 @@ const Home = () => {
 
         {/* Botones de acción rápida con estética deportiva */}
         <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
-          <Link href="/register">
+          {/* <Link href="/register">
             <div className="bg-gradient-to-r from-redCustom to-rose-600 hover:from-rose-600 hover:to-redCustom text-white font-extrabold px-7 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center cursor-pointer">
               <Image src="/tennis.png" width={26} height={26} alt="Icono tenis" className="mr-3 brightness-0 invert" />
               <span className="tracking-wide">Regístrate AQUÍ para la carrera</span>
             </div>
-          </Link>
+          </Link> */}
           <Link href="/login">
             <div className="bg-gradient-to-r from-blueCustom to-cyan-600 hover:from-cyan-600 hover:to-blueCustom text-white font-extrabold px-7 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center cursor-pointer">
               <Image src="/tennis.png" width={26} height={26} alt="Icono tenis" className="mr-3 brightness-0 invert" />
@@ -578,12 +578,12 @@ const Home = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/register" className="w-full sm:w-auto">
+            {/* <Link href="/register" className="w-full sm:w-auto">
               <div className="bg-gradient-to-r from-redCustom to-rose-600 hover:from-rose-600 hover:to-redCustom text-white font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer w-full">
                 <Image src="/tennis.png" width={30} height={30} alt="Icono tenis" className="mr-3 brightness-0 invert" />
                 <span className="text-base sm:text-lg">Regístrate AQUÍ para la carrera</span>
               </div>
-            </Link>
+            </Link> */}
 
             <Link href="/login" className="w-full sm:w-auto">
               <div className="bg-gradient-to-r from-blueCustom to-cyan-600 hover:from-cyan-600 hover:to-blueCustom text-white font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer w-full">
