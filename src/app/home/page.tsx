@@ -24,7 +24,7 @@ const Home = () => {
   const userData = Cookies.get('user')
   const router = useRouter();
 
-  const { userItem } = useSelector((state : RootState) => state.userData)
+  const { userItem } = useSelector((state: RootState) => state.userData)
 
   useEffect(() => {
     if (userData && token) {
@@ -33,7 +33,7 @@ const Home = () => {
       dispatch(showOneUser(idUser, token))
     }
   }, [])
-  
+
   useEffect(() => {
     if (token) {
       dispatch(getDate(token))
@@ -47,8 +47,8 @@ const Home = () => {
       router.push("/login")
     }
   }, [])
-  
-  const { date } = useSelector((state : RootState) => state.dateData)
+
+  const { date } = useSelector((state: RootState) => state.dateData)
 
   const number = () => {
     let numRunner;
@@ -58,7 +58,7 @@ const Home = () => {
     }
     if (num?.length === 2) {
       numRunner = '0' + num;
-    } 
+    }
     if (num !== undefined && num.length >= 3) {
       numRunner = num;
     }
@@ -68,7 +68,7 @@ const Home = () => {
   const editRegister = () => {
     router.push("/editRegister")
   }
-  
+
   const logOut = () => {
     router.push("/login")
     dispatch(userLoading(false));
@@ -79,22 +79,22 @@ const Home = () => {
   return (
     <div className='flex justify-center items-center h-screen text-center'>
       <div className='flex justify-center flex-col pb-5 m-auto'>
-        <Image 
-        src='/logo.png' 
-        width={450}
-        height={230}
-        alt="Picture of the author"
-        className='m-auto'
+        <Image
+          src='/logo.png'
+          width={450}
+          height={230}
+          alt="Picture of the author"
+          className='m-auto'
         />
         {userItem && (
           <div>
             <div className='flex flex-col justify-center mt-20'>
               <BsPersonCircle className='text-[184px] text-gray-400 text-center m-auto' />
-              <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.kms}-${ NumberFunc(userItem?.numRunner) }`}</div>
+              <div className='text-4xl font-bold text-gray-600 mt-3'>{userItem && `${userItem?.kms}-${NumberFunc(userItem?.numRunner)}`}</div>
             </div>
-    
+
             <div className='text-2xl font-thin text-gray-600 mt-4'>{`Número de corredor:`}</div>
-            <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[124px]'>{`${userItem?.kms}-${number()}` }</div>
+            <div className='text-8xl font-extrabold text-redCustom from-neutral-100 text-[124px]'>{`${userItem?.kms}-${number()}`}</div>
 
             <div className='flex text-gray-600 items-center justify-center mt-3 flex-col md:flex-row'>
               <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center'>
@@ -116,9 +116,9 @@ const Home = () => {
                   Rango de edad
                 </div>
                 <div className='left'>
-                  { userItem?.edad === "1" && '18-39 años'}
-                  { userItem?.edad === "2" && '40-49 años'}
-                  { userItem?.edad === "3" && '50 0 más años'}
+                  {userItem?.edad === "1" && '18-39 años'}
+                  {userItem?.edad === "2" && '40-49 años'}
+                  {userItem?.edad === "3" && '50 0 más años'}
                 </div>
               </div>
               <div className='text-4xl bg-blueLightCustom rounded-full w-16 h-16 flex justify-center items-center ml-0 md:ml-8 mt-4 md:mt-0'>
@@ -129,14 +129,14 @@ const Home = () => {
                   Categoría
                 </div>
                 <div className='left'>
-                  { userItem?.genero === "H" && 'Varonil'}
-                  { userItem?.genero === "M" && 'Femenil'}
+                  {userItem?.genero === "H" && 'Varonil'}
+                  {userItem?.genero === "M" && 'Femenil'}
                 </div>
               </div>
             </div>
           </div>
         )}
-        
+
 
         {/* <div className='text-3xl text-blueCustom mt-16  mb-2 font-extralight'>Gracias por tu participación</div> */}
         {/* <div className='flex justify-center p-2 mt-5'>
@@ -153,22 +153,22 @@ const Home = () => {
           </div>
         </a> */}
 
-        
-        {/* <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
+
+        <div className='flex items-center text-2xl mt-10 justify-center font-thin cursor-pointer' onClick={editRegister}>
           <FaRegChartBar />
           <div className='ml-2'>Editar registro</div>
-        </div> */}
+        </div>
 
-        {/* <div className='text-xl mt-7 justify-center font-thin '>
+        <div className='text-xl mt-7 justify-center font-thin '>
           <div>Tiempo asignado:</div>
           <div className='ml-2 text-sm'>{`${userItem?.time !== '' ? userItem?.time : 'No se ha registrado un tiempo'}`}</div>
-        </div> */}
-  
-        {/* <Link href="/evidence">
+        </div>
+
+        <Link href="/evidence">
           <button className='flex items-center text-xl md:text-2xl mt-5 justify-center font-thin bg-yellowCustom text-white w-12/12 md:w-8/12 m-auto p-2 rounded-lg' >
             <span className='ml-2 flex items-center'><MdOutlineFileUpload className='mr-2' /> Subir evidencia y resultados</span>
           </button>
-        </Link> */}
+        </Link>
 
         {/* <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed' >
@@ -177,15 +177,15 @@ const Home = () => {
           </button>
         </Link> */}
 
-          {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
+        {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
-          <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
-            onClick={logOut}>
-            <div className='ml-2'>Salir</div>
-          </div>
-        
-          
-          {/* <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
+        <div className='bg-blueCustom text-white text-center w-4/12 m-auto mt-6 font-extrabold p-3 rounded-md flex items-center justify-center hover:scale-105 transition transform duration-200 cursor-pointer'
+          onClick={logOut}>
+          <div className='ml-2'>Salir</div>
+        </div>
+
+
+        {/* <div className='flex items-center text-2xl mt-10 justify-center font-medium '>
             <div className='border-2 border-gray-600 text-gray-600 rounded-full p-2 px-5 cursor-pointer hover:bg-redCustom hover:border-redCustom hover:text-white'>Imprime tu registro</div>
             <div className='bg-gray-500 text-white rounded-full p-2 px-5 ml-5 cursor-pointer shadow-xl hover:bg-blueCustom'>Ver todos los reultados</div>
           </div> */}
