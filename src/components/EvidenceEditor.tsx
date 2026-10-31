@@ -18,6 +18,10 @@ const smallStickers = [
   '/sticker2',
   '/sticker3',
   '/sticker4',
+  '/sticker5',
+  '/sticker6',
+  '/sticker7',
+  '/sticker8',
 ];
 
 const EvidenceEditor = forwardRef<ExportHandle, Props>(({ onHasImage }, ref) => {
