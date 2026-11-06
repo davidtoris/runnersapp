@@ -170,12 +170,12 @@ const Home = () => {
           </button>
         </Link>
 
-        <Link href="/winners">
+        {/* <Link href="/winners">
           <button className='flex items-center text-2xl mt-10 justify-center font-thin bg-greenCustom text-white w-12/12 md:w-6/12 m-auto p-2 rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed' >
             <GiRunningShoe />
             <span className='ml-2'>Ver ganadores</span>
           </button>
-        </Link>
+        </Link> */}
 
         {/* <div className=''>Una vez iniciada la carrera se habilitará este botón</div> */}
 
