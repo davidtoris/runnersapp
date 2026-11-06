@@ -17,8 +17,8 @@ import { NumberFunc } from '../helper/Number'
 const Runners = () => {
   const token = Cookies.get('tokenUser')
   const dispatch = useAppDispatch();
-  
-  const { users } = useSelector((state : RootState) => state.userData)
+
+  const { users } = useSelector((state: RootState) => state.userData)
   console.log(users);
 
   useEffect(() => {
@@ -49,6 +49,52 @@ const Runners = () => {
     }),
     columnHelper.accessor('time', {
       header: () => 'tiempo',
+    }),
+    columnHelper.accessor('imgEvidence', {
+      header: () => 'evidencia',
+      cell: info => {
+        const imgUrl = info.getValue()
+        return imgUrl ? (
+          <a
+            href={imgUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Ver imagen completa"
+            className="inline-block"
+          >
+            <img
+              src={imgUrl}
+              alt="Evidencia"
+              className="w-16 h-16 min-w-[4rem] object-cover rounded border border-gray-300 hover:opacity-80 transition-opacity shadow-sm"
+            />
+          </a>
+        ) : (
+          <span className="text-gray-400 italic text-xs">Sin evidencia</span>
+        )
+      },
+    }),
+    columnHelper.accessor('imgPhoto', {
+      header: () => 'foto',
+      cell: info => {
+        const imgUrlPhoto = info.getValue()
+        return imgUrlPhoto ? (
+          <a
+            href={imgUrlPhoto}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Ver imagen completa"
+            className="inline-block"
+          >
+            <img
+              src={imgUrlPhoto}
+              alt="Photo"
+              className="w-16 h-16 min-w-[4rem] object-cover rounded border border-gray-300 hover:opacity-80 transition-opacity shadow-sm"
+            />
+          </a>
+        ) : (
+          <span className="text-gray-400 italic text-xs">Sin foto</span>
+        )
+      },
     }),
     columnHelper.accessor('timeNumber', {
       header: () => 'tiempo Número',
@@ -92,7 +138,7 @@ const Runners = () => {
     columnHelper.accessor('edad', {
       header: 'edad',
     }),
-    
+
     columnHelper.accessor('kms', {
       header: 'kms',
     }),
@@ -113,40 +159,40 @@ const Runners = () => {
     <>
       {users && (
         <>
-        <Exports users={users} />
-        <div className='flex justify-center'>
-        <table className="w-8/12">
-          <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Num</th>
-                {headerGroup.headers.map(header => (
-                  <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider' key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
+          <Exports users={users} />
+          <div className='flex justify-center'>
+            <table className="w-8/12">
+              <thead>
+                {table.getHeaderGroups().map(headerGroup => (
+                  <tr key={headerGroup.id}>
+                    <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Num</th>
+                    {headerGroup.headers.map(header => (
+                      <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider' key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      </th>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row,i) => (
-              <tr key={row.id}>
-                <td>{i}</td>
-                {row.getVisibleCells().map(cell => (
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+              </thead>
+              <tbody>
+                {table.getRowModel().rows.map((row, i) => (
+                  <tr key={row.id}>
+                    <td>{i}</td>
+                    {row.getVisibleCells().map(cell => (
+                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
         </>
       )}
     </>
