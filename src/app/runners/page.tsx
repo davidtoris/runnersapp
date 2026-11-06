@@ -160,38 +160,50 @@ const Runners = () => {
       {users && (
         <>
           <Exports users={users} />
-          <div className='flex justify-center'>
-            <table className="w-8/12">
-              <thead>
-                {table.getHeaderGroups().map(headerGroup => (
-                  <tr key={headerGroup.id}>
-                    <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider'>Num</th>
-                    {headerGroup.headers.map(header => (
-                      <th className='px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider' key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+          <div className="w-full max-w-[95%] mx-auto px-2 pb-12">
+            <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200">
+              <table className="min-w-full divide-y divide-gray-200 bg-white">
+                <thead className="bg-gray-50">
+                  {table.getHeaderGroups().map(headerGroup => (
+                    <tr key={headerGroup.id}>
+                      <th className="px-6 py-3 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                        Num
                       </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody>
-                {table.getRowModel().rows.map((row, i) => (
-                  <tr key={row.id}>
-                    <td>{i}</td>
-                    {row.getVisibleCells().map(cell => (
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200" key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {headerGroup.headers.map(header => (
+                        <th
+                          className="px-6 py-3 text-left text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                          key={header.id}
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white">
+                  {table.getRowModel().rows.map((row, i) => (
+                    <tr key={row.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-b border-gray-200">
+                        {i}
                       </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      {row.getVisibleCells().map(cell => (
+                        <td
+                          className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 border-b border-gray-200"
+                          key={cell.id}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </>
       )}
